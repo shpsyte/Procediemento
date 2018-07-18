@@ -1,0 +1,41 @@
+﻿
+@model Situacao
+
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleDetails") <small>@Html.T("Situacao") </small></h2>
+    </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.DESCRICAO)
+                            @Html.TextBoxFor(model => model.DESCRICAO, new { @class = "form-control", disabled = "disabled" })
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.ID_SITUACAO.ToString().Trim() })"><i class="fa fa-pencil-square-o"></i>&nbsp;@Html.T("btbeditar")</a>
+                </div>
+            </div>
+        </div>
+         
+</div>
+
+
+

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Clientes>
+<table class="table table-hover" >
+    <tr>
+          <th>
+            @Html.DisplayNameFor(model => model.CD_CADASTRO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RAZAO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FANTASIA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CGC_CPF)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+             <td>
+                <a href="#" onclick="SelecionaCadastro('@item.CD_CADASTRO','@item.RAZAO');">@item.CD_CADASTRO</a>
+            </td>
+            <td>
+                <a href="#" onclick="SelecionaCadastro('@item.CD_CADASTRO','@item.RAZAO');">@item.RAZAO</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FANTASIA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CGC_CPF)
+            </td>
+           
+        </tr>
+    }
+</table>

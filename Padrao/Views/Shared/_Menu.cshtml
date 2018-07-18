@@ -1,0 +1,101 @@
+﻿<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">@Html.T("MNUDASHBOARD")</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                @*CADASTRO*@
+
+                <li>
+                    <a href="http://sac.grupofoxlux.com.br">Sistema do SAC </a>
+                </li>
+
+                <li class="menu-item dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Html.T("MNUCADASTROS").ToString()<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">@Html.T("MNUBASICO").ToString()</li>
+                        <li>@Html.ActionLink(@Html.T("MNUTIPOPROCEDIMENTO").ToString(), "Index", new { area = "Procedimento", controller = "tp_procedimento" })</li>
+                        <li>@Html.ActionLink(@Html.T("MNUDEPARTAMENTOS").ToString(), "Index", new { area = "Procedimento", controller = "Departamento" })</li>
+                        <li>@Html.ActionLink(@Html.T("MNUSITUACOES").ToString(), "Index", new { area = "Procedimento", controller = "Situacao" })</li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">@Html.T("MNUSEGURANCA").ToString()</li>
+                        <li>@Html.ActionLink(@Html.T("MNUUSUARIOS").ToString(), "Index", new { area = "", controller = "Usuario" })</li>
+                        <li>@Html.ActionLink(@Html.T("MNUGRUPOUSUARIO").ToString(), "Index", new { area = "", controller = "GUSUARIO" })</li>
+
+                    </ul>
+                </li>
+                @*MATERIAIS*@
+
+                <li class="menu-item dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Html.T("MNUPROCEDIMENTO").ToString()<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">@Html.T("MNUPROCMANU").ToString()</li>
+                        <li>@Html.ActionLink(@Html.T("MNUPROCINC").ToString(), "Create", new { area = "Procedimento", controller = "ProcedimentoAdm" })</li>
+                        <li>@Html.ActionLink(@Html.T("MNUPROCEDT").ToString(), "FindDoc", new { area = "Procedimento", controller = "ProcedimentoAdm" })</li>
+
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Pesquisa</li>
+                        <li>@Html.ActionLink("Procedimentos", "Pesquisa", new { area = "Procedimento", controller = "ProcedimentoAdm" })</li>
+                    </ul>
+                </li>
+                <li class="menu-item dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Html.T("MNURELATORIOS").ToString()<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">@Html.T("MNUBASICO").ToString()</li>
+                        <li>@Html.ActionLink("Tempo de Liberação", "TempoLiberacao", new { area = "Procedimento", controller = "Relatorios" })</li>
+                        <li>@Html.ActionLink(@Html.T("MNUPROCPORDEP").ToString(), "ProcedimentoDepartamento", new { area = "Procedimento", controller = "Relatorios" })</li>
+                        <li>@Html.ActionLink(@Html.T("MNUPROCLISTA").ToString(), "ListagemGeral", new { area = "Procedimento", controller = "Relatorios" })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink(@Html.T("MNUPROCTMMEIOD").ToString(), "TempoMedio", new { area = "Procedimento", controller = "Relatorios" })</li>
+                        <li>@Html.ActionLink("Tempo Médio Único", "TMR", new { area = "Procedimento", controller = "Relatorios" })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink(@Html.T("MNUPRINTPRO").ToString(), "PrintPro", new { area = "Procedimento", controller = "Relatorios" })</li>
+                        <li>@Html.ActionLink("Nota de Débito", "PrintNFDebito", new { area = "Procedimento", controller = "Relatorios" })</li>                    </ul>
+                </li>
+            </ul>
+
+            @using (Html.BeginForm("Edit", "ProcedimentoAdm", new { area = "Procedimento" }, FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+            {
+                <div class="form-group">
+                    <div class="form-group">
+                        <input data-val="true" data-val-required="*" id="id" name="id" type="text" placeholder="Procedimento" class="form-control">
+                        <span class="field-validation-valid" data-valmsg-for="id" data-valmsg-replace="false"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Atender</button>
+
+
+                </div>
+
+                
+
+            }
+            <ul class="nav navbar-nav navbar-right">
+                 <li class="menu-item dropdown">
+
+                        @if (Session["usuario"] != null)
+                        {
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Usuário <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Protected/Logout">@Html.T("MNUSAIR").ToString()</a></li>
+                                <li class="divider"></li>
+
+                                <li><a href="/Protected/ChangePassword/@Session["cd_usuario"].ToString()">@Html.T("MNUTROCARSENHA").ToString()</a></li>
+                            </ul>
+                        }
+
+
+
+                    </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+

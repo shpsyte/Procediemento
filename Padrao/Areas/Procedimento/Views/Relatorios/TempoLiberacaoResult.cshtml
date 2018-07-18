@@ -1,0 +1,228 @@
+﻿@{ int count = Model == null ? 0 : Model.Count(); }
+
+
+<div class="container_none">
+    <div class="page-header-isco">
+        <h2>@Html.T("ProcedimentoAdm") <small> tempo de liberação</small></h2>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("TempoLiberacao")"><i class="fa fa-refresh"></i>&nbsp;Nova Pesquisa</a>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            @(Html.Kendo().Grid((IEnumerable<wProcedimento>)ViewData["Customers"])
+            .Name("Grid")
+             .Columns(columns =>
+    {
+        //columns.Bound(p => p.CD_PROCEDIMENTO)
+        //.ClientFooterTemplate("Total Count: #=count#");
+        columns.Bound(p => p.CD_PROCEDIMENTO).Width(50).Visible(true);
+        columns.Bound(p => p.Clientes.FANTASIA).Width(160);
+        columns.Bound(p => p.DTA_ABERTURA).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(120).Title("Abertura");
+        columns.Bound(p => p.DTA_FECHAMENTO).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(120).Title("Fechamento");
+        columns.Bound(p => p.HORASCORRIDAS).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(100).Title("Horas Corridas");
+        columns.Bound(p => p.HORASUTEIS).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(100).Title("Horas Úteis");
+        columns.Bound(p => p.tp_procedimento.DES_TIPO).Title("Tipo").Width(120);
+        columns.Bound(p => p.tp_procedimento.TEMPO_PADRAO).Title("TP").Width(30);
+        columns.Bound(p => p.PERCENTUALPROCEDIMENTO).Width(25).ClientTemplate("#= productDetailsImg(data) #").Title("PP");
+
+        //columns.Bound(p => p.ID_SITUACAO).Title("sTipo").Width(120).ClientGroupFooterTemplate("Total Geral: #=count#");
+        //columns.Bound(p => p.DEPARTAMENTO.DESC_DEPARTAMENTO).Title("Departamento").Width(120);
+
+
+    })
+
+        .Filterable()
+        .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+        .Pageable(pageable => pageable
+        .PageSizes(true)
+                .ButtonCount(20)
+        .Messages(d => d.Display("{0} - {1} de {2} Registros"))
+        .Messages(d => d.ItemsPerPage("Itens por Página"))
+
+        )
+        .Sortable()
+        .Filterable()
+        .Resizable(resize => resize.Columns(true))
+        .Reorderable(reorder => reorder.Columns(true))
+        .ClientDetailTemplateId("template")
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            //   .Aggregates(aggregates =>
+            //{
+            //    aggregates.Add(p => p.ID_SITUACAO).Count();
+            //})
+
+        //.Group(groups => groups.Add(p => p.DEPARTAMENTO.DESC_DEPARTAMENTO))
+            .PageSize(20)
+            .Read(read => read.Action("ReadProcessos", "Relatorios"))
+        )
+        .Events(events => events.DataBound("dataBound"))
+        )
+
+
+        </div>
+    </div>
+</div>
+
+<script id="template" type="text/kendo-tmpl">
+  
+       
+   @(Html.Kendo().Grid((IEnumerable<wpa_troca_departamentos>)ViewData["Orders"])
+            .Name("grid_#=CD_PROCEDIMENTO#")
+            .Columns(columns =>
+            {
+
+                columns.Bound(o => o.Usuario.NOME).Width(60);
+                //columns.Bound(o => o.DEPANT.DESC_DEPARTAMENTO).Title("De");
+
+                columns.Bound(o => o.DEPNOVA.DESC_DEPARTAMENTO).Title("Departamento").Width(170);
+                columns.Bound(o => o.DEPNOVA.TEMPO_PADRAO).Title("Tempo Dep").Width(85);
+                //columns.Bound(o => o.DTA_TROCA).Title("Em").Format("{0:dd/MM/yyyy HH:mm:ss}");
+                columns.Bound(o => o.DTA_ENTRADA_DEP_NOVA).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(100);
+                columns.Bound(o => o.DTA_SAIDA_DEP_NOVA).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(100);
+
+                columns.Bound(o => o.HORASCORRIDAS).Format("{0:dd/MM/yyyy HH:mm:ss}").Title("Horas Corridas").Width(60);
+                columns.Bound(o => o.HORASUTEIS).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(60).Title("Horas Úteis");
+                //columns.Bound(o => o.PERCENTUAL).Width(45).Title("PD");
+                columns.Bound(o => o.IMG).Width(40).Encoded(false).Title("PD");
+
+                //         .ClientTemplate("#if(PERCENTUAL == 0){#" +
+                //"#=PERCENTUAL#" +
+                //"#} else {#" +
+                //"#= PERCENTUAL#" +
+                //"# } #");
+                //.ClientTemplate(   " <img src='../../Images/SetaAcima.png' /> ");
+
+
+
+
+
+
+                //if (product.PERCENTUAL <= 0)
+                //{
+                //    html = "<img src='../../Images/SetaAcima.png' />";
+                //}
+                //else
+                //    if (product.PERCENTUAL > 0 && product.PERCENTUAL < 80)
+                //    {
+                //        html = "<img src='../../Images/SetaAcima.png' />";
+                //    }
+                //    else
+                //        if (product.PERCENTUAL > 80 && product.PERCENTUAL < 100)
+                //        {
+                //            html = "<img src='../../Images/SetaDireita.png' />";
+                //        }
+                //        else
+                //            html = "<img src='../../Images/SetaBaixo.png' />";
+
+
+
+                //columns.Bound(o => o.HORAS).ClientTemplate("#= productDetails(data) #").Title(Html.T("Comando").ToString()).Width(100);
+
+
+                //columns.Bound(o => o.DEPNOVA.DESC_DEPARTAMENTO);
+
+
+            })
+
+
+         //    .HtmlAttributes(new { style = "height:830px;" })
+           .DataSource(dataSource => dataSource
+                .Ajax()
+               //  .Group(groups => groups.Add(p => p.DEPNOVA.DESC_DEPARTAMENTO))
+                .ServerOperation(true)
+                 .Model(m =>
+                                {
+                                    m.Id(p => p.NUM_SEQ);
+
+
+
+                                })
+                .PageSize(40)
+                .Read(read => read.Action("ReadProcedimentoDepartamento", "Relatorios", new { COD_PROCEDIMENTO = "#=CD_PROCEDIMENTO#" }))
+            )
+            .Pageable()
+
+            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+           //.Sortable()
+            .ToClientTemplate()
+    )
+</script>
+
+
+
+
+<script>
+    function productDetails(product) {
+        var actionDetail = '@Url.Action("Details", "ProcedimentoAdm")';
+        var actionEdit = '@Url.Action("Edit", "ProcedimentoAdm")';
+        var actionDelete = '@Url.Action("Delete", "ProcedimentoAdm")';
+
+
+
+        var html = kendo.format("<a class='icon-folder-open' href='{0}/{1}'> </a>     ",
+        actionDetail, product.CD_PROCEDIMENTO);
+        return html;
+    }
+
+
+    function productDetailsImg2(product) {
+        //var html = "<img src='../../Images/Logo.png' />";
+        //return html;
+        //alert(product.PERCENTUAL);
+        //alert(product.CD_DEPARTAMENTO);
+        var html = "<img src='../../Images/SetaAcima.png' />";
+
+
+        if (product.PERCENTUAL <= 0) {
+            html = "<img src='../../Images/SetaAcima.png' />";
+        } else
+            if (product.PERCENTUAL > 0 && product.PERCENTUAL < 80) {
+                html = "<img src='../../Images/SetaAcima.png' />";
+            } else
+                if (product.PERCENTUAL > 80 && product.PERCENTUAL < 100) {
+                    html = "<img src='../../Images/SetaDireita.png' />";
+                } else
+                    html = "<img src='../../Images/SetaBaixo.png' />";
+
+
+        return html;
+
+    }
+
+
+    function productDetailsImg(product) {
+        //var html = "<img src='../../Images/Logo.png' />";
+        //return html;
+
+        var html = "<img src='../../Images/SetaAcima.png' />";
+
+
+        if (product.PERCENTUALPROCEDIMENTO <= 0) {
+            html = "<img src='../../Images/SetaAcima.png' />";
+        } else
+            if (product.PERCENTUALPROCEDIMENTO > 0 && product.PERCENTUALPROCEDIMENTO < 80) {
+                html = "<img src='../../Images/SetaAcima.png' />";
+            } else
+                if (product.PERCENTUALPROCEDIMENTO > 80 && product.PERCENTUALPROCEDIMENTO < 100) {
+                    html = "<img src='../../Images/SetaDireita.png' />";
+                } else
+                    html = "<img src='../../Images/SetaBaixo.png' />";
+
+
+        return html;
+
+    }
+</script>
+
+<script>
+    function dataBound() {
+
+        this.expandRow(this.tbody.find("tr.k-master-row").first());
+    }
+</script>
+

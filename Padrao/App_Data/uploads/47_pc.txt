@@ -1,0 +1,566 @@
+
+@{
+    var options = new AjaxOptions()
+                      {
+                          Url = Url.Action("Create", "PedidoCompra"),
+                          OnBegin = "Iniciando",
+                          OnSuccess = "Sucesso ('','Compras/PedidoCompra') ",
+                          OnFailure = "Erro",
+                          HttpMethod = "Post",
+                          OnComplete = "Complete"
+                      };
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $(".wizard-step:first").fadeIn(); // show first step
+
+
+        // attach backStep button handler
+        // hide on first step
+        $("#back-step").hide().click(function () {
+            var $step = $(".wizard-step:visible"); // get current step
+            if ($step.prev().hasClass("wizard-step")) { // is there any previous step?
+                $step.hide().prev().fadeIn();  // show it and hide current step
+
+                // disable backstep button?
+                if (!$step.prev().prev().hasClass("wizard-step")) {
+                    $("#back-step").hide();
+                }
+            }
+        });
+        $("#confimar").click(function () {
+
+            $("#pr_desconto_geral").val($("#pr_desconto").val());
+            $("#vl_frete_geral").val($("#vl_frete").val());
+
+
+            $("form").submit();
+        });
+
+        //11 - 4003 - 4128
+        //11 - 3156-5700
+
+        //0800 - 8801188
+        //2285, 00
+
+        //1792, 00
+
+
+
+
+        // attach nextStep button handler
+        $("#next-step").click(function () {
+
+            var $step = $(".wizard-step:visible"); // get current step
+
+            var validator = $("form").validate(); // obtain validator
+            var anyError = false;
+            $step.find("input").each(function () {
+
+                if (!validator.element(this)) { // validate every input element inside this step
+                    anyError = true;
+                }
+
+            });
+
+            if (anyError)
+                return false; // exit if any error found
+
+
+
+
+            if ($step.next().hasClass("confirm")) { // is it confirmation?
+                // show confirmation asynchronously
+
+                $.post("/wizard/confirm", $("form").serialize(), function (r) {
+                    // inject response in confirmation step
+                    $(".wizard-step.confirm").html(r);
+                });
+
+            }
+
+            if ($step.next().hasClass("wizard-step")) { // is there any next step?
+                $step.hide().next().fadeIn();  // show it and hide current step
+                $("#back-step").show();   // recall to show backStep button
+
+
+            }
+
+            else { // this is last step, submit form
+                $("form").submit();
+            }
+
+
+        });
+
+    });
+
+
+</script>
+
+
+
+<div id="page-wrapper">
+    <div class="page-header-isco">
+        <h2>@Html.T("titlecreate") <small> @Html.T("PedidoCompra") </small></h2>
+    </div>
+</div>
+
+<div class="pull-left">
+    <ul class="pager">
+        <li id="back-step" class="previous"><a href="#"> <i class="fa fa-step-backward"></i>&nbsp;@Html.T("btbvoltar").ToString() </a></li>
+        <li id="next-step" class="next"><a href="#"><i class="fa fa-step-forward"></i>&nbsp;@Html.T("btbproximo").ToString()</a></li>
+    </ul>
+</div>
+<br />
+
+
+<div class="wizard-step">
+
+    @using (Html.BeginForm())
+    {
+        <input type="hidden" name="cd_empresa" id="cd_empresa" value="@Session["cd_empresa"]" />
+        <input type="hidden" name="cd_usuario" id="cd_usuario" value="@Session["cd_usuario"]" />
+        <input type="hidden" name="dt_pedido" id="dt_pedido" value="@System.DateTime.Now" />
+        <input type="hidden" name="dt_chegada" id="dt_chegada" value="@System.DateTime.Now" />
+        <input type="hidden" name="situacao" id="situacao" value="B" />
+        <input type="hidden" name="prazo_medio" id="prazo_medio" value="0" />
+        <input type="hidden" name="nr_oproducao" id="nr_oproducao" value="0" />
+        <input type="hidden" name="nr_provisao" id="nr_provisao" value="0" />
+        <input type="hidden" name="dt_faturamento" id="dt_faturamento" value="@System.DateTime.Now" />
+        <input type="hidden" name="cd_tabprecofor" id="cd_tabprecofor" value="0" />
+
+
+
+        <div class="main-content">
+            @*<div class="page-header-isco">
+                    <h1><small>@Html.T("titlecreate") </small>@Html.T("PedidoCompra")</h1>
+
+                </div>*@
+
+            <div class="align-content">
+                @*<div class="controles-none">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-save"></i>&nbsp;@Html.T("btbsalvar").ToString()
+                        </button>
+                        <a class="btn " href="@Url.Action("Index", "PedidoCompra")"><i class="icon-arrow-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                    </div>*@
+
+                <div id="form-container" style="display: block;">
+                    <div id="deform" class="deform form-horizontal deform">
+                        <fieldset>
+                            <div class="area-controles">
+                                <div class="controls-fields">
+                                    @Html.ValidationMessage("error")
+                                    <div class="row">
+
+                                        <div class="span4">
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.cd_cadastro)</span>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @(Html.Kendo().ComboBox()
+                                                                  .Name("cd_cadastro")
+                                                                  .HtmlAttributes(new { style = "width:280px" })
+                                                                  .DataTextField("razao")
+                                                                  .DataValueField("cd_cadastro")
+                                                                  .Filter(FilterType.Contains)
+
+                                                                  .DataSource(source =>
+                                                                  {
+                                                                      source.Read(read =>
+                                                                      {
+                                                                          read.Action("ReadCadastro", "ReadCombos", new { area = "Cadastros" });
+                                                                      });
+                                                                  }))
+                                                @Html.ValidationMessageFor(model => model.cd_cadastro)
+                                            </div>
+
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.nr_original)</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.nr_original, new { @Value = "0", @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.nr_original)
+                                            </div>
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.cd_comprador)</span>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @(Html.Kendo().ComboBox()
+                                                                  .Name("cd_comprador")
+                                                                  .HtmlAttributes(new { style = "width:280px" })
+                                                                  .DataTextField("UsuarioComprador.nome")
+                                                                  .DataValueField("cd_usuario")
+                                                                  .Filter(FilterType.Contains)
+
+                                                                  .DataSource(source =>
+                                                                  {
+                                                                      source.Read(read =>
+                                                                      {
+                                                                          read.Action("ReadCompador", "ReadCombos", new { area = "Cadastros" });
+                                                                      });
+                                                                  }))
+                                                @Html.ValidationMessageFor(model => model.cd_comprador)
+                                            </div>
+
+
+
+
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.cd_tipopedidoc)</span>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @(Html.Kendo().DropDownList()
+                                                                  .Name("cd_tipopedidoc")
+                                                                  .HtmlAttributes(new { style = "width:280px" })
+                                                                  .DataTextField("descricao")
+                                                                  .DataValueField("cd_tipopedidoc")
+
+                                                                  .SelectedIndex(0)
+
+                                                                  .DataSource(source =>
+                                                                  {
+                                                                      source.Read(read =>
+                                                                      {
+                                                                          read.Action("ReadTipoPedidoCompra", "ReadCombos", new { area = "Cadastros" });
+                                                                      });
+                                                                  }))
+                                                @Html.ValidationMessageFor(model => model.cd_tipopedidoc)
+                                            </div>
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.cd_origem)</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                @(Html.Kendo().DropDownList()
+                                                                  .Name("cd_origem")
+                                                                  .HtmlAttributes(new { style = "width:280px" })
+                                                                  .DataTextField("descricao")
+                                                                  .DataValueField("cd_origem")
+                                                                 .SelectedIndex(0)
+
+                                                                  .DataSource(source =>
+                                                                  {
+                                                                      source.Read(read =>
+                                                                      {
+                                                                          read.Action("ReadOrigemCompraPC", "ReadCombos", new { area = "Cadastros" });
+                                                                      });
+                                                                  }))
+                                                @Html.ValidationMessageFor(model => model.cd_origem)
+                                            </div>
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.contato)</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.contato, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.contato)
+                                            </div>
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.email)</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.email)
+                                            </div>
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.obs)</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                @Html.TextAreaFor(model => model.obs, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.obs)
+                                            </div>
+                                        </div>
+                                        <div class="span4">
+
+
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.cd_condicaovenda)</span>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @(Html.Kendo().ComboBox()
+                                                                  .Name("cd_condicaovenda")
+                                                                  .HtmlAttributes(new { style = "width:280px" })
+                                                                  .DataTextField("descricao")
+                                                                  .DataValueField("cd_condicaovenda")
+                                                                  .Filter(FilterType.Contains)
+
+                                                                  .DataSource(source =>
+                                                                  {
+                                                                      source.Read(read =>
+                                                                      {
+                                                                          read.Action("ReadCondicaoVendaCompras", "ReadCombos", new { area = "Cadastros" });
+                                                                      });
+                                                                  }))
+                                                @Html.ValidationMessageFor(model => model.cd_condicaovenda)
+                                            </div>
+
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.cd_frete)</span>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @(Html.Kendo().DropDownList()
+                                                                  .Name("cd_frete")
+                                                                  .HtmlAttributes(new { style = "width:280px" })
+                                                                  .DataTextField("Text")
+                                                                  .DataValueField("Value")
+                                                                  .SelectedIndex(0)
+
+                                                                  .DataSource(source =>
+                                                                  {
+                                                                      source.Read(read =>
+                                                                      {
+                                                                          read.Action("ReadTipoFrete", "ReadCombos", new { area = "Cadastros" });
+                                                                      });
+                                                                  }))
+                                                @Html.ValidationMessageFor(model => model.cd_frete)
+                                            </div>
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.cd_transportador)</span>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @(Html.Kendo().ComboBox()
+                                                                  .Name("cd_transportador")
+                                                                  .HtmlAttributes(new { style = "width:280px" })
+                                                                  .DataTextField("razao")
+                                                                  .DataValueField("cd_cadastro")
+                                                                  .Filter(FilterType.Contains)
+
+                                                                  .DataSource(source =>
+                                                                  {
+                                                                      source.Read(read =>
+                                                                      {
+                                                                          read.Action("ReadTransportador", "ReadCombos", new { area = "Cadastros" });
+                                                                      });
+                                                                  }))
+
+                                            </div>
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.cd_redespacho)</span>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @(Html.Kendo().ComboBox()
+                                                                  .Name("cd_redespacho")
+                                                                  .HtmlAttributes(new { style = "width:280px" })
+                                                                  .DataTextField("razao")
+                                                                  .DataValueField("cd_cadastro")
+                                                                  .Filter(FilterType.Contains)
+
+                                                                  .DataSource(source =>
+                                                                  {
+                                                                      source.Read(read =>
+                                                                      {
+                                                                          read.Action("ReadTransportador", "ReadCombos", new { area = "Cadastros" });
+                                                                      });
+                                                                  }))
+
+                                            </div>
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.cd_carimbo)</span>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @(Html.Kendo().ComboBox()
+                                                                  .Name("cd_carimbo")
+                                                                  .HtmlAttributes(new { style = "width:280px" })
+                                                                  .DataTextField("descricao")
+                                                                  .DataValueField("cd_carimbo")
+                                                                  .Filter(FilterType.Contains)
+
+                                                                  .DataSource(source =>
+                                                                  {
+                                                                      source.Read(read =>
+                                                                      {
+                                                                          read.Action("ReadCarimbo", "ReadCombos", new { area = "Cadastros" });
+                                                                      });
+                                                                  }).Template(
+                                                                                "<dl>" +
+                                                                                    "<dt>Descricao:</dt><dd>${ data.descricao }</dd>" +
+                                                                                    "<dt>Texto:</dt><dd>${ data.texto }</dd>" +
+                                                                                "</dl>"))
+                                                @Html.ValidationMessageFor(model => model.cd_carimbo)
+                                            </div>
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.cd_carimbo2)</span>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @(Html.Kendo().ComboBox()
+                                                                  .Name("cd_carimbo2")
+                                                                  .HtmlAttributes(new { style = "width:280px" })
+                                                                  .DataTextField("descricao")
+                                                                  .DataValueField("cd_carimbo")
+                                                                  .Filter(FilterType.Contains)
+
+                                                                  .DataSource(source =>
+                                                                  {
+                                                                      source.Read(read =>
+                                                                      {
+                                                                          read.Action("ReadCarimbo", "ReadCombos", new { area = "Cadastros" });
+                                                                      });
+                                                                  }).Template(
+                                                                                "<dl>" +
+                                                                                    "<dt>Descricao:</dt><dd>${ data.descricao }</dd>" +
+                                                                                    "<dt>Texto:</dt><dd>${ data.texto }</dd>" +
+                                                                                "</dl>"))
+                                                @Html.ValidationMessageFor(model => model.cd_carimbo2)
+                                            </div>
+
+
+
+
+                                            <div class="editor-label">
+                                                <span class="display-label-text">@Html.DisplayNameFor(model => model.cd_ccusto)</span>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                @(Html.Kendo().ComboBox()
+                                                      .Name("cd_ccusto")
+                                                      .HtmlAttributes(new { style = "width:280px" })
+                                                      .DataTextField("descricao")
+                                                      .DataValueField("cd_pr")
+                                                      .Filter(FilterType.Contains)
+                                                      .DataSource(source =>
+                                                      {
+                                                          source.Read(read =>
+                                                          {
+                                                              read.Action("ReadCentroCusto", "ReadCombos", new { area = "Cadastros" });
+                                                          });
+                                                      }))
+                                                @Html.ValidationMessageFor(model => model.cd_ccusto)
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <input type="hidden" name="pr_desconto_geral" id="pr_desconto_geral" value="0" />
+        <input type="hidden" name="vl_frete_geral" id="vl_frete_geral" value="0" />
+
+    }
+
+
+</div>
+<div class="wizard-step">
+    <div class="main-content">
+        @* <div class="page-header-isco">
+                <h1><small>@Html.T("titleitens") </small>@Html.T("PedidoCompra")</h1>
+
+            </div>*@
+
+
+        <div class="align-content">
+            <div id="form-container" style="display: block;">
+                <div id="deform" class="deform form-horizontal deform">
+                    <fieldset>
+                        <div class="area-controles">
+                            <div class="controls-fields">
+                                @*@Html.Partial("~/Areas/Cart/Views/Shared/_PedidoCompra_InsereItem.cshtml")*@
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+<div class="wizard-step confirm">
+    <div class="main-content">
+        @* <div class="page-header-isco">
+                <h1><small>@Html.T("titlefinalizar") </small>@Html.T("PedidoCompra")</h1>
+
+            </div>*@
+
+
+        <div class="align-content">
+            <div class="controles">
+                <button type="submit" id="confimar" name="confimar" class="btn btn-primary">
+                    <i class="fa fa-save"></i>&nbsp;@Html.T("btbsalvar").ToString()
+                </button>
+            </div>
+            <div id="form-container" style="display: block;">
+                <div id="deform" class="deform form-horizontal deform">
+                    <fieldset>
+                        <div class="area-controles">
+                            <div class="controls-fields">
+
+                                <div class="editor-label">
+                                    <span class="display-label-text">@Html.T("pr_desconto_geral").ToString()</span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <input type="text" name="pr_desconto" id="pr_desconto" value="0" />
+
+                                </div>
+
+
+                                <div class="editor-label">
+                                    <span class="display-label-text">@Html.T("vl_frete_geral").ToString()</span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <input type="text" name="vl_frete" id="vl_frete" value="0" />
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

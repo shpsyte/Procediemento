@@ -1,0 +1,38 @@
+﻿@{ int count = Model == null ? 0 : Model.Count(); }
+
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titlefind") <small>@Html.T("ProcedimentoAdm") </small></h2>
+    </div>
+
+@using (Html.BeginForm("PrintProPDF", "Relatorios", FormMethod.Post, null))
+        {
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <button type="submit" id="Destino" name="Destino" value="Tela" class="btn btn-success">
+                    Imprimir
+                </button>
+            </div>
+            <div class="panel-body">
+
+                <div class="form-horizontal">
+                   
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Nº. Procedimento</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" id="nr_procedimento" name="nr_procedimento" type="text" />
+                        </div>
+                    </div>
+
+                 
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+

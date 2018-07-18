@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/Bootstrap")
+    <script src="~/Scripts/_FuncoesIsco.js"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+
+@*    @Styles.Render("~/Content/kendo")
+    @Scripts.Render("~/bundles/kendo")*@
+
+
+     <link href="/Content/kendo/2012.3.1114/kendo.common.min.css" rel="stylesheet"/>
+<link href="/Content/kendo/2012.3.1114/kendo.dataviz.min.css" rel="stylesheet"/>
+<link href="/Content/kendo/2012.3.1114/kendo.default.min.css" rel="stylesheet"/>
+
+    <script src="/Scripts/kendo/2012.3.1114/jquery.min.js"></script>
+<script src="/Scripts/kendo/2012.3.1114/kendo.all.min.js"></script>
+<script src="/Scripts/kendo/2012.3.1114/kendo.aspnetmvc.min.js"></script>
+
+
+
+    <style type="text/css">
+        #footer
+        {
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+
+            <!-- Modal -->
+            <div id="Modalbegin" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+
+                    <h3>@Html.T("SaveData")</h3>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-info">
+
+                        @Html.T("SaveData")
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div id="ModalError" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+
+                    <h3 id="myModalLabel">@Html.T("Erro")</h3>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-danger">
+
+                        @Html.T("ErrorSaveData")
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">@Html.T("btbClose")</button>
+                </div>
+            </div>
+        </div>
+        <br />
+      
+        <div class="container">
+            <img src="~/Images/Logo.png" width="400" height="200" />
+
+        </div>
+
+        @*  <hr>*@
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <div class="container">
+        <div class="navbar navbar-bottom">
+            <div class="navbar-inner">
+                <p class="pull-right">
+                    <small>@DateTime.Now.Year - Isco Sistemas - Todos os Direitos Reservados.</small>
+                </p>
+                <span class=""><a href="http://www.foxlux.com.br" target="_blank">Foxlux Ltda</a></span>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/Scripts/Bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

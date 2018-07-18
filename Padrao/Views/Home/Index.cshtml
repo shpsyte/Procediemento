@@ -1,0 +1,275 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+    <hr />
+    @using (Html.BeginForm("Index", "ProcedimentoAdm", new { ID_SITUACAO = 1, area = "Procedimento" }, FormMethod.Post, null))
+    {
+        <button type="submit" class="btn btn-success">
+            <i class="icon-ok icon-white"></i>Verificar Meus Procedimentos
+        </button>
+        <a class="btn btn-warning" href="@Url.Action("Create", "ProcedimentoAdm", new { area = "Procedimento"})">Criar um Procedimento</a>
+    }
+    <hr />
+</div>
+
+
+
+<link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300" rel="stylesheet">
+
+@{
+    if (Session["cd_pagina"].ToString() == "1")
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+
+                    <h1 class="example-title">Procedimentos <span> Ativos</span> <small> por Departamento</small></h1>
+
+                    @(Html.Kendo().Chart<Grafico1>()
+                                    .Name("charts")
+                    .HtmlAttributes(new { style = "height: 320px;" })
+                                   .Legend(legend => legend
+                                        .Position(ChartLegendPosition.Bottom)
+                                        .Visible(false)
+                                    )
+                                    .ChartArea(chartArea => chartArea
+                                        .Background("transparent")
+                                    )
+                                   .DataSource(ds => ds.Read(read => read.Action("_Grafico1", "Home")))
+                                    .Series(series =>
+                                    {
+                                        series.Column(model => model.QTDEATIVAS).Labels(true).Name("Ativas").Gap(1).Color("#639514").Opacity(90);
+                                    })
+                                    .CategoryAxis(axis => axis
+                                        .Categories(model => model.DESC_DEPARTAMENTO)
+
+                                        .Labels(labels => labels.Rotation(-60))
+                                        .MajorGridLines(lines => lines.Visible(true))
+                                    )
+                                    .ValueAxis(axis => axis
+                                        .Numeric().Labels(labels => labels.Format("{0}"))
+                                    )
+                                    .Tooltip(tooltip => tooltip
+                                        .Visible(true)
+                                        .Format("{0}")
+                                    )
+                    )
+
+
+                    <div class="row placeholders">
+                        <div class="col-xs-6 col-sm-3 placeholder">
+                            <div class="totalproc">@ViewData["TOTALPROCEDIMENTOS"]</div>
+                            <h4>TOTAL</h4>
+                        </div>
+                        @*  <div class="col-xs-6 col-sm-3 placeholder">
+                                <div class="aprovadas">@ViewData["TOTALAPROVADOS"]</div>
+                                <h5>APROVADAS</h5>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-3 placeholder">
+                                <div class="reprovadas">@ViewData["TOTALREPROVADOS"]</div>
+                                <h5>REPROVADAS</h5>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-3 placeholder">
+                                <div class="ativas">@ViewData["TOTALATIVAS"]</div>
+                                <h5>ATIVAS</h5>
+                            </div>*@
+
+                    </div>
+
+
+
+                </div>
+                <div class="col-md-6">
+                    
+                    <h1 class="example-title">TOP 5 <span>Procedimentos</span> <small> com maior tempo parado</small></h1>
+                    @(Html.Kendo().Chart<Grafico3>()
+                                    .Name("charts_2")
+                                 .HtmlAttributes(new { style = "height: 320px;" })
+                                   .Legend(legend => legend
+                                        .Position(ChartLegendPosition.Bottom)
+                                        .Visible(false)
+                                    )
+                                    .ChartArea(chartArea => chartArea
+                                        .Background("transparent")
+                                    )
+                                    .DataSource(ds => ds.Read(read => read.Action("_Grafico3", "Home")))
+                                     .Series(series =>
+                                     {
+                                         series.Column(
+                                             model => model.HORASPARADAS
+                                         ).Labels(true).Name("Horas").Gap(5).Color("#4da3d5").Opacity(90);
+
+                                         series.Column(
+                                               model => model.DEPARTAMENTO
+                                           ).Labels(true).Name("Dep").Gap(5).Color("#ffff").Opacity(90).Labels(labels => labels.Rotation(-90));
+
+                                         
+
+                                     })
+                                    //.Series(series =>
+                                    //{
+                                    //    //series.Column(model => model.HORASPARADAS).Labels(true).Name("Horas").Gap(5).Color("#4da3d5").Opacity(90);
+
+
+                                    //})
+                                    .CategoryAxis(axis => axis
+                                        .Categories(model => model.CD_PROCEDIMENTO)
+                                        .Justify()
+
+                                          .Labels(labels => labels.Rotation(-90))
+                                           .MajorGridLines(lines => lines.Visible(true))
+
+                                    )
+                                    .ValueAxis(axis => axis
+                                        .Numeric().Labels(labels => labels.Format("{0}"))
+                                    )
+                                   .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Template("#= series.name #: #= value #")
+
+        )
+                    )
+
+
+
+                </div>
+
+                @*<div class="col-md-6">
+
+                        <h1 class="example-title">Mês <span>Atual</span> <small>Situação dos Procedimentos</small></h1>
+
+                        @(Html.Kendo().Chart<Grafico2>()
+                                            .Name("charts_2")
+                                         .HtmlAttributes(new { style = "height: 320px;" })
+                                           .Legend(legend => legend
+                                                .Position(ChartLegendPosition.Bottom)
+                                                .Visible(false)
+                                            )
+                                            .ChartArea(chartArea => chartArea
+                                                .Background("transparent")
+                                            )
+                                            .DataSource(ds => ds.Read(read => read.Action("_Grafico2", "Home")))
+                                            .Series(series =>
+                                            {
+                                                series.Column(model => model.QTDETOTAL).Labels(true).Name("Total").Gap(5).Color("#4da3d5").Opacity(90);
+
+                                            })
+                                            .CategoryAxis(axis => axis
+                                                .Categories(model => model.SITUACAO)
+                                                .Justify()
+
+                                                .MajorGridLines(lines => lines.Visible(true))
+                                            )
+                                            .ValueAxis(axis => axis
+                                                .Numeric().Labels(labels => labels.Format("{0}"))
+                                            )
+                                            .Tooltip(tooltip => tooltip
+                                                .Visible(true)
+                                                .Format("{0}")
+                                            )
+                                        )
+
+
+                        <div class="row placeholders">
+                            <div class="col-xs-6 col-sm-3 placeholder">
+                                <div class="totalproc">@ViewData["TOTALPROCEDIMENTOS2"]</div>
+                                <h4>TOTAL</h4>
+                            </div>
+                           <div class="col-xs-6 col-sm-2 placeholder">
+                                <div class="aprovadas">@ViewData["TOTALAPROVADOS2"]</div>
+                                <h5>APROVADAS</h5>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-2 placeholder">
+                                <div class="reprovadas">@ViewData["TOTALREPROVADOS2"]</div>
+                                <h5>REPROVADAS</h5>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-2 placeholder">
+                                <div class="ativas">@ViewData["TOTALATIVAS2"]</div>
+                                <h5>ATIVAS</h5>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-2 placeholder">
+                                <div class="canceladas">@ViewData["TOTALCANCELADA"]</div>
+                                <h5>CANCELADAS</h5>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>*@
+            </div>
+        </div>
+
+
+    }
+}
+
+<div class="modal fade" id="VinculaNota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Aviso ! </h4>
+            </div>
+
+
+            <div class="modal-body">
+                <p id="msgretorno"></p>
+                <input type="hidden" id="id" name="id" />
+
+
+                <div class="row">
+                    <div class="form-group  col-md-12">
+                        <label>Mensagem</label>
+                        <div class="form-group">
+                            <h1>Ufaaa...</h1>
+                            <h4>
+                                Primeira versão do SAC está disponível, se você ainda não conhece, clique
+                                <a href="Http://sac.grupofoxlux.com.br">aqui</a>, para conhecê-lo ao vivo..
+                            </h4>
+                            <br />
+                            Deverá informar seu login e senha do próprio portal de procedimentos ...
+                            <br />
+                            Lembre-se: Os dados la ainda serão excluidos...
+                            <br />
+
+                            Att,
+                            Foxlux ;)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Fechar
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+
+@section scripts {
+    <script>
+        //$('#VinculaNota').modal()
+        //$('#VinculaNota').modal('show')
+
+    </script>
+}

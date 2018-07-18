@@ -1,0 +1,3 @@
+session has now exceeded its time limit,
+logoff wil start in 2 minutes
+save all your files now

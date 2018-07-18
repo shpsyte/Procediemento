@@ -1,0 +1,717 @@
+﻿@model ProcedimentoAdm
+
+<style>
+    .disable
+    {
+        background-color: #e5dfdf;
+    }
+</style>
+
+
+
+
+@(Html.Kendo().Window()
+        .Name("TransportadorLookUpDialog")
+        .Title("Pesquisa de Transportador")
+        .Content("Carregando...")
+        .Actions(actions => actions.Refresh().Close())
+        .LoadContentFrom("TransportadorLookup", "ProcedimentoAdm")
+        .Width(880)
+        .Height(480)
+        .Modal(true)
+        .Visible(false)
+        .Scrollable(true)
+        .Resizable()
+        .Draggable(true)
+
+        )
+
+
+@(Html.Kendo().Window()
+        .Name("CadastroLookUpDialog")
+        .Title("Pesquisa de Clientes")
+        .Content("Carregando...")
+        .Actions(actions => actions.Refresh().Close())
+        .LoadContentFrom("CadastroLookup", "ProcedimentoAdm")
+        .Width(880)
+        .Height(480)
+        .Modal(true)
+        .Visible(false)
+        .Scrollable(true)
+        .Resizable()
+        .Draggable(true)
+
+        )
+
+
+
+@(Html.Kendo().Window()
+        .Name("TipoLookUpDialog")
+        .Title("Pesquisa de Tipos")
+        .Content("Carregando...")
+        .Actions(actions => actions.Refresh().Close())
+        .LoadContentFrom("TipoLookup", "ProcedimentoAdm")
+        .Width(580)
+        .Height(480)
+        .Modal(true)
+        .Visible(false)
+        .Scrollable(true)
+        .Resizable()
+        .Draggable(true))
+
+@(Html.Kendo().Window()
+    .Name("NFLookUpDialog")
+    .Title("Pesquisa de Notas")
+    .Content("Carregando...")
+    .Actions(actions => actions.Refresh().Close())
+    .LoadContentFrom("NFLookup", "ProcedimentoAdm")
+    .Width(680)
+    .Height(480)
+    .Modal(true)
+    .Visible(false)
+    .Scrollable(true)
+    .Resizable()
+    .Draggable(true))
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titlecreate") <small>@Html.T("ProcedimentoAdm") </small></h2>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.Partial("_Validation", ViewData.ModelState)
+        <div class="panel panel-success">
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.LabelFor(f => f.CD_CADASTRO)
+
+                            <div class="input-group">
+
+                                @Html.TextBoxFor(model => model.CD_CADASTRO, new { @class = "form-control" })
+                                <span class="input-group-btn">
+                                    <button id="btbPesqCadastro" class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="cd_cadastro_desc">Razão Social</label>
+                            <span id="cd_cadastro_desc" name="cd_cadastro_desc" class="form-control disable"></span>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <label for="des_cidade">Cidade - UF</label>
+                            <span id="des_cidade" name="des_cidade" class="form-control disable"></span>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-2">
+                            <label for="CD_REGIONAL">Regional</label>
+                            <span id="CD_REGIONAL" name="CD_REGIONAL" class="form-control disable"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="RAZAO_REPRES">Representante</label>
+                            <span id="RAZAO_REPRES" name="RAZAO_REPRES" class="form-control disable"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.LabelFor(f => f.tp_procedimento.CD_TIPO)
+
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.CD_TIPO, new { @class = "form-control" })
+                                <span class="input-group-btn">
+                                    <button id="btbPesqTipo" class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="cd_tipo_desc">Tipo do Procedimento</label>
+                            <span id="cd_tipo_desc" class="form-control disable"></span>
+                        </div>
+
+                        <div class="col-md-4">
+                            Motivo
+                            <br />
+                            @Html.DropDownListFor(p => p.MOTIVOID, ViewBag.MOTIVOID as IEnumerable<SelectListItem>, String.Empty, new { @class = "select2" }) <i></i>
+                            
+                            @Html.ValidationMessageFor(model => model.MOTIVOID)
+                        </div>
+
+
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.LabelFor(f => f.NF_FOX)
+
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.NF_FOX, new { @class = "form-control" })
+                                <span class="input-group-btn">
+                                    <button id="btbPesqNF" class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="cd_nf_desc">Emissão</label>
+                            <span id="cd_nf_desc" class="form-control disable"></span>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.CD_DEPARTAMENTO)
+                            <br />
+                            @(Html.Kendo().ComboBox()
+                                                  .Name("CD_DEPARTAMENTO")
+                                                  .DataTextField("DESC_DEPARTAMENTO")
+                                                  .DataValueField("CD_DEPARTAMENTO")
+                                                  .SelectedIndex(-1)
+                                                  .Filter(FilterType.Contains)
+                                                   .HtmlAttributes(new { style = "width:100%" })
+                                                  .DataSource(source => { source.Read(read => { read.Action("GetDepartamento", "ProcedimentoAdm"); }); })
+                                            )
+                            @Html.ValidationMessageFor(model => model.CD_DEPARTAMENTO)
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.LabelFor(f => f.CD_TRANSPORTADOR)
+
+                            <div class="input-group">
+
+                                @Html.TextBoxFor(model => model.CD_TRANSPORTADOR, new { @class = "form-control" })
+                                <span class="input-group-btn">
+                                    <button id="btbPesqTransportador" class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="cd_transportador_desc">Nome</label>
+                            <span id="cd_transportador_desc" name="cd_transportador_desc" class="form-control disable"></span>
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.NF_CLIENTE)
+                            @Html.TextBoxFor(model => model.NF_CLIENTE, new { @class = "form-control" })
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="display-field">
+                                @Html.LabelFor(model => model.VL_TRANSPORTADORA)
+                                @Html.TextBoxFor(model => model.VL_TRANSPORTADORA, new { @class = "form-control", @onkeypress="return BloqueiaLetras(event)", @style = "border-color: #f00; color: #f00; font-weight: bold;" })
+                                @Html.ValidationMessageFor(model => model.VL_TRANSPORTADORA)
+                            </div>
+                        </div>
+
+                    
+
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.VL_REPRESENTANTE)
+                            @Html.TextBoxFor(model => model.VL_REPRESENTANTE, new { @class = "form-control", @onkeypress="return BloqueiaLetras(event)", @style = "border-color: #f00; color: #f00; font-weight: bold;" })
+                            @Html.ValidationMessageFor(model => model.VL_REPRESENTANTE)
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="display-field">
+                                @Html.LabelFor(model => model.VL_FOXLUX)
+                                @Html.TextBoxFor(model => model.VL_FOXLUX, new { @class = "form-control",@onkeypress="return BloqueiaLetras(event)",  @style = "border-color: #f00; color: #f00; font-weight: bold;" })
+                                @Html.ValidationMessageFor(model => model.VL_FOXLUX)
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.VL_CLIENTE)
+                            @Html.TextBoxFor(model => model.VL_CLIENTE, new { @class = "form-control",@onkeypress="return BloqueiaLetras(event)",  @style = "border-color: #2e41dd; color: #2e41dd; font-weight: bold;" })
+                            @Html.ValidationMessageFor(model => model.VL_CLIENTE)
+                        </div>
+
+                    </div>
+                  
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="display-field">
+                                @Html.LabelFor(model => model.VL_DCLIENTE)
+                                @Html.TextBoxFor(model => model.VL_DCLIENTE, new { @class = "form-control",  @onkeypress="return BloqueiaLetras(event)",  @style = "border-color: #f00; color: #f00; font-weight: bold;" })
+                                @Html.ValidationMessageFor(model => model.VL_DCLIENTE)
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            @Html.LabelFor(model => model.OBS)
+                            @Html.TextAreaFor(model => model.OBS, new { @class = "form-control", @rows = "5" })
+                            @Html.ValidationMessageFor(model => model.OBS)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="files">Clique para enviar arquivos</label>
+                            @(Html.Kendo().Upload()
+                                            .Name("files")
+                                            .ShowFileList(true)
+
+
+
+                                        )
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="btn-group">
+
+                    <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-save"></i>&nbsp;@Html.T("btbsalvar").ToString()</button>
+
+
+                </div>
+            </div>
+
+        </div>
+
+           
+         
+    }
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#btbPesqCadastro")
+           .bind("click", function () {
+               var windows = $("#CadastroLookUpDialog").data("kendoWindow");
+               windows.center();
+               windows.open().refresh();
+           });
+
+
+        $("#btbPesqTransportador")
+          .bind("click", function () {
+              var windows = $("#TransportadorLookUpDialog").data("kendoWindow");
+              windows.center();
+              windows.open().refresh();
+          });
+
+
+
+        $("#CD_TRANSPORTADOR")
+          .bind("blur", function () {
+              if ($(this).val() == "") {
+                  $(this).val("");
+                  $("#cd_transportador_desc").text("");
+
+
+                  return;
+              }
+              else {
+                  var parametros = { cd_cadastro: $(this).val() };
+                  $.ajax({
+                      type: "POST",
+                      url: "@Url.Action("ReadTransportador", "ProcedimentoAdm")",
+                      data: parametros,
+                      success: $.fn.RetornoTransportador,
+                      dataType: "json"
+                  });
+              }
+          });
+        $.fn.RetornoTransportador = function (oCadastro) {
+            if (oCadastro.CD_CADASTRO == "0") {
+                $("#CD_TRANSPORTADOR").val("");
+                $("#cd_transportador_desc").text("REGISTRO NÃO ENCONTRADO");
+                return;
+            }
+            else {
+                $("#CD_TRANSPORTADOR").val(oCadastro.CD_CADASTRO);
+                $("#cd_transportador_desc").text(oCadastro.RAZAO);
+                return;
+            }
+        };
+
+
+
+
+
+
+
+
+        $("#CD_CADASTRO")
+           .bind("blur", function () {
+               if ($(this).val() == "") {
+                   $(this).val("");
+                   $("#cd_cadastro_desc").text("");
+                   $("#CD_REPRESENTANTE").val("");
+                   $("#RAZAO_REPRES").text("");
+                   $("#des_cidade").text("");
+                   $("#CD_REGIONAL").text("");
+
+
+                   return;
+               }
+               else {
+                   var parametros = { cd_cadastro: $(this).val() };
+                   $.ajax({
+                       type: "POST",
+                       url: "@Url.Action("ReadCadastro", "ProcedimentoAdm")",
+                       data: parametros,
+                       success: $.fn.RetornoCadastro,
+                       dataType: "json"
+                   });
+               }
+           });
+        $.fn.RetornoCadastro = function (oCadastro) {
+            if (oCadastro.CD_CADASTRO == "0") {
+                $("#CD_CADASTRO").val("");
+                $("#cd_cadastro_desc").text("REGISTRO NÃO ENCONTRADO");
+                $("#CD_REPRESENTANTE").val("");
+                $("#RAZAO_REPRES").text("REGISTRO NÃO ENCONTRADO");
+                $("#des_cidade").text("REGISTRO NÃO ENCONTRADO");
+                $("#CD_REGIONAL").text("REGISTRO NÃO ENCONTRADO");
+
+
+
+                return;
+            }
+            else {
+                $("#CD_CADASTRO").val(oCadastro.CD_CADASTRO);
+                $("#cd_cadastro_desc").text(oCadastro.RAZAO);
+                $("#CD_REPRESENTANTE").val(oCadastro.CD_REPRESENTANTE);
+                $("#RAZAO_REPRES").text(oCadastro.CD_REPRESENTANTE + ' - ' + oCadastro.RAZAO_REPRES);
+                $("#des_cidade").text(oCadastro.DES_CIDADE + ' - ' + oCadastro.CD_ESTADO);
+                $("#CD_REGIONAL").text(oCadastro.CD_REGIONAL);
+
+                return;
+            }
+        };
+
+
+
+        $("#btbPesqTipo")
+                  .bind("click", function () {
+                      var windows = $("#TipoLookUpDialog").data("kendoWindow");
+                      windows.center();
+                      windows.open().refresh();
+                  });
+
+
+
+
+        $("#CD_TIPO")
+           .bind("blur", function () {
+               if ($(this).val() == "") {
+                   $(this).val("");
+                   $("#cd_tipo_desc").text("");
+                   return;
+               }
+               else {
+                   var parametros = { cd_tipo: $(this).val() };
+                   $.ajax({
+                       type: "POST",
+                       url: "@Url.Action("ReadTipo", "ProcedimentoAdm")",
+                       data: parametros,
+                       success: $.fn.RetornoTipo,
+                       dataType: "json"
+                   });
+               }
+           });
+
+        $.fn.RetornoTipo = function (oTipo) {
+            if (oTipo.CD_TIPO == "0") {
+                $("#CD_TIPO").val("");
+                $("#cd_tipo_desc").text("REGISTRO NÃO ENCONTRADO");
+                return;
+            }
+            else {
+                $("#CD_TIPO").val(oTipo.CD_TIPO);
+                $("#cd_tipo_desc").text(oTipo.DES_TIPO);
+                return;
+            }
+        };
+
+
+
+
+        $("#btbPesqNF")
+                        .bind("click", function () {
+                            var ipvalue = $("#cd_cadastro_desc").text();
+
+                            if (ipvalue == "") {
+                                ipvalue = "NOTAS DO CLIENTE: TODOS";
+                            } else {
+                                ipvalue = "NOTAS DO CLIENTE: " + ipvalue;
+                            }
+
+                            var ipcad = $("#CD_CADASTRO").val();
+                            var parametros = { CD_CADASTRO: $("#CD_CADASTRO").val() };
+                            $.ajax({
+                                type: "POST",
+                                url: "@Url.Action("SetSession", "ProcedimentoAdm")",
+                                data: parametros,
+                                dataType: "json"
+                            });
+
+
+
+                            //  this.href = this.href.replace("xxx", ipcad);
+                            // alert(ipcad);
+
+
+
+
+                            var windows = $("#NFLookUpDialog").data("kendoWindow");
+                            windows.center();
+                            windows.title(ipvalue);
+                            windows.data = "cd_cadastro = " + ipcad;
+                            windows.open().refresh();
+                        });
+
+
+        $("#NF_FOX")
+           .bind("blur", function () {
+               if ($(this).val() == "") {
+                   $(this).val("");
+                   $("#cd_nf_desc").text("");
+                   return;
+               }
+               else {
+                   var parametros = { nr_nota: $(this).val(), cd_cadastro: $("#CD_CADASTRO").val() };
+                   $.ajax({
+                       type: "POST",
+                       url: "@Url.Action("ReadNF", "ProcedimentoAdm")",
+                       data: parametros,
+                       success: $.fn.RetornoNF,
+                       dataType: "json"
+                   });
+               }
+           });
+
+        $.fn.RetornoNF = function (oNf) {
+
+            if (oNf.NR_NOTA == "0") {
+                $("#NF_FOX").val("0");
+                $("#cd_nf_desc").text("S/D");
+                $("#CD_TRANSPORTADOR").val("0");
+                $("#cd_transportador_desc").text("REGISTRO NÃO ENCONTRADO");
+                return;
+            }
+            else {
+
+                $("#NF_FOX").val(oNf.NR_NOTA);
+                $("#cd_nf_desc").text(oNf.DT_EMISSAO);
+                $("#CD_TRANSPORTADOR").val(oNf.CD_TRANSPORTADOR);
+
+
+
+                var parametros = { cd_cadastro: oNf.CD_TRANSPORTADOR };
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("ReadTransportador", "ProcedimentoAdm")",
+                     data: parametros,
+                     success: RetornoTransportadornf,
+                     dataType: "json"
+                 });
+
+
+
+                 function RetornoTransportadornf(oCadastro) {
+
+                     if (oCadastro.CD_TRANSPORTADOR == "0") {
+                         $("#CD_TRANSPORTADOR").val("");
+                         $("#cd_transportador_desc").text("REGISTRO NÃO ENCONTRADO");
+                         return;
+                     }
+                     else {
+
+                         $("#CD_TRANSPORTADOR").val(oCadastro.CD_CADASTRO);
+                         $("#cd_transportador_desc").text(oCadastro.RAZAO);
+                         return;
+                     }
+                 };
+
+
+
+
+
+                 return;
+             }
+        };
+
+    });
+</script>
+
+<script type="text/javascript">
+
+    function applyacept(e) {
+        var files = e.files[0].extension;
+
+        if (this.extension != ".jpg") {
+            alert("Only .jpg files can be uploaded")
+            e.preventDefault();
+
+        }
+
+    }
+
+
+
+
+
+    function SelecionaTransportador(cd_cadastro, razao) {
+        $("#CD_TRANSPORTADOR").val(cd_cadastro);
+        $("#cd_transportador_desc").text(razao);
+        $("#TransportadorLookUpDialog").data("kendoWindow").close();
+    }
+
+    function SelecionaCadastro(cd_cadastro, razao) {
+        $("#CD_CADASTRO").val(cd_cadastro);
+        $("#cd_cadastro_desc").text(razao);
+
+        var parametros = { cd_cadastro: cd_cadastro };
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("ReadCadastro", "ProcedimentoAdm")",
+            data: parametros,
+            success: RetornoCadastroPesquisa,
+            dataType: "json"
+        });
+
+
+        function RetornoCadastroPesquisa(oCadastro) {
+            $("#CD_REPRESENTANTE").val(oCadastro.CD_REPRESENTANTE);
+            $("#RAZAO_REPRES").text(oCadastro.CD_REPRESENTANTE + ' - ' + oCadastro.RAZAO_REPRES);
+            $("#des_cidade").text(oCadastro.DES_CIDADE + ' - ' + oCadastro.CD_ESTADO);
+            $("#CD_REGIONAL").text(oCadastro.CD_REGIONAL);
+
+        }
+
+        $("#CadastroLookUpDialog").data("kendoWindow").close();
+    }
+
+    function SelecionaTipo(cd_tipo, desc_tipo) {
+        $("#CD_TIPO").val(cd_tipo);
+        $("#cd_tipo_desc").text(desc_tipo);
+        $("#TipoLookUpDialog").data("kendoWindow").close();
+
+        $("#MOTIVOID").empty();
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetMotivos")', // we are calling json method
+            dataType: 'json',
+            data: { id: cd_tipo },
+            success: function (states) {
+                $.each(states, function (i, state) {
+                    $("#MOTIVOID").append('<option value="' + state.Value + '">' +
+                         state.Text + '</option>');
+                });
+            },
+            error: function (ex) {
+                alert('Failed to retrieve states.' + ex);
+            }
+        });
+
+
+
+    }
+
+
+    function SelecionaNF(nr_nota, dt_emissao, cd_transportador) {
+        $("#NF_FOX").val(nr_nota);
+        $("#cd_nf_desc").text(dt_emissao);
+        $("#NFLookUpDialog").data("kendoWindow").close();
+        var parametros = { cd_cadastro: cd_transportador };
+
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("ReadTransportador", "ProcedimentoAdm")",
+            data: parametros,
+            success: RetornoTransportadornfSeleciona,
+            dataType: "json"
+        });
+
+
+
+        function RetornoTransportadornfSeleciona(oCadastro) {
+
+            if (oCadastro.CD_TRANSPORTADOR == "0") {
+                $("#CD_TRANSPORTADOR").val("");
+                $("#cd_transportador_desc").text("REGISTRO NÃO ENCONTRADO");
+                return;
+            }
+            else {
+
+                $("#CD_TRANSPORTADOR").val(oCadastro.CD_CADASTRO);
+                $("#cd_transportador_desc").text(oCadastro.RAZAO);
+                return;
+            }
+
+
+
+
+        }
+    }
+
+    $("#_SITUACAO").click(function () {
+        var isChecked = $(this).is(":checked");
+        $("#SITUACAO").val(isChecked ? "S" : "N");
+    });
+</script>
+
+
+
+<style>
+    .texto
+    {
+        width: 600px;
+    }
+</style>

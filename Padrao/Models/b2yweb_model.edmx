@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="b2yweb_model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="b2yweb_modelStoreContainer">
+          <EntitySet Name="GUsuario" EntityType="b2yweb_model.Store.GUsuario" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Usuario" EntityType="b2yweb_model.Store.Usuario" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Usuario_GUsuario" Association="b2yweb_model.Store.FK_Usuario_GUsuario">
+            <End Role="GUsuario" EntitySet="GUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="GUsuario">
+          <Key>
+            <PropertyRef Name="cd_gusuario" />
+          </Key>
+          <Property Name="cd_gusuario" Type="smallint" Nullable="false" />
+          <Property Name="nome" Type="char" Nullable="false" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="cd_usuario" />
+          </Key>
+          <Property Name="cd_usuario" Type="smallint" Nullable="false" />
+          <Property Name="nome" Type="char" Nullable="false" MaxLength="40" />
+          <Property Name="login" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="senha" Type="varchar" MaxLength="20" />
+          <Property Name="cd_gusuario" Type="smallint" Nullable="false" />
+          <Property Name="cd_empresa" Type="int" Nullable="false" />
+          <Property Name="cd_ccusto" Type="int" Nullable="false" />
+          <Property Name="situacao" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="fone" Type="char" MaxLength="12" />
+          <Property Name="celular" Type="char" MaxLength="12" />
+          <Property Name="ramal" Type="int" Nullable="false" />
+          <Property Name="cd_cidade" Type="smallint" Nullable="false" />
+          <Property Name="altera_formulario" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="altera_senha" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="msg_connect" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="msg_conec_desc" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="ddd_celular" Type="smallint" />
+          <Property Name="envio_mail_market" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="aviso_corporativo" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="cep" Type="char" MaxLength="8" />
+          <Property Name="endereco" Type="char" MaxLength="40" />
+          <Property Name="complemento" Type="char" MaxLength="20" />
+          <Property Name="bairro" Type="char" MaxLength="25" />
+          <Property Name="envia_sms" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="cd_operadora" Type="smallint" Nullable="false" />
+          <Property Name="email_particular" Type="char" MaxLength="50" />
+          <Property Name="ddd_fone_com" Type="smallint" />
+          <Property Name="fone_com" Type="char" MaxLength="12" />
+          <Property Name="per_mensagem_dia" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="dt_cadastro" Type="smalldatetime" />
+          <Property Name="dt_nascimento" Type="smalldatetime" />
+          <Property Name="pub_lista_con_des" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="permite_enviar_sms" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="conf_tela_meu" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="permite_relatorios" Type="char" MaxLength="1" />
+          <Property Name="permite_alt_config" Type="char" MaxLength="1" />
+          <Property Name="menu_acima" Type="char" MaxLength="1" />
+          <Property Name="ativa_cripto" Type="char" MaxLength="1" />
+          <Property Name="usa_btn_acima" Type="char" MaxLength="1" />
+          <Property Name="PDV" Type="char" MaxLength="10" />
+          <Property Name="PortaPDV" Type="char" MaxLength="10" />
+          <Property Name="AcessoWeb" Type="char" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK_Usuario_GUsuario">
+          <End Role="GUsuario" Type="b2yweb_model.Store.GUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="b2yweb_model.Store.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GUsuario">
+              <PropertyRef Name="cd_gusuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="cd_gusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="b2yweb_model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="b2yweb_entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="GUsuario" EntityType="b2yweb_model.GUsuario" />
+          <EntitySet Name="Usuario" EntityType="b2yweb_model.Usuario" />
+          <AssociationSet Name="FK_Usuario_GUsuario" Association="b2yweb_model.FK_Usuario_GUsuario">
+            <End Role="GUsuario" EntitySet="GUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="GUsuario">
+          <Key>
+            <PropertyRef Name="cd_gusuario" />
+          </Key>
+          <Property Name="cd_gusuario" Type="Int16" Nullable="false" />
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="Usuario" Relationship="b2yweb_model.FK_Usuario_GUsuario" FromRole="GUsuario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="cd_usuario" />
+          </Key>
+          <Property Name="cd_usuario" Type="Int16" Nullable="false" />
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="true" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="senha" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="cd_gusuario" Type="Int16" Nullable="false" />
+          <Property Name="cd_empresa" Type="Int32" Nullable="false" />
+          <Property Name="cd_ccusto" Type="Int32" Nullable="false" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="fone" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="celular" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="ramal" Type="Int32" Nullable="false" />
+          <Property Name="cd_cidade" Type="Int16" Nullable="false" />
+          <Property Name="altera_formulario" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="altera_senha" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="msg_connect" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="msg_conec_desc" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="ddd_celular" Type="Int16" />
+          <Property Name="envio_mail_market" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="aviso_corporativo" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="cep" Type="String" MaxLength="8" Unicode="false" FixedLength="true" />
+          <Property Name="endereco" Type="String" MaxLength="40" Unicode="false" FixedLength="true" />
+          <Property Name="complemento" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+          <Property Name="bairro" Type="String" MaxLength="25" Unicode="false" FixedLength="true" />
+          <Property Name="envia_sms" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="cd_operadora" Type="Int16" Nullable="false" />
+          <Property Name="email_particular" Type="String" MaxLength="50" Unicode="false" FixedLength="true" />
+          <Property Name="ddd_fone_com" Type="Int16" />
+          <Property Name="fone_com" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="per_mensagem_dia" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="dt_cadastro" Type="DateTime" Precision="0" />
+          <Property Name="dt_nascimento" Type="DateTime" Precision="0" />
+          <Property Name="pub_lista_con_des" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="permite_enviar_sms" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="conf_tela_meu" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="permite_relatorios" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="permite_alt_config" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="menu_acima" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="ativa_cripto" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="usa_btn_acima" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PDV" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="PortaPDV" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="AcessoWeb" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="GUsuario" Relationship="b2yweb_model.FK_Usuario_GUsuario" FromRole="Usuario" ToRole="GUsuario" />
+        </EntityType>
+        <Association Name="FK_Usuario_GUsuario">
+          <End Role="GUsuario" Type="b2yweb_model.GUsuario" Multiplicity="1" />
+          <End Role="Usuario" Type="b2yweb_model.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GUsuario">
+              <PropertyRef Name="cd_gusuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="cd_gusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="b2yweb_modelStoreContainer" CdmEntityContainer="b2yweb_entities">
+          <EntitySetMapping Name="GUsuario">
+            <EntityTypeMapping TypeName="b2yweb_model.GUsuario">
+              <MappingFragment StoreEntitySet="GUsuario">
+                <ScalarProperty Name="cd_gusuario" ColumnName="cd_gusuario" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="b2yweb_model.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="cd_usuario" ColumnName="cd_usuario" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="cd_gusuario" ColumnName="cd_gusuario" />
+                <ScalarProperty Name="cd_empresa" ColumnName="cd_empresa" />
+                <ScalarProperty Name="cd_ccusto" ColumnName="cd_ccusto" />
+                <ScalarProperty Name="situacao" ColumnName="situacao" />
+                <ScalarProperty Name="fone" ColumnName="fone" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="ramal" ColumnName="ramal" />
+                <ScalarProperty Name="cd_cidade" ColumnName="cd_cidade" />
+                <ScalarProperty Name="altera_formulario" ColumnName="altera_formulario" />
+                <ScalarProperty Name="altera_senha" ColumnName="altera_senha" />
+                <ScalarProperty Name="msg_connect" ColumnName="msg_connect" />
+                <ScalarProperty Name="msg_conec_desc" ColumnName="msg_conec_desc" />
+                <ScalarProperty Name="ddd_celular" ColumnName="ddd_celular" />
+                <ScalarProperty Name="envio_mail_market" ColumnName="envio_mail_market" />
+                <ScalarProperty Name="aviso_corporativo" ColumnName="aviso_corporativo" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="endereco" ColumnName="endereco" />
+                <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="envia_sms" ColumnName="envia_sms" />
+                <ScalarProperty Name="cd_operadora" ColumnName="cd_operadora" />
+                <ScalarProperty Name="email_particular" ColumnName="email_particular" />
+                <ScalarProperty Name="ddd_fone_com" ColumnName="ddd_fone_com" />
+                <ScalarProperty Name="fone_com" ColumnName="fone_com" />
+                <ScalarProperty Name="per_mensagem_dia" ColumnName="per_mensagem_dia" />
+                <ScalarProperty Name="dt_cadastro" ColumnName="dt_cadastro" />
+                <ScalarProperty Name="dt_nascimento" ColumnName="dt_nascimento" />
+                <ScalarProperty Name="pub_lista_con_des" ColumnName="pub_lista_con_des" />
+                <ScalarProperty Name="permite_enviar_sms" ColumnName="permite_enviar_sms" />
+                <ScalarProperty Name="conf_tela_meu" ColumnName="conf_tela_meu" />
+                <ScalarProperty Name="permite_relatorios" ColumnName="permite_relatorios" />
+                <ScalarProperty Name="permite_alt_config" ColumnName="permite_alt_config" />
+                <ScalarProperty Name="menu_acima" ColumnName="menu_acima" />
+                <ScalarProperty Name="ativa_cripto" ColumnName="ativa_cripto" />
+                <ScalarProperty Name="usa_btn_acima" ColumnName="usa_btn_acima" />
+                <ScalarProperty Name="PDV" ColumnName="PDV" />
+                <ScalarProperty Name="PortaPDV" ColumnName="PortaPDV" />
+                <ScalarProperty Name="AcessoWeb" ColumnName="AcessoWeb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

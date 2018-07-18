@@ -1,0 +1,74 @@
+﻿ @model UsuarioRegional
+
+@{
+     ViewBag.Title = @Html.T("titleDetails").ToString();
+    
+     Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+
+<div class="container">
+   <p><span class="label label">@Html.T("UsuarioRegional")</span></p>
+
+    <div class="controls">
+        <div class="container" style="width: 100%">
+            <div class="pull-left">
+                <p>
+				   				    <a class="btn btn-primary" href="@Url.Action("Edit", "UsuarioRegional", new { id = Model.ID })"><i class="fa fa-pencil-square-o"></i>@Html.T("btbEditar")</a>
+                    <a class="btn " href="@Url.Action("Index", "UsuarioRegional")"><i class="fa fa-caret-left"></i>@Html.T("VoltarListagem")</a>
+									</p>
+            </div>
+        </div>
+        <div class="container" style="width: 100%">
+            <div class="tabbable">
+                <!-- Only required for left/right tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1" data-toggle="tab">@Html.T("Geral")</a></li>
+                    <li><a href="#tab2" data-toggle="tab"></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab1">
+                       <div class="controls">
+								
+									<div class="display-label">
+										  <span class="display-label-text">@Html.DisplayNameFor(model => model.CD_REGIONAL)</span>
+									</div>
+									<div class="display-field">
+										<span class="form-control uneditable-input">@Model.CD_REGIONAL</span>
+									</div>
+								
+									<div class="display-label">
+										  <span class="display-label-text">@Html.DisplayNameFor(model => model.Usuario.NOME)</span>
+									</div>
+									<div class="display-field">
+										<span class="form-control uneditable-input">@Model.Usuario.NOME</span>
+									</div>
+								                            
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                       <div class="controls">
+                            <div class="display-label">
+                            </div>
+                            <div class="display-field">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

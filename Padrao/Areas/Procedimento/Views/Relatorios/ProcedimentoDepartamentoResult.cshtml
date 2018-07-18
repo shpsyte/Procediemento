@@ -1,0 +1,124 @@
+﻿@model IEnumerable<wProcedimento>
+
+
+
+
+
+<div class="container_none">
+    <div class="page-header-isco">
+        <h2>@Html.T("ProcedimentoAdm") <small>por departamento </small></h2>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("ProcedimentoDepartamento")"><i class="fa fa-refresh"></i>&nbsp;Nova Pesquisa</a>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            @(Html.Kendo().Grid(Model)
+            .Name("Grid")
+             .Columns(columns =>
+    {
+        columns.Bound(p => p.CD_PROCEDIMENTO).Visible(true).ClientTemplate("#= productDetails(data) #").Title(Html.T("Comando").ToString()).Width(70);
+        columns.Bound(p => p.CD_PROCEDIMENTO).Visible(true).Width(60);
+        columns.Bound(p => p.DTA_ABERTURA).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(100);
+        columns.Bound(p => p.DTA_FECHAMENTO).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(100);
+        columns.Bound(p => p.HORASCORRIDAS).Width(100).Title("Horas Corridas");
+        columns.Bound(p => p.HORASUTEIS).Width(100).Title("Horas Úteis");
+        columns.Bound(p => p.PERCENTUAL).Visible(true).ClientTemplate("#= productDetailsImg(data) #").Title("").Width(20);
+
+
+    })
+
+        .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+        .Pageable(pageable => pageable
+        .PageSizes(true)
+        .ButtonCount(20)
+        .Messages(d => d.Display("{0} - {1} de {2} Registros"))
+        .Messages(d => d.ItemsPerPage("Itens por Página"))
+
+        )
+
+         .Events(events => events.DataBound("collapseGroupRows"))
+                    //.ClientDetailTemplateId("template")
+                    //.HtmlAttributes(new { style = "height:830px;" })
+
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(20)
+
+            .Group(groups => groups.Add(p => p.DEPARTAMENTO.DESC_DEPARTAMENTO))
+            .Group(groups => groups.Add(p => p.Situacao.DESCRICAO))
+
+
+            .PageSize(40)
+                    //            .Read(read => read.Action("ReadProcessos", "Relatorios" ))
+        )
+
+        )
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+
+    function productDetailsImg(product) {
+        //var html = "<img src='../../Images/Logo.png' />";
+        //return html;
+
+        var html = "<img src='../../Images/SetaAcima.png' />";
+
+
+        if (product.PERCENTUAL <= 0) {
+            html = "<img src='../../Images/SetaAcima.png' />";
+        } else
+            if (product.PERCENTUAL > 0 && product.PERCENTUAL < 80) {
+                html = "<img src='../../Images/SetaAcima.png' />";
+            } else
+                if (product.PERCENTUAL > 80 && product.PERCENTUAL < 100) {
+                    html = "<img src='../../Images/SetaDireita.png' />";
+                } else
+                    html = "<img src='../../Images/SetaBaixo.png' />";
+
+
+        return html;
+
+    }
+</script>
+
+
+<script>
+    function productDetails(product) {
+        var actionDetail = '@Url.Action("Details", "ProcedimentoAdm")';
+        var actionEdit = '@Url.Action("Edit", "ProcedimentoAdm")';
+        var actionDelete = '@Url.Action("Delete", "ProcedimentoAdm")';
+
+        var html = kendo.format("<a class='btn btn-info' TITLE='@Html.T("lnkDetails")' href='{0}/{1}'> Detalhar</a>     ",
+        actionDetail, product.CD_PROCEDIMENTO);
+        return html;
+    }
+</script>
+<script type="text/javascript">
+
+    function collapseGroupRows() {
+
+        var grid = $("#Grid").data("kendoGrid");
+        grid.collapseGroup(grid.tbody.find(">tr.k-grouping-row"));
+        $('tr[role*="row"]').hide();
+    }
+
+</script>
+
+<script>
+    $(".k-collapse").click();
+    function dataBound() {
+
+        this.expandRow(this.tbody.find("tr.k-master-row").first());
+    }
+</script>
+

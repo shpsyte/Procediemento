@@ -1,0 +1,437 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Data.Linq" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.ComponentModel.DataAnnotations" #>
+<#@ import namespace="System.Data.Linq.Mapping" #>
+<#@ import namespace="System.Data.Objects.DataClasses" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="Microsoft.VisualStudio.Web.Mvc.Scaffolding.BuiltIn" #>
+<#
+MvcTextTemplateHost mvcHost = MvcTemplateHost;
+#>
+  @model IEnumerable<#= "<" + mvcHost.ViewDataTypeName.Split('.').Last() + ">" #>
+
+ 
+
+<# if (!String.IsNullOrEmpty(mvcHost.MasterPageFile)) { 
+#>
+    @{ ViewBag.Title = @Html.T("titleindex").ToString(); Layout = "<#= mvcHost.MasterPageFile#>"; }
+<# }else
+{#>
+ @{ ViewBag.Title = @Html.T("titleindex").ToString(); }
+<# } #>
+
+
+<script>
+    $(document).ready(function () {
+        $("#idAjuda")
+            .bind("click", function () {
+                var kendoWindow = $("#window").data("kendoWindow");
+                kendoWindow.center();
+                kendoWindow.open();
+
+            });
+        var onClose = function () {
+            undo.show();
+        }
+
+    });
+</script>
+
+<script>
+
+    $(function () {
+        $('#lnkExporta').click(function () {
+            var value = $('#strPesquisa').val();
+            $(this).attr('href', function () {
+                return this.href;
+            });
+        });
+    });
+</script>
+
+<script>
+    function productDetails(product) {
+        var actionDetail = '@Url.Action("Details", "<#= mvcHost.ViewDataTypeName.Split('.').Last() #>")';
+        var actionEdit = '@Url.Action("Edit", "<#= mvcHost.ViewDataTypeName.Split('.').Last() #>")';
+        var actionDelete = '@Url.Action("Delete", "<#= mvcHost.ViewDataTypeName.Split('.').Last() #>")';
+
+        var html = kendo.format("<a class='icon-folder-open' href='{0}/{1}'> </a>  <a class='icon-edit' href='{2}/{3}'> </a> <a class='icon-trash' href='{4}/{5}'> </a> ",
+        actionDetail,
+		<# List<ModelProperty> DetailsTemplate = GetModelProperties(mvcHost.ViewDataType);
+					foreach (ModelProperty Prop1 in DetailsTemplate) {
+						if (Prop1.ValueExpression != "cd_empresa")
+						{
+						if (Prop1.IsPrimaryKey) {
+						#>
+							product.<#= Prop1.ValueExpression #>
+						<# }
+						break;
+						}
+					}
+					#>,
+        actionEdit,
+		<# List<ModelProperty> EditTemplate = GetModelProperties(mvcHost.ViewDataType);
+					foreach (ModelProperty Prop1 in EditTemplate) {
+						if (Prop1.ValueExpression != "cd_empresa")
+						{
+						if (Prop1.IsPrimaryKey) {
+						#>
+							product.<#= Prop1.ValueExpression #>
+						<# }
+						break;
+						}
+					}
+					#>,
+        actionDelete,
+        <# List<ModelProperty> DeleteTemplate = GetModelProperties(mvcHost.ViewDataType);
+					foreach (ModelProperty Prop1 in DeleteTemplate) {
+						if (Prop1.ValueExpression != "cd_empresa")
+						{
+						if (Prop1.IsPrimaryKey) {
+						#>
+							product.<#= Prop1.ValueExpression #>
+						<# }
+						break;
+						}
+					}
+					#>
+    );
+        return html;
+    }
+</script>
+
+
+
+
+
+@(Html.Kendo().Window()
+    .Name("window")
+    .Title(Html.T("Help").ToString())
+    .Content("loading user info...")
+    .LoadContentFrom("Index", "Ajuda", new { id = "<#= mvcHost.ViewDataType.Name.ToLower()#>" })
+   .Draggable()
+    .Resizable()
+    .Width(600)
+    .Height(400)
+    .Visible(false)
+    .Modal(false)
+    .Actions(actions => actions
+        .Close()
+    )
+)
+
+
+<div class="container">
+    <p><span class="label label">@Html.T("<#= mvcHost.ViewDataTypeName.Split('.').Last() #>")</span></p>
+
+    <div class="controls">
+        <div class="container" style="width: 100%">
+
+            <div class="pull-left">
+                <a class="btn btn-primary" href="@Url.Action("Create", "<#= mvcHost.ViewDataTypeName.Split('.').Last() #>")"><i class="icon-plus-sign icon-white"></i>@Html.T("btbNovo")</a>
+                <div class="btn-group">
+                    <div class="btn-group">
+                        <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-question-sign"></i>&nbsp;@Html.T("btbAjuda")&nbsp;&nbsp;<span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a id="idAjuda" href="#">@Html.T("btbAjuda")</a></li>
+                            <li class="divider"></li>
+                            <li><a id="lnkExporta" href="@Url.Action("ExportXls", new { strPesquisa = @ViewData["termo"] })">@Html.T("btbExportar") <i>@Model.Count()</i> @Html.T("msgTotalRegEncontrados")</a>   </li>
+                            @* <li><a id="lnkImporta" href="@Url.Action("Upload", "<#= mvcHost.ViewDataTypeName.Split('.').Last() #>")">@Html.T("btbImportar")</a></li> *@
+                        </ul>
+                    </div>
+                </div>
+
+                <p>
+                    <small><i>@Model.Count()</i>  @Html.T("msgTotalRegEncontrados")</small>
+                </p>
+            </div>
+
+            @using (Html.BeginForm("Index", "<#= mvcHost.ViewDataTypeName.Split('.').Last() #>", FormMethod.Post, null))
+            {
+              
+
+				<div class="pull-right">
+                    <div class="input-append">
+                        <input value=" @ViewData["termo"]" class="span2" id="strPesquisa" name="strPesquisa" type="text"  placeholder=" @Html.T("placeHoldPesquisar")" >
+                        <button class="btn btn-success" type="submit">@Html.T("btbIr")</button>
+                    </div>
+                </div>
+
+
+            }
+        </div>
+
+
+        @(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+					<# List<ModelProperty> ColumnTemplate = GetModelProperties(mvcHost.ViewDataType);
+					foreach (ModelProperty Prop1 in ColumnTemplate) {
+							if (!Prop1.IsPrimaryKey) {
+							#>
+								 columns.Bound(p => p.<#= Prop1.ValueExpression #>).ClientTemplate("#= productDetails(data) #").Title(Html.T("Comando").ToString()).Width(100);
+							<# break; }
+							
+						
+					}
+					#>
+					<#
+					List<ModelProperty> KeyVisibleFalse = GetModelProperties(mvcHost.ViewDataType);
+					foreach (ModelProperty Prop1 in KeyVisibleFalse) {
+						if (Prop1.IsPrimaryKey) {
+						#>
+							columns.Bound(p => p.<#= Prop1.ValueExpression #>).Visible(false);
+						<# }
+					}
+					#>
+					<#
+					List<ModelProperty> prop_col = GetModelProperties(mvcHost.ViewDataType);
+					foreach (ModelProperty prop_cols in prop_col) {
+						if (!prop_cols.IsPrimaryKey && !prop_cols.IsPrimaryKey && prop_cols.Scaffold) {
+						if (prop_cols.UnderlyingType == typeof (string))
+						{
+						#>
+						columns.Bound(p => p.<#= prop_cols.ValueExpression #>);
+						<# }
+					     }
+					     }
+					    #>				
+    })
+            .ColumnMenu()
+            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+            .Pageable()
+            .Sortable()
+            .Scrollable(scr => scr.Height(240))
+            .Filterable()
+            .DataSource(ds => ds.Ajax()
+				 .ServerOperation(false)
+                 .PageSize(7)
+				 
+                                .Model(m =>
+                                {
+								<#
+									List<ModelProperty> KeyOnModel = GetModelProperties(mvcHost.ViewDataType);
+									foreach (ModelProperty Prop1 in KeyOnModel) {
+										if (Prop1.IsPrimaryKey) {
+										#>
+										 m.Id(p => p.<#= Prop1.ValueExpression #>);
+										<# }
+									}
+									#>	  
+                                   
+                                })
+                        .Read(r => r.Action("Read", "<#= mvcHost.ViewDataTypeName.Split('.').Last() #>"))
+                )
+        )
+    </div>
+</div>
+
+
+@*
+
+//Este campos tb devem estar no parametro do index
+<#
+int aux = 0;
+List<ModelProperty> ParPesquisa = GetModelProperties(mvcHost.ViewDataType);
+foreach (ModelProperty PropPesqPar in ParPesquisa) {
+
+if (!PropPesqPar.IsForeignKey && !PropPesqPar.IsPrimaryKey && PropPesqPar.Scaffold) {
+if (PropPesqPar.UnderlyingType == typeof (string) )
+{
+#>
+  <# if (aux==0) 
+   {  #>
+	   .Where(a => a.<#= PropPesqPar.ValueExpression #>.ToUpper().Contains(strPesquisa.ToUpper())  
+
+ <# } else  {  #>
+      || a.<#= PropPesqPar.ValueExpression #>.ToUpper().Contains(strPesquisa.ToUpper()) 
+ <# }  #>
+  <# aux = 1;
+}
+}
+}
+#>
+
+//Save
+<#
+List<ModelProperty> ParPesquisaSave = GetModelProperties(mvcHost.ViewDataType);
+foreach (ModelProperty PropPesq4 in ParPesquisaSave) {
+
+#>
+ if (string.IsNullOrEmpty(dss.Tables[0].Rows[i]["<#= PropPesq4.ValueExpression #>"].ToString().Trim()))
+   <#= mvcHost.ViewDataType.Name.ToLower()#>.<#= PropPesq4.ValueExpression #> = "<#= PropPesq4.ValueExpression #>";
+ else
+   <#= mvcHost.ViewDataType.Name.ToLower()#>.<#= PropPesq4.ValueExpression #> = dss.Tables[0].Rows[i]["<#= PropPesq4.ValueExpression #>"].ToString().Trim();
+											
+<#
+}
+#>
+
+*@
+
+  
+
+<#+
+// Describes the information about a property on the model
+class ModelProperty {
+    public string Name { get; set; }
+    public string AssociationName { get; set; }
+    public string ValueExpression { get; set; }
+    public string ModelValueExpression { get; set; }
+    public string ItemValueExpression { get; set; }
+    public Type UnderlyingType { get; set; }
+    public bool IsPrimaryKey { get; set; }
+    public bool IsForeignKey { get; set; }
+    public bool IsReadOnly { get; set; }
+    public bool Scaffold { get; set; }
+}
+
+// Change this list to include any non-primitive types you think should be eligible for display/edit
+static Type[] bindableNonPrimitiveTypes = new[] {
+    typeof(string),
+    typeof(decimal),
+    typeof(Guid),
+    typeof(DateTime),
+    typeof(DateTimeOffset),
+    typeof(TimeSpan),
+};
+
+// Call this to get the list of properties in the model. Change this to modify or add your
+// own default formatting for display values.
+List<ModelProperty> GetModelProperties(Type type) {
+    List<ModelProperty> results = GetEligibleProperties(type);
+    
+    foreach (ModelProperty prop in results) {
+        if (prop.UnderlyingType == typeof(double) || prop.UnderlyingType == typeof(decimal)) {
+            prop.ModelValueExpression = "String.Format(\"{0:F}\", " + prop.ModelValueExpression + ")";
+        }
+        else if (prop.UnderlyingType == typeof(DateTime)) {
+            prop.ModelValueExpression = "String.Format(\"{0:g}\", " + prop.ModelValueExpression + ")";
+        }
+    }
+
+    return results;
+}
+
+
+// Call this to determine if property has scaffolding enabled
+bool Scaffold(PropertyInfo property) {
+    foreach (object attribute in property.GetCustomAttributes(true)) {
+        var scaffoldColumn = attribute as ScaffoldColumnAttribute;
+        if (scaffoldColumn != null && !scaffoldColumn.Scaffold) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Call this to determine if the property represents a primary key. Change the
+// code to change the definition of primary key.
+bool IsPrimaryKey(PropertyInfo property) {
+    if (string.Equals(property.Name, "id", StringComparison.OrdinalIgnoreCase)) {  // EF Code First convention
+        return true;
+    }
+
+    if (string.Equals(property.Name, property.DeclaringType.Name + "id", StringComparison.OrdinalIgnoreCase)) {  // EF Code First convention
+        return true;
+    }
+
+    foreach (object attribute in property.GetCustomAttributes(true)) {
+        if (attribute is KeyAttribute) {  // WCF RIA Services and EF Code First explicit
+            return true;
+        }
+        
+        var edmScalar = attribute as EdmScalarPropertyAttribute;
+        if (edmScalar != null && edmScalar.EntityKeyProperty) {  // EF traditional
+            return true;
+        }
+
+        var column = attribute as ColumnAttribute;
+        if (column != null && column.IsPrimaryKey) {  // LINQ to SQL
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+// This will return the primary key property name, if and only if there is exactly
+// one primary key. Returns null if there is no PK, or the PK is composite.
+string GetPrimaryKeyName(Type type) {
+    IEnumerable<string> pkNames = GetPrimaryKeyNames(type);
+    return pkNames.Count() == 1 ? pkNames.First() : null;
+}
+
+
+// This will return all the primary key names. Will return an empty list if there are none.
+IEnumerable<string> GetPrimaryKeyNames(Type type) {
+    return GetEligibleProperties(type).Where(mp => mp.IsPrimaryKey).Select(mp => mp.Name);
+}
+
+// Call this to determine if the property represents a foreign key.
+bool IsForeignKey(PropertyInfo property) {
+    return MvcTemplateHost.RelatedProperties.ContainsKey(property.Name);
+}
+
+// A foreign key, e.g. CategoryID, will have a value expression of Category.CategoryID
+string GetValueExpressionSuffix(PropertyInfo property) {
+    RelatedModel propertyModel;
+    MvcTemplateHost.RelatedProperties.TryGetValue(property.Name, out propertyModel);
+
+    return propertyModel != null ? propertyModel.PropertyName + "." + propertyModel.DisplayPropertyName : property.Name;
+}
+
+// A foreign key, e.g. CategoryID, will have an association name of Category
+string GetAssociationName(PropertyInfo property) {
+    RelatedModel propertyModel;
+    MvcTemplateHost.RelatedProperties.TryGetValue(property.Name, out propertyModel);
+
+    return propertyModel != null ? propertyModel.PropertyName : property.Name;
+}
+
+// Helper
+List<ModelProperty> GetEligibleProperties(Type type) {
+    List<ModelProperty> results = new List<ModelProperty>();
+
+    foreach (PropertyInfo prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance)) {
+        Type underlyingType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+        if (prop.GetGetMethod() != null && prop.GetIndexParameters().Length == 0 && IsBindableType(underlyingType)) {
+            string valueExpression = GetValueExpressionSuffix(prop);
+
+            results.Add(new ModelProperty {
+                Name = prop.Name,
+                AssociationName = GetAssociationName(prop),
+                ValueExpression = valueExpression,
+                ModelValueExpression = "Model." + valueExpression,
+                ItemValueExpression = "item." + valueExpression,
+                UnderlyingType = underlyingType,
+                IsPrimaryKey = IsPrimaryKey(prop),
+                IsForeignKey = IsForeignKey(prop),
+                IsReadOnly = prop.GetSetMethod() == null,
+	            Scaffold = Scaffold(prop)
+            });
+        }
+    }
+
+    return results;
+}
+
+// Helper
+bool IsBindableType(Type type) {
+    return type.IsPrimitive || bindableNonPrimitiveTypes.Contains(type);
+}
+
+MvcTextTemplateHost MvcTemplateHost {
+    get {
+        return (MvcTextTemplateHost)Host;
+    }
+}
+#>

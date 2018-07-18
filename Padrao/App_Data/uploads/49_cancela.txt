@@ -1,0 +1,45 @@
+@model Deposito
+@{
+    var options = new AjaxOptions()
+                      {
+                          Url = Url.Action("Delete", "Deposito"),
+
+                          OnBegin = "Iniciando",
+                          OnSuccess = "Sucesso ('Index','Materiais/Deposito') ",
+                          OnFailure = "Erro",
+                          HttpMethod = "Post"
+                      };
+}
+
+
+<div id="page-wrapper">
+    <div class="page-header-isco">
+        <h2>@Html.T("titlecancelar") <small> @Html.T("Deposito") </small></h2>
+    </div>
+
+    @using (Ajax.BeginForm(options))
+    {
+        @Html.HiddenFor(f => f.cd_deposito)
+        @Html.Partial("_Validation", ViewData.ModelState)
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                
+                
+               
+            </div>
+			 <div class="panel-footer">
+                <div class="btn-group">
+                    <input type="submit" value="@Html.T("btbcancelar").ToString()" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+

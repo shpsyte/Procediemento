@@ -1,0 +1,6 @@
+1 - Tela de dados padroes para pedidos com clientes novos;
+2 - Região vinculada por pedido (puxar por estado da transportadora)
+3 - Parcelamento nao esta respeitando o 50% da primeira parcela e esta
+abrindo varios campos da parcela
+4 -qtde volumes pedido nao aparece na NF fatura
+

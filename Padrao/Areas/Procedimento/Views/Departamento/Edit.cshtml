@@ -1,0 +1,107 @@
+﻿
+@model DEPARTAMENTO
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleEdit") <small>@Html.T("DEPARTAMENTO") </small></h2>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.CD_DEPARTAMENTO)
+        @Html.Partial("_Validation", ViewData.ModelState)
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.DESC_DEPARTAMENTO)
+                            @Html.TextBoxFor(model => model.DESC_DEPARTAMENTO, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.TEMPO_PADRAO)
+                            @Html.TextBoxFor(model => model.TEMPO_PADRAO, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.HiddenFor(model => model.ENVIA_EMAIL, new { id = "ENVIA_EMAIL" })
+                            <label class="checkbox">
+                                <input type="checkbox" id="_ENVIA_EMAIL" />
+                                @Html.DisplayNameFor(model => model.ENVIA_EMAIL)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.HiddenFor(model => model.ATIVO, new { id = "ATIVO" })
+                            <label class="checkbox">
+                                <input type="checkbox" id="_ATIVO" @(Model.ATIVO == "S" ? "checked='checked'" : "") />				 
+                                @Html.DisplayNameFor(model => model.ATIVO)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.HiddenFor(model => model.NIVEL_SERVICO, new { id = "NIVEL_SERVICO" })
+                            <label class="checkbox">
+                                <input type="checkbox" id="_NIVEL_SERVICO" @(Model.NIVEL_SERVICO == "S" ? "checked='checked'" : "") />
+                                @Html.DisplayNameFor(model => model.NIVEL_SERVICO)
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+             <div class="panel-footer">
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>&nbsp;@Html.T("btbsalvar").ToString()</button>
+                </div>
+            </div>
+
+        </div>
+         
+    }
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+    $("#_ENVIA_EMAIL").click(function () {
+        var isChecked = $(this).is(":checked");
+        $("#ENVIA_EMAIL").val(isChecked ? "S" : "N");
+    });
+
+    $("#_ATIVO").click(function () {
+        var isChecked = $(this).is(":checked");
+        $("#ATIVO").val(isChecked ? "S" : "N");
+    });
+
+    $("#_NIVEL_SERVICO").click(function () {
+        var isChecked = $(this).is(":checked");
+        $("#NIVEL_SERVICO").val(isChecked ? "S" : "N");
+    });
+
+
+</script>
+

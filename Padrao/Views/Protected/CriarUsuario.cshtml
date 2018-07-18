@@ -1,0 +1,83 @@
+﻿@model Usuario
+@{
+    ViewBag.Title = "Criar Usuário";
+    Layout = null;
+}
+<div>
+    <form action="@Url.Action("CriarUsuario", "Protected")" method="post">
+        <div id="divErro"></div>
+        <div id="divSucesso"></div>
+        @Html.ValidationSummary(true)
+        <div>
+            <label>Usuário</label>
+            <br />
+            <input name="strUsuario" />
+        </div>
+        <div>
+            <label>Nome (completo)</label>
+            <br />
+            <input name="strNome" />
+        </div>
+        <div>
+            <label>Senha</label>
+            <br />
+            <input name="strSenha" type="password" />
+        </div>
+        <div>
+            <label>Confirmar senha</label>
+            <br />
+            <input name="strConfirmarSenha" type="password" />
+        </div>
+        <div>
+            <label>E-mail</label>
+            <br />
+            <input name="strEmail" />
+        </div>
+        <div>
+            <label>Confirmar e-mail</label>
+            <br />
+            <input name="strConfirmarEmail" />
+        </div>
+        <div>
+            <br />
+            @*<input type="submit" />*@
+            <a href="#" onclick="CriarUsuario(strUsuario.value, strNome.value, strSenha.value, strConfirmarSenha.value, strEmail.value, strConfirmarEmail.value);">Criar</a>
+            <a href="javascript:void(0);" class="close">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    function CriarUsuario(strUsuario, strNome, strSenha, strConfirmarSenha, strEmail, strConfirmarEmail) {
+        var parametros = {
+            strUsuario: strUsuario,
+            strNome: strNome,
+            strSenha: strSenha,
+            strConfirmarSenha: strConfirmarSenha,
+            strEmail: strEmail,
+            strConfirmarEmail: strConfirmarEmail
+        };
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("CriarUsuario", "Protected")",
+            data: parametros,
+            success: Retorno,
+            dataType: 'json'
+        });
+    }
+
+    function Retorno(oRetorno) {
+        var oSucesso = $("#divSucesso");
+        var oErro = $("#divErro");
+        if (oRetorno.isError == 'S') {
+            oErro.html(oRetorno.Message);
+            oSucesso.html('');
+        }
+        if (oRetorno.isSuccess == 'S') {
+            oErro.html('');
+            oSucesso.html(oRetorno.Message);
+            window.location = "@Url.Action("Login", "Protected")";
+        }
+    }
+</script>

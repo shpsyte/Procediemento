@@ -1,0 +1,186 @@
+﻿@model ProcedimentoAdm
+
+@{
+    ViewBag.Title = @Html.T("titleDelete").ToString();
+
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+@{
+       
+    var options = new AjaxOptions()
+                      {
+                          Url = Url.Action("Delete", "ProcedimentoAdm"),
+
+                          OnBegin = "Iniciando",
+                          OnSuccess = "Sucesso ('Index', 'Procedimento/ProcedimentoAdm') ",
+                          OnFailure = "Erro",
+                          HttpMethod = "Post"
+                      };  
+}
+
+<div class="container">
+    <p><span class="label label">@Html.T("ProcedimentoAdm")</span></p>
+
+    <div class="controls">
+        <div class="container" style="width: 100%">
+            <div class="pull-left">
+                <h3>@Html.T("ConfirmarDeletarRegistro")</h3>
+                <p>
+                    @using (Ajax.BeginForm("Delete", null, options, new { onsubmit = "return false;" }))
+                    {
+                        <input type="submit" value=" @Html.T("btbDelete").ToString() "class="btn btn-danger" />
+                        <a class="btn " href="@Url.Action("Index", "ProcedimentoAdm")"><i class="fa fa-caret-left"></i>@Html.T("VoltarListagem")</a>
+                    }
+                </p>
+            </div>
+        </div>
+
+
+        <div class="container" style="width: 100%">
+            <div class="tabbable">
+                <!-- Only required for left/right tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1" data-toggle="tab">@Html.T("Geral")</a></li>
+                    <li><a href="#tab2" data-toggle="tab"></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab1">
+                        <div class="controls">
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.Clientes.RAZAO)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.Clientes.RAZAO</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.Usuario.NOME)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.Usuario.NOME</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.Regional.DESCRICAO)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.Regional.DESCRICAO</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.tp_procedimento.DES_TIPO)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.tp_procedimento.DES_TIPO</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.CD_ANEXO)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.CD_ANEXO</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.DTA_ABERTURA)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.DTA_ABERTURA</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.DTA_FECHAMENTO)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.DTA_FECHAMENTO</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.NF_FOX)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.NF_FOX</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.NF_CLIENTE)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.NF_CLIENTE</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.VL_TRANSPORTADORA)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.VL_TRANSPORTADORA</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.VL_REPRESENTANTE)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.VL_REPRESENTANTE</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.VL_FOXLUX)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.VL_FOXLUX</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.VL_CLIENTE)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.VL_CLIENTE</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.VL_DCLIENTE)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.VL_DCLIENTE</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.OBS)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.OBS</span>
+                            </div>
+
+                            <div class="display-label">
+                                <span class="display-label-text">@Html.DisplayNameFor(model => model.SITUACAO)</span>
+                            </div>
+                            <div class="display-field">
+                                <span class="form-control uneditable-input">@Model.SITUACAO</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                        <div class="controls">
+                            <div class="display-label">
+                            </div>
+                            <div class="display-field">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+

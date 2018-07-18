@@ -1,0 +1,183 @@
+﻿@model IEnumerable<wProcedimento>
+
+
+@{ int count = Model == null ? 0 : Model.Count(); }
+
+
+<div class="containers">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleindex") <small>@Html.T("ProcedimentoAdm") </small></h2>
+    </div>
+   
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("Create")"><i class="fa fa-plus"></i>&nbsp;@Html.T("btbnovo")</a>
+            </div>
+            <small><i>@Model.Count()</i>  @Html.T("msgtotalregencontrados")</small>
+        </div>
+        <div class="panel-body">
+
+
+            @(Html.Kendo().Grid(Model)
+    .Name("Grid")
+
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.Clientes.RAZAO).ClientTemplate("#= StringOfLink(data.CD_PROCEDIMENTO,'','','','ProcedimentoAdm','ProcedimentoDoc','') #").Width(70);
+        columns.Bound(p => p.CD_PROCEDIMENTO).Visible(true).Width(70).Title("Procedimento");
+        columns.Bound(p => p.Clientes.FANTASIA).Width(200);
+        columns.Bound(p => p.DTA_ABERTURA).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(180).Title("Abertura");
+        columns.Bound(p => p.DEPARTAMENTO.DESC_DEPARTAMENTO).Title("Departamento").Width(120);
+        columns.Bound(p => p.Situacao.DESCRICAO).Title("Status").Width(180);
+
+    })
+
+             .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                            .Pageable(pageable => pageable
+                            .PageSizes(true)
+                            .ButtonCount(5))
+                            .Sortable()
+                            .Filterable()
+
+
+            .DataSource(ds => ds.Ajax()
+                 .ServerOperation(false)
+                 .PageSize(20)
+
+                                .Model(m =>
+                                {
+                                    m.Id(p => p.CD_PROCEDIMENTO);
+
+
+                                })
+                        
+                )
+        )
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $(".btbincluirdocumento").click(function () {
+            var cd_procedimento = $(this).attr("data-id");
+
+            
+
+            var _ul = '@Url.Action("PesquisarDocumentos", "ProcedimentoAdm", new { area = "Procedimento" })'
+            var wnd = $("#JanelaFotos").data("kendoWindow");
+            wnd.refresh({
+                url: _ul,
+                data: {
+                    cd_procedimento: cd_procedimento
+                }
+            });
+
+            wnd.center();
+            wnd.open().refresh();
+        });
+    });
+</script>
+
+
+
+
+
+@(Html.Kendo().Window()
+        .Name("JanelaFotos")
+        .Title("Documentos Referenciados")
+        .Content("Carregando...")
+        .Actions(actions => actions.Refresh().Close())
+        .Width(680)
+        .Height(480)
+        .Modal(true)
+        .Visible(false)
+        .Scrollable(true)
+        .Resizable()
+        .Draggable(true)
+
+
+        )
+
+
+
+<script>
+
+     function onComplete(e) {
+         $("#JanelaFotos").data("kendoWindow").close(); // no iframe
+     }
+
+</script>
+<script>
+    function productDetails(product) {
+        var actionDetail = '@Url.Action("Details", "ProcedimentoAdm")';
+        var actionEdit = '@Url.Action("TempoLiberacaoResult?cd_procedimento={4}", "Relatorios")';
+        var actionDelete = '@Url.Action("Delete", "ProcedimentoAdm")';
+
+
+
+        var html = kendo.format("<a class='icon-folder-open' TITLE='@Html.T("lnkDetails")'  href='{0}/{1}'> </a>   ",
+        actionDetail, product.CD_PROCEDIMENTO);
+        return html;
+    }
+
+    function productDetailsImg2(product) {
+        //var html = "<img src='../../Images/Logo.png' />";
+        //return html;
+
+        var html = "<img src='../../Images/SetaAcima.png' />";
+
+
+        if (product.PERCENTUALPROCEDIMENTO <= 0) {
+            html = "<img src='../../Images/SetaAcima.png' />";
+        } else
+            if (product.PERCENTUALPROCEDIMENTO > 0 && product.PERCENTUALPROCEDIMENTO < 80) {
+                html = "<img src='../../Images/SetaAcima.png' />";
+            } else
+                if (product.PERCENTUALPROCEDIMENTO > 80 && product.PERCENTUALPROCEDIMENTO < 100) {
+                    html = "<img src='../../Images/SetaDireita.png' />";
+                } else
+                    html = "<img src='../../Images/SetaBaixo.png' />";
+
+
+        return html;
+
+    }
+
+    function productDetailsImg(product) {
+        //var html = "<img src='../../Images/Logo.png' />";
+        //return html;
+
+        var html = "<img src='../../Images/SetaAcima.png' />";
+
+
+        if (product.PERCENTUAL <= 0) {
+            html = "<img src='../../Images/SetaAcima.png' />";
+        } else
+            if (product.PERCENTUAL > 0 && product.PERCENTUAL < 80) {
+                html = "<img src='../../Images/SetaAcima.png' />";
+            } else
+                if (product.PERCENTUAL > 80 && product.PERCENTUAL < 100) {
+                    html = "<img src='../../Images/SetaDireita.png' />";
+                } else
+                    html = "<img src='../../Images/SetaBaixo.png' />";
+
+
+        return html;
+
+    }
+</script>
+
+<script>
+    function formatter(value) {
+        return value.substring(0, 13);
+    }
+
+    function productDetails2(product) {
+        return product.substring(0, 18) + "...";
+    }
+   
+</script>
+
+

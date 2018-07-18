@@ -1,0 +1,67 @@
+@model IEnumerable<ItemLocalizacao>
+
+@{ int count = Model == null ? 0 : Model.Count(); }
+
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleindex") <small> @Html.T("ItemLocalizacao") </small></h2>
+    </div>
+    @Html.Partial("_Search", "tipoorcamento")
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("Create")"><i class="fa fa-plus"></i>&nbsp;@Html.T("btbnovo")</a>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#Search"><i class="fa fa-filter"></i>&nbsp;@Html.T("btbfind")</button>
+                <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-refresh"></i>&nbsp;@Html.T("btbatualizar")</a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cloud"></i>&nbsp;@Html.T("btboutros")
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a id="lnkExporta" href="@Url.Action("ExportXls", new { strPesquisa = @ViewData["termo"] })">@Html.T("btbexportar") <i>@Model.Count()</i> @Html.T("msgtotalregencontrados")</a>   </li>
+                        <li><a id="lnkImporta" href="@Url.Action("Upload")">@Html.T("btbimportar")</a></li>
+                    </ul>
+                </div>
+            </div>
+            <small><i>@Model.Count()</i>  @Html.T("msgtotalregencontrados")</small>
+        </div>
+        <div class="panel-body">
+
+            @(Html.Kendo().Grid(Model)
+                    .Name("Grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(p => p.cd_item).Visible(true).ClientTemplate("#= StringOfLink(data.cd_item,'','','','ItemLocalizacao','','') #").Title(Html.T("Comando").ToString()).Width(80).Sortable(false).Filterable(false);
+                        columns.Bound(p => p.cd_item);
+                        columns.Bound(p => p.Item.descricao);
+                        columns.Bound(p => p.localizador_cx_master);
+                        columns.Bound(p => p.localizador_cx_midle);
+                        columns.Bound(p => p.localizador_outros);
+                        columns.Bound(p => p.localizador_unitario);
+
+
+                    })
+                            .Filterable()
+                            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                             .Pageable(pageable => pageable
+                            .PageSizes(true)
+                            .ButtonCount(5))
+                            .Sortable()
+                            .Filterable()
+                            .Resizable(resize => resize.Columns(true))
+                            .Reorderable(reorder => reorder.Columns(true))
+                            .DataSource(ds => ds.Ajax()
+                            .PageSize(Convert.ToInt32(Session["NumberRow"].ToString() != null ? Session["NumberRow"].ToString() : "10"))
+                            .ServerOperation(false).Model(m =>
+                            {
+                                m.Id(p => p.cd_item);
+                            })
+                    //.Read(r => r.Action("Read", "ItemLocalizacao"))
+                                        ))
+        </div>
+    </div>
+
+</div>
+

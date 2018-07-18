@@ -1,0 +1,67 @@
+﻿@model IEnumerable<DEPARTAMENTO>
+
+
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleindex") <small>@Html.T("DEPARTAMENTO") </small></h2>
+    </div>
+    @Html.Partial("_Search", "DEPARTAMENTO")
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("Create")"><i class="fa fa-plus"></i>&nbsp;@Html.T("btbnovo")</a>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#Search"><i class="fa fa-filter"></i>&nbsp;@Html.T("btbfind")</button>
+                <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-refresh"></i>&nbsp;@Html.T("btbatualizar")</a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cloud"></i>&nbsp;@Html.T("btboutros")
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a id="lnkExporta" href="@Url.Action("ExportXls", new { strPesquisa = @ViewData["termo"] })">@Html.T("btbexportar") <i>@Model.Count()</i> @Html.T("msgtotalregencontrados")</a>   </li>
+                        <li><a id="lnkImporta" href="@Url.Action("Upload")">@Html.T("btbimportar")</a></li>
+                    </ul>
+                </div>
+            </div>
+            <small><i>@Model.Count()</i>  @Html.T("msgtotalregencontrados")</small>
+        </div>
+        <div class="panel-body">
+
+
+            @(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.DESC_DEPARTAMENTO).ClientTemplate("#= StringOfLink(data.CD_DEPARTAMENTO,'','','','DEPARTAMENTO','UserDepartamento','') #").Title(Html.T("Comando").ToString()).Width(100);
+        columns.Bound(p => p.CD_DEPARTAMENTO).Visible(false);
+        columns.Bound(p => p.DESC_DEPARTAMENTO);
+        columns.Bound(p => p.TEMPO_PADRAO).Width(100);
+        columns.Bound(p => p.ENVIA_EMAIL).Width(100);
+        columns.Bound(p => p.ATIVO).Width(100);
+        columns.Bound(p => p.NIVEL_SERVICO).Width(100);
+
+    })
+             .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                            .Pageable(pageable => pageable
+                            .PageSizes(true)
+                            .ButtonCount(5))
+                            .Sortable()
+                            .Filterable()
+            .DataSource(ds => ds.Ajax()
+                 .ServerOperation(false)
+                 .PageSize(7)
+
+                                .Model(m =>
+                                {
+                                    m.Id(p => p.CD_DEPARTAMENTO);
+
+
+                                })
+                        .Read(r => r.Action("Read", "DEPARTAMENTO"))
+                )
+        )
+        </div>
+    </div>
+</div>
+

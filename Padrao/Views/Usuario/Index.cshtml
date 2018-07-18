@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Usuario>
+
+
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleindex") <small>@Html.T("Usuario") </small></h2>
+    </div>
+    @Html.Partial("_Search", "Usuario")
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("Create")"><i class="fa fa-plus"></i>&nbsp;@Html.T("btbnovo")</a>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#Search"><i class="fa fa-filter"></i>&nbsp;@Html.T("btbfind")</button>
+                <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-refresh"></i>&nbsp;@Html.T("btbatualizar")</a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cloud"></i>&nbsp;@Html.T("btboutros")
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a id="lnkExporta" href="@Url.Action("ExportXls", new { strPesquisa = @ViewData["termo"] })">@Html.T("btbexportar") <i>@Model.Count()</i> @Html.T("msgtotalregencontrados")</a>   </li>
+                        <li><a id="lnkImporta" href="@Url.Action("Upload")">@Html.T("btbimportar")</a></li>
+                    </ul>
+                </div>
+            </div>
+            <small><i>@Model.Count()</i>  @Html.T("msgtotalregencontrados")</small>
+        </div>
+        <div class="panel-body">
+
+            @(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.NOME).ClientTemplate("#= StringOfLink(data.CD_USUARIO,'','','','Usuario','Usuario','') #").Width(100);
+        columns.Bound(p => p.CD_USUARIO).Visible(false);
+        columns.Bound(p => p.NOME);
+        columns.Bound(p => p.EMAIL).Width(300);
+        columns.Bound(p => p.LOGIN).Width(150);
+        columns.Bound(p => p.SENHA).Visible(false);
+        columns.Bound(p => p.APROVA).Width(100);
+        columns.Bound(p => p.REPROVA).Width(100);
+        columns.Bound(p => p.SITUACAO).Width(100);
+
+    })
+             .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                            .Pageable(pageable => pageable
+                            .PageSizes(true)
+                            .ButtonCount(5))
+                            .Sortable()
+                            .Filterable()
+            .DataSource(ds => ds.Ajax()
+                 .ServerOperation(false)
+                 .PageSize(20)
+
+                                .Model(m =>
+                                {
+                                    m.Id(p => p.CD_USUARIO);
+
+
+                                })
+                        .Read(r => r.Action("Read", "Usuario"))
+                )
+        )
+        </div>
+    </div>
+</div>

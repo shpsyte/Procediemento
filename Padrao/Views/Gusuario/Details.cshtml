@@ -1,0 +1,99 @@
+﻿@model GUsuario
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleDetails") <small>@Html.T("GUsuario") </small></h2>
+    </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.NOME)
+                            @Html.TextBoxFor(model => model.NOME, new { @class = "form-control", disabled = "disabled"})
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.CD_DEPARTAMENTO)
+                            <br />
+                            @(Html.Kendo().DropDownList()
+                                                  .Name("CD_DEPARTAMENTO")
+                                                  .DataTextField("DESC_DEPARTAMENTO")
+                                                  .DataValueField("CD_DEPARTAMENTO")
+                                                   .HtmlAttributes(new { style = "width:360px" })
+                                                  .Enable(false) .DataSource(source =>{ source.Read(read => { read.Action("GetDepartamento", "Gusuario"); }); })
+                                            )
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.CD_DEPARTAMENTO_DEFAULT)
+                            <br />
+                            @(Html.Kendo().DropDownList()
+                                                  .Name("CD_DEPARTAMENTO_DEFAULT")
+                                                  .DataTextField("DESC_DEPARTAMENTO")
+                                                  .DataValueField("CD_DEPARTAMENTO")
+                                                   .HtmlAttributes(new { style = "width:360px" })
+                                                  .Enable(false) .DataSource(source =>{ source.Read(read => { read.Action("GetDepartamento", "Gusuario"); }); })
+                                            )
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.CD_PAGINA)
+                            <br />
+                            @(Html.Kendo().DropDownList()
+                                                  .Name("CD_PAGINA")
+                                                  .DataTextField("TEXT")
+                                                  .DataValueField("VALUE")
+                                                  .Enable(false)
+                                                  .HtmlAttributes(new { style = "width:360px" })
+                                                  .DataSource(source =>
+                                                      {
+                                                          source.Read(read =>
+                                                             {
+                                                                 read.Action("ReadPagina", "Usuario");
+                                                             });
+                                                      })
+                                            )
+                        </div>
+                    </div>
+
+
+                    
+                     <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.TMP_MESES_PESQUISA)
+                            <br />
+                            @Html.TextBoxFor(model => model.TMP_MESES_PESQUISA, new { @class = "form-control", disabled = "disabled"})
+                        </div>
+                    </div>
+                    
+
+                </div>
+
+            </div>
+           <div class="panel-footer">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.CD_GUSUARIO.ToString().Trim() })"><i class="fa fa-pencil-square-o"></i>&nbsp;@Html.T("btbeditar")</a>
+                </div>
+            </div>
+        </div>
+         
+</div>
+
+
+

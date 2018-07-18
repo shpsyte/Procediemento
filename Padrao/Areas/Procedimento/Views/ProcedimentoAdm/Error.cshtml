@@ -1,0 +1,41 @@
+﻿<br />
+<div class="container">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h2>@Html.T("Oops") <small> Verifique a mensagem abaixo:</small></h2>
+        </div>
+        <div class="panel-body">
+
+
+            @{
+                
+                if (Request["Stid"].ToString() == "ErroNotFound")
+                {
+                <div class="alert alert-danger">
+                    <h4>Registro não encontrado ou Não é permitido sua alteração!</h4>
+                    <b>O Registro que você está procurando não está disponível para esta consulta</b>
+                    <br />
+                    <b>Verifique:</b>
+                    <ol>
+                        <li>Se o procedimento já está finalizado.</li>
+                        <li>Se você tem acesso ao departamento para Atendê-lo.</li>
+                        <li>Se o procedimento existe.</li>
+
+                    </ol>
+                </div>
+                }
+
+
+                if (Request["Stid"].ToString() == "SemProc")
+                {
+                <div class="alert alert-success">
+                    <strong>Muito Bem!</strong> Você não possui nenhum procedimento para atender.
+                
+                </div>
+                }
+                
+                
+            }
+        </div>
+    </div>
+</div>

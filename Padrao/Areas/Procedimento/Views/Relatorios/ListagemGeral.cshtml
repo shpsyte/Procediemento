@@ -1,0 +1,144 @@
+﻿@{ int count = Model == null ? 0 : Model.Count(); }
+
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titlefind") <small>@Html.T("ProcedimentoAdm") </small></h2>
+    </div>
+
+@using (Html.BeginForm("ListagemGeralResult", "Relatorios", FormMethod.Post, null))
+        {
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <button type="submit" id="Destino" name="Destino" value="Tela" class="btn btn-success">
+                    Pesquisar
+                </button>
+            </div>
+            <div class="panel-body">
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Período de Inclusão</label>
+                        </div>
+                        <div class="col-md-2">
+                            @(Html.Kendo().DatePicker()
+                                                      .Name("dt_inicial")
+                                                      .HtmlAttributes(new { style = "width:100%" }))
+                        </div>
+                        <div class="col-md-2">
+                            @(Html.Kendo().DatePicker()
+                                                      .Name("dt_final")
+                                                      .HtmlAttributes(new { style = "width:100%" }))
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Nº. Procedimento</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" id="nr_procedimento" name="nr_procedimento" type="text" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Cliente</label>
+                        </div>
+                        <div class="col-md-4">
+                            @(Html.Kendo().ComboBox()
+                                                  .Name("CD_CADASTRO")
+                                                  .DataTextField("RAZAO")
+                                                  .DataValueField("CD_CADASTRO")
+                                                  .Filter("contains")
+                                                  .MinLength(4)
+                                                  .AutoBind(false)
+                                                  .HtmlAttributes(new { style = "width:100%" })
+                                                  .DataSource(source => { source.Read(read => { read.Action("GetCadastro", "ProcedimentoAdm"); }); })
+                                                   .Template(
+                                                    "<dl>" +
+                                                        "<dt>Razão:</dt><dd>${ data.RAZAO }</dd>" +
+                                                         "<dt>Código:</dt><dd>${ data.CD_CADASTRO }</dd>" +
+                                                    "</dl>"))
+                                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Tipo do Procedimento</label>
+                        </div>
+                        <div class="col-md-4">
+                            @(Html.Kendo().ComboBox()
+                                                  .Name("CD_TIPO")
+                                                  .DataTextField("DES_TIPO")
+                                                  .DataValueField("CD_TIPO")
+                                                  .Filter("contains")
+                                                  .AutoBind(false)
+                                                  .HtmlAttributes(new { style = "width:100%" })
+                                  .DataSource(source => { source.Read(read => { read.Action("GetTipoProcedimento", "ProcedimentoAdm"); }); })
+                                            )
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Departamento</label>
+                        </div>
+                        <div class="col-md-4">
+                            @(Html.Kendo().ComboBox()
+                                                  .Name("CD_DEPARTAMENTO")
+                                                  .DataTextField("DESC_DEPARTAMENTO")
+                                                  .DataValueField("CD_DEPARTAMENTO")
+                                                  .Filter("contains")
+                                                  .AutoBind(false)
+                                                  .HtmlAttributes(new { style = "width:100%" })
+                            .DataSource(source => { source.Read(read => { read.Action("GetDepartamento", "ProcedimentoAdm"); }); })
+                                            )
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Usuário</label>
+                        </div>
+                        <div class="col-md-4">
+                            @(Html.Kendo().ComboBox()
+                                                  .Name("CD_USUARIO")
+                                                  .DataTextField("NOME")
+                                                  .DataValueField("CD_USUARIO")
+                                                  .Filter("contains")
+                                                  .AutoBind(false)
+                                                  .HtmlAttributes(new { style = "width:100%" })
+                            .DataSource(source => { source.Read(read => { read.Action("GetUsuario", "ProcedimentoAdm"); }); })
+                                            )
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Situação</label>
+                        </div>
+                        <div class="col-md-4">
+                            @(Html.Kendo().ComboBox()
+                                                  .Name("ID_SITUACAO")
+                                                  .DataTextField("DESCRICAO")
+                                                  .DataValueField("ID_SITUACAO")
+                                                  .Filter("contains")
+                                                  .AutoBind(false)
+                                                  .HtmlAttributes(new { style = "width:100%" })
+                                                  .DataSource(source => { source.Read(read => { read.Action("GetSituacao", "ProcedimentoAdm"); }); })
+                                            )
+                        </div>
+                    </div>
+
+                 
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+

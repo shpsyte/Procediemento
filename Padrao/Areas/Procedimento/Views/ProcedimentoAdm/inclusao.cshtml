@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "inclusao";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+<div class="container">
+
+    <div class="control">
+        <div class="container">
+            <div class="pull-left">
+                <p>
+                   
+                </p>
+            </div>
+        </div>
+        <div class="containerisco">
+
+            <div class="tabbable">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab1">
+                        <div class="controls">
+                            <div class="row">
+                                <div class="span8">
+                                    <h4>Obrigado, foi criado o procedimento <b>@Request["cd_procedimento"]</b>, e já está em processo de análise</h4>
+                                    <a class="btn " href="@Url.Action("Create", "ProcedimentoAdm")"> Abrir Novo Procedimento</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

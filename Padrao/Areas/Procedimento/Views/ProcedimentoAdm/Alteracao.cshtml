@@ -1,0 +1,28 @@
+﻿<br />
+<div class="container">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h2>Procedimento <small>@Request["cd_procedimento"].ToString()</small></h2>
+        </div>
+        <div class="panel-body">
+
+
+
+            <strong>Muito Bem!</strong>
+
+            <h4>O procedimento @Request["cd_procedimento"].ToString() foi alterado com sucesso!</h4>
+            <h3>Processo de Análise encaminhado</h3>
+            <h3>Que tal verificar outros procedimentos ?</h3>
+            @using (Html.BeginForm("Index", "ProcedimentoAdm", new { ID_SITUACAO = 1, area = "Procedimento" }, FormMethod.Post, null))
+            {
+                <button type="submit" class="btn btn-success">
+                    <i class="icon-ok icon-white"></i>Verificar Outros Procedimentos
+                </button>
+                
+            }
+
+
+        </div>
+    </div>
+</div>
+

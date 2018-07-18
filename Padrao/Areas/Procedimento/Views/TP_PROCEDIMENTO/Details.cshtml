@@ -1,0 +1,95 @@
+﻿ @model tp_procedimento
+
+
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleDetails") <small>@Html.T("tp_procedimento") </small></h2>
+    </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.DES_TIPO)
+                            @Html.TextBoxFor(model => model.DES_TIPO, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <div class="col-md-4">
+                            @Html.HiddenFor(model => model.SOL_NF_OBRIGATORIA, new { id = "SOL_NF_OBRIGATORIA" })
+                            <label class="checkbox">
+                                <input type="checkbox" disabled  id="_SOL_NF_OBRIGATORIA" @(Model.SOL_NF_OBRIGATORIA == "S" ? "checked='checked'" : "") />
+                                @Html.DisplayNameFor(model => model.SOL_NF_OBRIGATORIA)
+                            </label>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+
+
+                        <div class="col-md-4">
+                            @Html.HiddenFor(model => model.SOL_NF_CLIENTE_OBRIGATORIA, new { id = "SOL_NF_CLIENTE_OBRIGATORIA" })
+                            <label class="checkbox">
+                                <input type="checkbox" disabled id="_SOL_NF_CLIENTE_OBRIGATORIA" @(Model.SOL_NF_CLIENTE_OBRIGATORIA == "S" ? "checked='checked'" : "") />
+                                @Html.DisplayNameFor(model => model.SOL_NF_CLIENTE_OBRIGATORIA)
+                            </label>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+
+
+
+                        <div class="col-md-4">
+                            @Html.HiddenFor(model => model.ATIVO, new { id = "ATIVO" })
+                            <label class="checkbox">
+                                <input type="checkbox" disabled id="_ATIVO"  @(Model.ATIVO == "S" ? "checked='checked'" : "") />
+                                @Html.DisplayNameFor(model => model.ATIVO)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="display-field">
+                                @Html.LabelFor(model => model.TEMPO_PADRAO)
+                                @Html.TextBoxFor(model => model.TEMPO_PADRAO, new { @class = "form-control", disabled = "disabled" })
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.CD_TIPO.ToString().Trim() })"><i class="fa fa-pencil-square-o"></i>&nbsp;@Html.T("btbeditar")</a>
+                </div>
+            </div>
+        </div>
+                
+</div>
+
+

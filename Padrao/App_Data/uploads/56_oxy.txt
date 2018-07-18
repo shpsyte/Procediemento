@@ -1,0 +1,20 @@
+comissoes a creditoar f4 (comissionado)
+f4 para gerar
+---tela de comissões
+-- data pedido
+-- parametros de busca pedidos
+-- calculo de custo de nf-e importacao (avalon)
+
+
+
+
+Falo Felipe
+14:00
+Av Maringa, 1551
+Nilkon
+
+Super - Safe
+
+
+
+

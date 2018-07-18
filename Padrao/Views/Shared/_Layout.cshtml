@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Foxlux SA - Portal de Procedimentos</title>
+
+    @Scripts.Render("~/bundles/jquery")
+@*    @Scripts.Render("~/bundles/kendo")*@
+
+    <script src="~/Scripts/kendo/jquery.min.js"></script>
+    <script src="~/Scripts/kendo/kendo.all.min.js"></script>
+    <script src="~/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
+    <script src="~/Scripts/kendo/kendo.timezones.min.js"></script>
+
+
+
+        @{  var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();  }
+        <script src="@Url.Content("~/Scripts/kendo/cultures/kendo.culture." + culture + ".min.js")"></script>
+        <script> kendo.culture("@culture");   </script>
+    @*@Styles.Render("~/Content/kendo")*@
+    <link href="~/Content/kendo/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/kendo.bootstrap.min.css" rel="stylesheet" />
+
+
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/ptbr")
+    <script type="text/javascript">
+        // Faz com que o plugin de globalização adote a cultura pt-BR.
+        // O ideal é que esta linha não seja necessária, e que o plugin detecte automaticamente a cultura sendo usada.
+        // Verificar isso depois.
+        Globalize.cultureSelector = '@culture';
+    </script>
+
+
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    
+    
+</head>
+<body>
+    <div class="container">
+
+            <!-- Modal -->
+            <div id="Modalbegin" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+
+                    <h3>@Html.T("SaveData")</h3>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-info">
+
+                        @Html.T("SaveData")
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div id="ModalError" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+
+                    <h3 id="myModalLabel">@Html.T("Erro")</h3>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-danger">
+
+                        @Html.T("ErrorSaveData")
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">@Html.T("btbClose")</button>
+                </div>
+            </div>
+        </div>
+
+
+
+      @{ if ((Request.IsAuthenticated) && (Session["usuario"] != null))
+      {   
+      
+             @Html.Partial("_menu")  
+      
+      }    
+      }
+    <div class="body-content">
+        @RenderBody()
+        <hr />
+        <div id="footer">
+            <div class="container">
+                <footer>
+                    @{ if ((Request.IsAuthenticated) && (Session["usuario"] != null))
+                       { 
+                        <p>&copy; @DateTime.Now.Year - Isco Sistemas</p>
+                       }
+                      
+                      }
+                </footer>
+            </div>
+        </div>
+    </div>
+   @Scripts.Render("~/Scripts/Bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

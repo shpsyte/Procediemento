@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+    
+}
+
+
+@model IEnumerable<pa_troca_departamentos>
+
+   @(Html.Kendo().Grid(Model)
+    .Name("Gridd")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.NUM_SEQ).Visible(true).Width(30).Title("Sequencia");
+        columns.Bound(p => p.Usuario.NOME).Width(100);
+        columns.Bound(p => p.DEPANT.DESC_DEPARTAMENTO).Title("De").Width(130);
+        columns.Bound(p => p.DEPNOVA.DESC_DEPARTAMENTO).Title("Para").Width(130);
+        columns.Bound(p => p.DTA_TROCA).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(150).Title("Em");
+        //columns.Bound(p => p.DTA_ENTRADA_DEP_NOVA).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(170).Title("Entrada");
+        //columns.Bound(p => p.DTA_SAIDA_DEP_NOVA).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(170).Title("Saída");
+        columns.Bound(p => p.OBS);
+
+    })
+            .ColumnMenu()
+            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+            .DataSource(ds => ds.Ajax()
+                 .ServerOperation(true)
+                                .Model(m =>
+                                {
+                                    m.Id(p => p.NUM_SEQ);
+                                })
+                )
+        )
+
+
+@*<table>
+
+    <tr>
+        <th>teset
+        </th>
+    </tr>
+
+    @foreach (var a in Model)
+    {
+
+    <tr>
+        <td>
+            @a.DTA_INICIAL
+        </td>
+
+    </tr>
+    }
+
+</table>*@

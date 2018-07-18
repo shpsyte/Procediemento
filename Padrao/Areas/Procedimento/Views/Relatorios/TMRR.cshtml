@@ -1,0 +1,162 @@
+﻿@model IEnumerable<wpa_troca_departamentos_unico>
+
+@{ int count = Model == null ? 0 : Model.Count(); }
+
+<div class="row placeholders">
+    <div class="col-md-6">
+        <h2>TEMPO MÉDIO DE RESPOSTA</h2>
+        <div class="ativas">@ViewData["tempo_medio_resposta"].ToString()</div>
+        
+    </div>
+    <div class="col-md-6">
+        <h2>RESPONDIDO FORA DO PRAZO</h2>
+        <div class="ativas">@ViewData["qtde_fora"]</div>
+    </div>
+</div>
+
+
+<div class="container_none">
+    <div class="page-header-isco">
+        <h2>@Html.T("ProcedimentoAdm") <small>Listagem Geral</small></h2>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("TempoMedio")"><i class="fa fa-refresh"></i>&nbsp;Nova Pesquisa</a>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            @(Html.Kendo().Grid(Model)
+            .Name("Grid")
+             .Columns(columns =>
+    {
+        columns.Bound(p => p.Procedimento).Visible(true).ClientTemplate("#= productDetails(data) #").Title(">").Width(30);
+        columns.Bound(p => p.Procedimento).Visible(true).Width(60);
+        columns.Bound(p => p.Fantasia).Width(150);
+        columns.Bound(p => p.Tipo).Width(100);
+        columns.Bound(p => p.Departamento);
+        columns.Bound(p => p.HorasString);
+
+        //columns.Bound(p => p.PERCENTUAL).Visible(true).ClientTemplate("#= productDetailsImg(data) #").Title("PD").Width(20);
+
+
+
+    })
+
+        .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+            .Pageable(pageable => pageable
+        .PageSizes(true)
+                .ButtonCount(20)
+        .Messages(d => d.Display("{0} - {1} de {2} Registros"))
+        .Messages(d => d.ItemsPerPage("Itens por Página"))
+
+        )
+        .Sortable()
+        .Groupable()
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .ServerOperation(false)
+
+            .PageSize(20)
+            .Read(read => read.Action("ReadWProcessos", "Relatorios"))
+        )
+
+        )
+
+        </div>
+    </div>
+</div>
+
+<div class="row placeholders">
+    <div class="col-md-6">
+        <h2>TEMPO MÉDIO DE RESPOSTA</h2>
+        <div class="ativas">@ViewData["tempo_medio_resposta"].ToString()</div>
+        
+    </div>
+    @*<div class="col-md-6">
+        <h2>RESPONDIDO FORA DO PRAZO</h2>
+        <div class="ativas">@ViewData["qtde_fora"]</div>
+    </div>*@
+</div>
+
+
+
+<script>
+
+    function productDetailsImg(product) {
+        //var html = "<img src='../../Images/Logo.png' />";
+        //return html;
+
+        var html = "<img src='../../Images/SetaAcima.png' />";
+
+
+        if (product.PERCENTUAL <= 0) {
+            html = "<img src='../../Images/SetaAcima.png' />";
+        } else
+            if (product.PERCENTUAL > 0 && product.PERCENTUAL < 80) {
+                html = "<img src='../../Images/SetaAcima.png' />";
+            } else
+                if (product.PERCENTUAL > 80 && product.PERCENTUAL < 100) {
+                    html = "<img src='../../Images/SetaDireita.png' />";
+                } else
+                    html = "<img src='../../Images/SetaBaixo.png' />";
+
+
+        return html;
+
+    }
+</script>
+
+
+<script>
+    function productDetailsImg2(product) {
+        //var html = "<img src='../../Images/Logo.png' />";
+        //return html;
+
+        var html = "<img src='../../Images/SetaAcima.png' />";
+
+
+        if (product.PERCENTUALPROCEDIMENTO <= 0) {
+            html = "<img src='../../Images/SetaAcima.png' />";
+        } else
+            if (product.PERCENTUALPROCEDIMENTO > 0 && product.PERCENTUALPROCEDIMENTO < 80) {
+                html = "<img src='../../Images/SetaAcima.png' />";
+            } else
+                if (product.PERCENTUALPROCEDIMENTO > 80 && product.PERCENTUALPROCEDIMENTO < 100) {
+                    html = "<img src='../../Images/SetaDireita.png' />";
+                } else
+                    html = "<img src='../../Images/SetaBaixo.png' />";
+
+
+        return html;
+
+    }
+    function productDetails(product) {
+        var actionDetail = '@Url.Action("Details", "ProcedimentoAdm")';
+            var actionEdit = '@Url.Action("Edit", "ProcedimentoAdm")';
+            var actionDelete = '@Url.Action("Delete", "ProcedimentoAdm")';
+
+            var html = kendo.format("<a class='btn btn-info' TITLE='@Html.T("lnkDetails")' href='{0}/{1}'> Detalhar</a>     ",
+            actionDetail, product.CD_PROCEDIMENTO);
+            return html;
+        }
+</script>
+<script type="text/javascript">
+
+    function collapseGroupRows() {
+
+        var grid = $("#Grid").data("kendoGrid");
+        grid.collapseGroup(grid.tbody.find(">tr.k-grouping-row"));
+        $('tr[role*="row"]').hide();
+    }
+
+</script>
+
+<script>
+    $(".k-collapse").click();
+    function dataBound() {
+
+        this.expandRow(this.tbody.find("tr.k-master-row").first());
+    }
+</script>

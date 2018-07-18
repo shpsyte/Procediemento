@@ -1,0 +1,76 @@
+﻿@model GUsuario
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleDetails") <small>@Html.T("GUsuario") </small></h2>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.NOME)
+                            @Html.TextBoxFor(model => model.NOME, new { @class = "form-control", disabled = "disabled"})
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.CD_DEPARTAMENTO)
+                            <br />
+                            @(Html.Kendo().DropDownList()
+                                                  .Name("CD_DEPARTAMENTO")
+                                                  .DataTextField("DESC_DEPARTAMENTO")
+                                                  .DataValueField("CD_DEPARTAMENTO")
+                                                  .OptionLabel("Selecione um Departamento Padrão")
+                                                  .Value("0")
+                                                   .HtmlAttributes(new { style = "width:360px" })
+                                                  .Enable(false) .DataSource(source =>{ source.Read(read => { read.Action("GetDepartamento", "Gusuario"); }); })
+                                            )
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.CD_PAGINA)
+                            <br />
+                            @(Html.Kendo().DropDownList()
+                                                  .Name("CD_PAGINA")
+                                                  .DataTextField("TEXT")
+                                                  .DataValueField("VALUE")
+                                                  .SelectedIndex(1)
+                                                  .Enable(false)
+                                                  .DataSource(source =>
+                                                      {
+                                                          source.Read(read =>
+                                                             {
+                                                                 read.Action("ReadPagina", "Usuario");
+                                                             });
+                                                      })
+                                            )
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+         	<div class="panel-footer">
+                <div class="btn-group">
+                    <input type="submit" value="@Html.T("btbdelete").ToString()" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    }         
+</div>
+
+
+

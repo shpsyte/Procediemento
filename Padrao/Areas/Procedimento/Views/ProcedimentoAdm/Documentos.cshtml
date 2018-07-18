@@ -1,0 +1,98 @@
+﻿@model IEnumerable<ProcedimentoAdmArq>
+
+@{
+    
+    string cd_procedimento_pesquisa = "0";
+    foreach (var itens in Model)
+    {
+       cd_procedimento_pesquisa = itens.CD_PROCEDIMENTO.ToString();
+       
+    }
+
+    if ((string.IsNullOrEmpty(cd_procedimento_pesquisa)) || (cd_procedimento_pesquisa == "0"))
+    {
+        cd_procedimento_pesquisa = Session["cd_procedimento"].ToString();
+    }
+    
+}
+
+
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-4">
+            <label for="files">Clique para enviar arquivos</label>
+            @(Html.Kendo().Upload()
+                                    .Name("files")
+                                    .Async(a => a
+                                        .Save("CreateDocumento", "ProcedimentoAdm", new { area = "Procedimento", cd_procedimento = cd_procedimento_pesquisa  })
+                                        .AutoUpload(true)
+                                    )
+                                    //.Events(events => events
+                                       // .Complete("onComplete")
+                                    //)
+                                    )
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<table id="tabarq" class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CD_PROCEDIMENTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CAMINHO)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.CD_PROCEDIMENTO
+            </td>
+            <td>
+                @*@Html.ActionLink(item.CAMINHO, "../../App_Data/Uploads", new { id = item.CAMINHO }, new { target = "_blank" })*@
+
+                @if (string.IsNullOrEmpty(item.DES_CONTENTTYPE))
+                { 
+                   @Html.ActionLink(item.CAMINHO, "../../Arquivos/Uploads", new { id = item.CAMINHO }, new { target = "_blank" })
+                }
+                else
+                {
+                  <a href="@Url.Action("DownloadDoc", "ProcedimentoAdm", new { id = item.ID_ARQ})" target="_blank"> @item.NOME_ARQUIVO</a>
+                      
+                }
+
+                @*@Html.ActionLink(item.CAMINHO, "../../docs/Upload", new { id = item.CAMINHO }, new { target = "_blank" })*@
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+
+    <script lang="JavaScript" type="text/javascript">
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#Preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#Arquivo").change(function () {
+            readURL(this);
+        });
+    </script>

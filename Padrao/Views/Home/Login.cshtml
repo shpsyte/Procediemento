@@ -1,0 +1,180 @@
+﻿@model Usuario
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    body
+    {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+
+    .form-signin
+    {
+        max-width: 350px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    }
+
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox
+        {
+            margin-bottom: 10px;
+        }
+
+        .form-signin input[type="text"],
+        .form-signin input[type="password"]
+        {
+            font-size: 16px;
+            height: auto;
+            margin-bottom: 15px;
+            padding: 7px 9px;
+        }
+</style>
+
+
+
+
+@(Html.Kendo().Window()
+    .Name("window")
+    .Title("Criar Usuário")
+    .Content("loading user info...")
+    .LoadContentFrom("criarusuario", "Home")
+   .Draggable()
+    .Resizable()
+    .Width(600)
+    .Visible(false)
+    .Modal(true)
+
+    .Actions(actions => actions
+         .Refresh()
+        .Minimize()
+        .Maximize()
+        .Close()
+
+    )
+
+
+)
+
+<script>
+    $(document).ready(function () {
+        $("#undo")
+            .bind("click", function () {
+                var kendoWindow = $("#window").data("kendoWindow");
+                kendoWindow.center();
+                kendoWindow.open();
+
+                //$("#window").data("kendoWindow").open();
+
+            });
+        var onClose = function () {
+            undo.show();
+        }
+
+
+
+
+    });
+</script>
+
+<div class="container">
+
+
+    @using (Html.BeginForm(null, null, new { ReturnUrl = @Url.Action("Login", "Home") }, FormMethod.Post, new { @class = "form-signin", @id = "formLogin" }))
+    {
+        @Html.ValidationSummary(true)
+        
+        <h2 class="form-signin-heading">B2Y-Web Edition</h2>
+        
+        <div class="control-group">
+            @Html.TextBoxFor(model => model.nome, new { @class = "input-block-level", @placeholder = "Usuário" })
+        </div>
+       
+        <div class="control-group">
+            @Html.PasswordFor(model => model.senha, new { @class = "input-block-level", @placeholder = "Password" })
+        </div>
+    
+      
+        <div class="control-group">
+            @Html.TextBoxFor(model => model.Apelido, new { @class = "input-block-level", @placeholder = "Apelido" })
+        </div>
+           
+        
+        <button class="btn btn-primary loading-preload" type="submit" value="Entrar">Entrar</button>
+        <span id="undo" class="btn btn-warning">Cadastre-se</span>
+        <a href="#myModal" role="link" class="btn btn-warning" data-toggle="modal">Recuperar Senha</a>
+  
+    }
+
+    <!-- Button to trigger modal -->
+</div>
+    
+   
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Recuperar Senha</h3>
+    </div>
+    <div class="modal-body">
+        <p>Entre em contato com o usuário administrador para ressetar sua senha.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Entendi!</button>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#formLogin').validate(
+        {
+            rules: {
+                nome: {
+                    minlength: 2,
+                    required: true
+                   
+                },
+                senha: {
+                    required: true,
+                    required: true
+                },
+                Apelido: {
+                    minlength: 2,
+                    required: true
+                }
+            },
+            highlight: function (label) {
+                $(label).closest('.control-group').addClass('error');
+             
+            },
+            success: function (label) {
+                label
+           
+                  .closest('.control-group').addClass('success');
+            }
+        });
+    }); // end document.ready
+
+</script>

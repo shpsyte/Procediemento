@@ -1,0 +1,51 @@
+﻿@model IEnumerable<tp_procedimento>
+
+
+@using (Ajax.BeginForm("PesquisarTipo", "ProcedimentoAdm", new AjaxOptions { UpdateTargetId = "TipoLookupGrid", InsertionMode = InsertionMode.Replace  }))
+{
+    
+     <br />
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-6">
+                <label for="TipoLookupPesquisa">@Html.DisplayName("Descrição")</label>
+                @Html.TextBox("TipoLookupPesquisa", "", new { @class = "form-control" })
+            </div>
+        </div>
+
+    </div>
+    <hr />
+    
+    <button  id="loading-btn" class="btn btn-success" data-loading-text="Loading..." type="submit">@Html.T("btbConsultar")</button>
+    
+    
+}
+<hr />
+<div id="TipoLookupGrid">
+
+    
+<table class="table table-hover" >
+    <tr>
+          <th>
+            @Html.DisplayNameFor(model => model.CD_TIPO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DES_TIPO)
+        </th>
+       
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+             <td>
+                <a href="#" onclick="SelecionaTipo('@item.CD_TIPO','@item.DES_TIPO');">@item.CD_TIPO</a>
+            </td>
+            <td>
+                <a href="#" onclick="SelecionaTipo('@item.CD_TIPO','@item.DES_TIPO');">@item.DES_TIPO</a>
+            </td>
+           
+        </tr>
+    }
+</table>
+
+</div>

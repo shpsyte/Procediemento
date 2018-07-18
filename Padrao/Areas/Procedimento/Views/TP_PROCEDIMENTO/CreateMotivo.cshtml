@@ -1,0 +1,71 @@
+﻿@model Tp_Procedimento_Motivos
+
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titlecreate") <small>Motivos </small></h2>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.Partial("_Validation", ViewData.ModelState)
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("ListaMotivos", new { cod_tipo  = Request["cod_tipo"]})"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            Motivo
+                            @Html.TextBoxFor(model => model.DES_NOME, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>&nbsp;@Html.T("btbsalvar").ToString()</button>
+                </div>
+            </div>
+        </div>
+
+
+    }
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+    $("#_SOL_NF_OBRIGATORIA").click(function () {
+        var isChecked = $(this).is(":checked");
+        $("#SOL_NF_OBRIGATORIA").val(isChecked ? "S" : "N");
+    });
+
+    $("#_SOL_NF_CLIENTE_OBRIGATORIA").click(function () {
+        var isChecked = $(this).is(":checked");
+        $("#SOL_NF_CLIENTE_OBRIGATORIA").val(isChecked ? "S" : "N");
+    });
+
+    $("#_ATIVO").click(function () {
+        var isChecked = $(this).is(":checked");
+        $("#ATIVO").val(isChecked ? "S" : "N");
+    });
+
+
+
+</script>
+

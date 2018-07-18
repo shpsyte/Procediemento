@@ -1,0 +1,64 @@
+﻿@model UsuarioRegional
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titlecreate") <small>@Html.T("UsuarioRegional") </small></h2>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.Partial("_Validation", ViewData.ModelState)
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index","UsuarioRegional", new { cd_usuario = Request["cd_usuario"] })"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.CD_REGIONAL)
+                            <br />
+                              @(Html.Kendo().ComboBox()
+                                                .Name("CD_REGIONAL")
+                                                 .DataTextField("DESCRICAO")
+                                            .DataValueField("CD_REGIONAL")
+
+                                                .HtmlAttributes(new { style = "width: 400px" })
+                                               .DataSource(source =>
+                                            {
+                                                source.Read(read =>
+                                                {
+                                                    read.Action("ReadRegional", "UsuarioRegional", new { cd_usuario = Request["cd_usuario"] });
+                                                });
+                                            })
+                                                .Template("<p> <b>${ data.CD_REGIONAL } </b> </p>  ${ data.DESCRICAO }  "))
+                                               
+
+                            @Html.ValidationMessageFor(model => model.CD_REGIONAL)
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>&nbsp;@Html.T("btbsalvar").ToString()</button>
+                </div>
+            </div>
+        </div>
+         
+    }
+</div>
+
+
+
+
+
+
+

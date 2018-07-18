@@ -1,0 +1,18 @@
+﻿@using (Ajax.BeginForm("PesquisarTransportador","ProcedimentoAdm", new AjaxOptions { UpdateTargetId = "TransportadorLookupGrid", InsertionMode = InsertionMode.Replace}))
+{
+
+    <br /> 
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-6">
+                <label for="CadastroLookupPesquisa">@Html.DisplayName("Razão social, Fantasia")</label>
+                @Html.TextBox("CadastroLookupPesquisa", "", new { @class = "form-control" })
+            </div>
+        </div>
+
+    </div>
+    <hr />
+    <button  id="loading-btn" class="btn btn-success" data-loading-text="Loading..." type="submit">@Html.T("btbConsultar")</button>
+}
+<hr />
+<div id="TransportadorLookupGrid"></div>

@@ -1,0 +1,51 @@
+Installation instructions
+
+    Copy the DLL somewhere on your path. You will also need an appropriate
+    (V5.0) libmysql.dll on the path.
+
+    If you're setting your dbexpress stuff up in the IDE, append the contents of
+    the .ini files to the existing ones of the same name in your Delphi
+    installation.
+
+    If you're setting up the dbexpress stuff programmatically, then you need
+    something like:
+
+    var
+      Connection: TSQLConnection;
+    begin
+      Connection := TSQLConnection.Create(nil);
+      Connection.DriverName := 'dbxmysql';
+      Connection.GetDriverFunc := 'getSQLDriverMYSQL50';
+      Connection.LibraryName := 'dbxopenmysql50.dll';
+      Connection.VendorLib := 'libmysql.dll';
+      Connection.Params.Append('Database=NAME_OF_DATABASE);
+      Connection.Params.Append('User_Name=NAME_OF_USER');
+      Connection.Params.Append('Password=PASSWORD');
+      Connection.Params.Append('HostName=localhost');
+
+      Connection.Open;
+
+      // ... do stuff
+
+      Connection.Free;
+    end;
+
+    This has only been tested with Delphi 7. It may or may not work with other
+    versions --- I would be grateful of any reports of success or
+    otherwise. There is currently no support for metadata, such as the list of
+    available tables, or the indexes on a table.
+
+Supporting Alternative Character Sets
+
+    Alternative character sets can be specified in the Connection.Params
+    settings. Before opening the connection, set the ServerCharSet property to
+    the desired MySQL character set name. e.g.:
+
+      Connection.Params.Append('ServerCharSet=SJIS');
+
+Using this driver as DCUs
+
+    In order to static-link this driver as a DCU, put the compiled DCUs
+    somewhere on your Unit search Path, and add dbxopenmysql50 to your uses
+    clause.
+

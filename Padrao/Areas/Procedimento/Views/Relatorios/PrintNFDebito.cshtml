@@ -1,0 +1,87 @@
+﻿@{ int count = Model == null ? 0 : Model.Count(); }
+
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titlefind") <small>@Html.T("ProcedimentoAdm") </small></h2>
+    </div>
+
+    @using (Html.BeginForm("PrintNFDebitoPDFNovaVersao", "Relatorios", FormMethod.Post, null))
+    {
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <button type="submit" id="Destino" name="Destino" value="Tela" class="btn btn-success">
+                    Imprimir
+                </button>
+            </div>
+            <div class="panel-body">
+
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Nº. Procedimento</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" id="nr_procedimento" name="nr_procedimento" type="text" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Motivo</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" id="motivo" name="motivo" type="text" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Débito</label>
+                        </div>
+                        <div class="col-md-4">
+                            @(Html.Kendo().NumericTextBox().Decimals(2).Name("vlr_credito").Value(0)
+                                                      .HtmlAttributes(new { style = "width:100%" }))
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Data do Vencimento</label>
+                        </div>
+                        <div class="col-md-4">
+                            @(Html.Kendo().DatePicker()
+                                                      .Name("dta_vencimento").Value(System.DateTime.Now.AddDays(28))
+                                                      .HtmlAttributes(new { style = "width:100%" }))
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Sacado</label>
+                        </div>
+                        <div class="col-md-4">
+                            <select id="sacado" name="sacado">
+                                <option value="T" selected="selected">Transportadora</option>
+                                <option value="C">Cliente</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+

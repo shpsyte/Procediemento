@@ -1,0 +1,61 @@
+﻿@model IEnumerable<UsuarioRegional>
+
+
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleindex") <small>@Html.T("UsuarioRegional") </small></h2>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("Create", new { cd_usuario = Request["cd_usuario"] })"><i class="fa fa-plus"></i>&nbsp;@Html.T("btbnovo")</a>
+                <a class="btn btn-default" href="@Url.Action("Index", "Usuario", new { area = ""})"><i class="fa fa-angle-double-left"></i>Voltar a Listagem de Usuários</a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cloud"></i>&nbsp;@Html.T("btboutros")
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a id="lnkExporta" href="@Url.Action("ExportXls", new { strPesquisa = @ViewData["termo"] })">@Html.T("btbexportar") <i>@Model.Count()</i> @Html.T("msgtotalregencontrados")</a>   </li>
+                        <li><a id="lnkImporta" href="@Url.Action("Upload")">@Html.T("btbimportar")</a></li>
+                    </ul>
+                </div>
+            </div>
+            <small><i>@Model.Count()</i>  @Html.T("msgtotalregencontrados")</small>
+        </div>
+        <div class="panel-body">
+
+
+            @(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        //columns.Bound(p => p.CD_REGIONAL).ClientTemplate("#= productDetails(data) #").Title(Html.T("Comando").ToString()).Width(100);
+        columns.Bound(p => p.CD_REGIONAL).Width(120);
+        columns.Bound(p => p.Regional.DESCRICAO);
+        columns.Command(command => { command.Destroy().Text("Excluir"); }).Width(180);
+
+    })
+            .ColumnMenu()
+            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+            .Pageable()
+            .Sortable()
+            .Filterable()
+            .DataSource(ds => ds.Ajax()
+                 .ServerOperation(false)
+                 .PageSize(7)
+
+                                .Model(m =>
+                                {
+                                    m.Id(p => p.ID);
+
+
+                                })
+                        .Read(r => r.Action("Read", "UsuarioRegional"))
+                         .Destroy("Destroy", "UsuarioRegional")
+                )
+        )
+        </div>
+    </div>
+</div>

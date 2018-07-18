@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Authorization";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+<div class="container">
+
+    <div class="control">
+        <div class="container">
+            <div class="pull-left">
+                <p>
+                   
+                </p>
+            </div>
+        </div>
+        <div class="containerisco">
+
+            <div class="tabbable">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab1">
+                        <div class="controls">
+                            <div class="row">
+                                <div class="span8">
+                                    <h4>Acesso Negado!</h4>
+                                    <h3>
+                                       <b>Seu perfil não possui acesso ao registro solicitado.</b>
+                                        <hr />
+                                        <input type="button" class="btn btn-info" value="Voltar" onClick="history.go(-1)"> 
+                                        @Html.ActionLink("Efetuar Login", "Login", "Protected", new { @class="btn btn-success"})
+                                       
+                                        
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

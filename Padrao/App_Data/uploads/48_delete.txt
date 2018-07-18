@@ -1,0 +1,91 @@
+@model ItemLocalizacao
+@{
+    var options = new AjaxOptions()
+                      {
+                          Url = Url.Action("Delete", "Deposito"),
+
+                          OnBegin = "Iniciando",
+                          OnSuccess = "Sucesso ('Index','Materiais/ItemLocalizacao') ",
+                          OnFailure = "Erro",
+                          HttpMethod = "Post"
+                      };
+}
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titledelete") <small> @Html.T("ItemLocalizacao") </small></h2>
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(f => f.cd_item)
+                            <br />
+                            @(Html.Kendo().ComboBox()
+                                .Name("cd_item")
+                                .HtmlAttributes(new { style = "width:350px" })
+                                .DataTextField("descricao")
+                                .DataValueField("cd_item")
+                                .Filter(FilterType.Contains)
+                                .Enable(false)
+                                .DataSource(source =>
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("ReadItem", "ReadCombos", new { area = "Cadastros" });
+                                    });
+                                })
+                            )
+                            @Html.ValidationMessageFor(f => f.cd_item)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(f => f.localizador_cx_master)
+                            @Html.TextBoxFor(model => model.localizador_cx_master, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(f => f.localizador_cx_midle)
+                            @Html.TextBoxFor(model => model.localizador_cx_midle, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(f => f.localizador_outros)
+                            @Html.TextBoxFor(model => model.localizador_outros, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(f => f.localizador_unitario)
+                            @Html.TextBoxFor(model => model.localizador_unitario, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+			<div class="panel-footer">
+                <div class="btn-group">
+                    <input type="submit" value="@Html.T("btbdelete").ToString()" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

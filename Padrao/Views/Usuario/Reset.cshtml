@@ -1,0 +1,60 @@
+﻿
+@model Usuario
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleEdit") <small>@Html.T("Usuario") </small></h2>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+         @Html.HiddenFor(model => model.CD_USUARIO)
+        @Html.HiddenFor(model => model.NOME)
+        @Html.HiddenFor(MODEL => Model.LOGIN)
+        @Html.HiddenFor(MODEL => Model.EMAIL)
+        @Html.HiddenFor(MODEL => Model.APROVA)
+        @Html.HiddenFor(MODEL => Model.REPROVA)
+        @Html.HiddenFor(MODEL => Model.CANCELA)
+        @Html.HiddenFor(MODEL => Model.CD_NL)
+        @Html.HiddenFor(MODEL => Model.SITUACAO)
+        @Html.HiddenFor(MODEL => Model.ALT_SENHA)
+        @Html.HiddenFor(model => model.CD_GUSUARIO )
+
+
+        @Html.Partial("_Validation", ViewData.ModelState)
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.SENHA)
+                            @Html.PasswordFor(model => model.SENHA, new { @class = "form-control" })
+                        </div>
+
+                       
+                    </div>
+                 
+
+
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>&nbsp;@Html.T("btbsalvar").ToString()</button>
+                </div>
+            </div>
+
+        </div>
+         
+    }
+</div>
+
+
+
+

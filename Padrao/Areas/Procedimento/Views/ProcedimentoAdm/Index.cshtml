@@ -1,0 +1,156 @@
+﻿@model IEnumerable<wProcedimento>
+
+
+@{ int count = Model == null ? 0 : Model.Count(); }
+
+
+<div class="containers">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleindex") <small>@Html.T("ProcedimentoAdm") </small></h2>
+    </div>
+    @Html.Partial("_Search", "ProcedimentoAdm")
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("Create")"><i class="fa fa-plus"></i>&nbsp;@Html.T("btbnovo")</a>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#Search"><i class="fa fa-filter"></i>&nbsp;@Html.T("btbfind")</button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cloud"></i>&nbsp;@Html.T("btboutros")
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a id="lnkExporta" href="@Url.Action("ExportXls", new { strPesquisa = @ViewData["termo"] })">@Html.T("btbexportar") <i>@Model.Count()</i> @Html.T("msgtotalregencontrados")</a>   </li>
+                    </ul>
+                </div>
+            </div>
+            <small><i>@Model.Count()</i>  @Html.T("msgtotalregencontrados")</small>
+        </div>
+        <div class="panel-body">
+
+
+            @(Html.Kendo().Grid(Model)
+    .Name("Grid")
+
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.Clientes.RAZAO).ClientTemplate("#= StringOfLink(data.CD_PROCEDIMENTO,'','','','ProcedimentoAdm','ProcedimentoAdm','') #").Width(70);
+        columns.Bound(p => p.CD_PROCEDIMENTO).Visible(true).Width(70).Title("Procedimento");
+        columns.Bound(p => p.Clientes.FANTASIA).Width(200);
+        columns.Bound(p => p.DTA_ABERTURA).Format("{0:dd/MM/yyyy HH:mm:ss}").Width(180).Title("Abertura");
+        //        columns.Bound(p => p.tp_procedimento.DES_TIPO).Title("Tipo").Width(100);
+        columns.Bound(p => p.tp_procedimento.TEMPO_PADRAO).Visible(true).Width(40).Title("Tempo");
+        columns.Bound(p => p.DEPARTAMENTO.DESC_DEPARTAMENTO).Title("Departamento").Width(120);
+        columns.Bound(p => p.DEPARTAMENTO.TEMPO_PADRAO).Visible(true).Width(50).Title("Tempo");
+        columns.Bound(p => p.PERCENTUAL).Visible(true).ClientTemplate("#= productDetailsImg(data) #").Title("PD").Width(30);
+        columns.Bound(p => p.PERCENTUALPROCEDIMENTO).Visible(true).ClientTemplate("#= productDetailsImg2(data) #").Title("PP").Width(30);
+
+        //        columns.Bound(p => p.OBS);
+        //        columns.Bound(p => p.DTA_ABERTURA).Format("dd/MM/YYYY");
+        columns.Bound(p => p.Situacao.DESCRICAO).ClientTemplate("#= productDetails2(Situacao.DESCRICAO) #").Title("Status").Width(180);
+
+    })
+
+             .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                            .Pageable(pageable => pageable
+                            .PageSizes(true)
+                                    .ButtonCount(20)
+        .Messages(d => d.Display("{0} - {1} de {2} Registros"))
+        .Messages(d => d.ItemsPerPage("Itens por Página"))
+                            )
+                            .Sortable()
+                            .Filterable()
+            .Groupable()
+
+
+            .DataSource(ds => ds.Ajax()
+                 .ServerOperation(false)
+                 .PageSize(20)
+
+                                .Model(m =>
+                                {
+                                    m.Id(p => p.CD_PROCEDIMENTO);
+
+
+                                })
+                        .Read(r => r.Action("Read", "ProcedimentoAdm"))
+                )
+        )
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function productDetails(product) {
+        var actionDetail = '@Url.Action("Details", "ProcedimentoAdm")';
+        var actionEdit = '@Url.Action("TempoLiberacaoResult?cd_procedimento={4}", "Relatorios")';
+        var actionDelete = '@Url.Action("Delete", "ProcedimentoAdm")';
+
+
+
+        var html = kendo.format("<a class='icon-folder-open' TITLE='@Html.T("lnkDetails")'  href='{0}/{1}'> </a>   ",
+        actionDetail, product.CD_PROCEDIMENTO);
+        return html;
+    }
+
+    function productDetailsImg2(product) {
+        //var html = "<img src='../../Images/Logo.png' />";
+        //return html;
+
+        var html = "<img src='../../Images/SetaAcima.png' />";
+
+
+        if (product.PERCENTUALPROCEDIMENTO <= 0) {
+            html = "<img src='../../Images/SetaAcima.png' />";
+        } else
+            if (product.PERCENTUALPROCEDIMENTO > 0 && product.PERCENTUALPROCEDIMENTO < 80) {
+                html = "<img src='../../Images/SetaAcima.png' />";
+            } else
+                if (product.PERCENTUALPROCEDIMENTO > 80 && product.PERCENTUALPROCEDIMENTO < 100) {
+                    html = "<img src='../../Images/SetaDireita.png' />";
+                } else
+                    html = "<img src='../../Images/SetaBaixo.png' />";
+
+
+        return html;
+
+    }
+
+    function productDetailsImg(product) {
+        //var html = "<img src='../../Images/Logo.png' />";
+        //return html;
+
+        var html = "<img src='../../Images/SetaAcima.png' />";
+
+
+        if (product.PERCENTUAL <= 0) {
+            html = "<img src='../../Images/SetaAcima.png' />";
+        } else
+            if (product.PERCENTUAL > 0 && product.PERCENTUAL < 80) {
+                html = "<img src='../../Images/SetaAcima.png' />";
+            } else
+                if (product.PERCENTUAL > 80 && product.PERCENTUAL < 100) {
+                    html = "<img src='../../Images/SetaDireita.png' />";
+                } else
+                    html = "<img src='../../Images/SetaBaixo.png' />";
+
+
+        return html;
+
+    }
+</script>
+
+<script>
+    function formatter(value) {
+        return value.substring(0, 13);
+    }
+
+    function productDetails2(product) {
+        return product.substring(0, 18) + "...";
+    }
+   
+</script>
+
+

@@ -1,0 +1,1317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BTBNOVO" xml:space="preserve">
+    <value>Novo</value>
+  </data>
+  <data name="DESCRICAO" xml:space="preserve">
+    <value>Descrição</value>
+  </data>
+  <data name="TITLEINDEX" xml:space="preserve">
+    <value>Índice</value>
+  </data>
+  <data name="BTBAJUDA" xml:space="preserve">
+    <value>Ajuda</value>
+  </data>
+  <data name="BTBEXPORTAR" xml:space="preserve">
+    <value>Exportar</value>
+  </data>
+  <data name="BTBIMPORTAR" xml:space="preserve">
+    <value>Importar</value>
+  </data>
+  <data name="BTBIR" xml:space="preserve">
+    <value>Ir</value>
+  </data>
+  <data name="CADASTRESE" xml:space="preserve">
+    <value>Cadastre-se</value>
+  </data>
+  <data name="COMANDO" xml:space="preserve">
+    <value>Comando</value>
+  </data>
+  <data name="EMPRESA" xml:space="preserve">
+    <value>Empresa</value>
+  </data>
+  <data name="ENTRAR" xml:space="preserve">
+    <value>Entrar</value>
+  </data>
+  <data name="GRUPOFISCAL" xml:space="preserve">
+    <value>Grupos Fiscais</value>
+  </data>
+  <data name="HELP" xml:space="preserve">
+    <value>Ajuda</value>
+  </data>
+  <data name="LOGIN" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="MSGTOTALREGENCONTRADOS" xml:space="preserve">
+    <value>registro(s) encontrado(s)</value>
+  </data>
+  <data name="NOMEAPP" xml:space="preserve">
+    <value>Foxlux SA - Portal de Procedimentos</value>
+  </data>
+  <data name="PLACEHOLDPESQUISAR" xml:space="preserve">
+    <value>Pesquisar</value>
+  </data>
+  <data name="RECUPERARSENHA" xml:space="preserve">
+    <value>Recuperar Senha</value>
+  </data>
+  <data name="SENHA" xml:space="preserve">
+    <value>Senha</value>
+  </data>
+  <data name="USUARIO" xml:space="preserve">
+    <value>Usuário</value>
+  </data>
+  <data name="BTBGRAVAR" xml:space="preserve">
+    <value>Gravar</value>
+  </data>
+  <data name="GERAL" xml:space="preserve">
+    <value>Geral</value>
+  </data>
+  <data name="VOLTARLISTAGEM" xml:space="preserve">
+    <value>Voltar à Listagem</value>
+  </data>
+  <data name="BTBCLOSE" xml:space="preserve">
+    <value>Fechar</value>
+  </data>
+  <data name="BTBDELETE" xml:space="preserve">
+    <value>Excluir</value>
+  </data>
+  <data name="BTBEDITAR" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="CONFIRMARDELETARREGISTRO" xml:space="preserve">
+    <value>Confirma a exclusão do registro?</value>
+  </data>
+  <data name="ERRO" xml:space="preserve">
+    <value>Erro</value>
+  </data>
+  <data name="ERRORSAVEDATA" xml:space="preserve">
+    <value>Ocorreu um erro ao gravar os dados. Contate o suporte.</value>
+  </data>
+  <data name="SAVEDATA" xml:space="preserve">
+    <value>Aguarde. Gravando dados.</value>
+  </data>
+  <data name="TITLECREATE" xml:space="preserve">
+    <value>Criar Novo Registro</value>
+  </data>
+  <data name="TITLEDELETE" xml:space="preserve">
+    <value>Excluir Registro</value>
+  </data>
+  <data name="TITLEDETAILS" xml:space="preserve">
+    <value>Detalhes do Registro</value>
+  </data>
+  <data name="TITLEEDIT" xml:space="preserve">
+    <value>Editar Registro</value>
+  </data>
+  <data name="BTBSALVAR" xml:space="preserve">
+    <value>Gravar</value>
+  </data>
+  <data name="OPERACAOFISCAL" xml:space="preserve">
+    <value>Operação Fiscal</value>
+  </data>
+  <data name="CD_CARIMBO" xml:space="preserve">
+    <value>Código do Carimbo</value>
+  </data>
+  <data name="CD_OPERACAO_DACON" xml:space="preserve">
+    <value>Tipo de Operação DACON</value>
+  </data>
+  <data name="CD_ORIGEM" xml:space="preserve">
+    <value>Código do Grupo</value>
+  </data>
+  <data name="CD_VARFUNCAO" xml:space="preserve">
+    <value>Função da Operação</value>
+  </data>
+  <data name="CIAP" xml:space="preserve">
+    <value>CIAP</value>
+  </data>
+  <data name="GIA" xml:space="preserve">
+    <value>GIA</value>
+  </data>
+  <data name="INTEGRA_CONTABIL" xml:space="preserve">
+    <value>Integração Contábil</value>
+  </data>
+  <data name="INTEGRA_FISCAL" xml:space="preserve">
+    <value>Integração EFD</value>
+  </data>
+  <data name="INTEGRA_ICMSLIVRO" xml:space="preserve">
+    <value>Integra Livros Fiscais ICMS/IPI</value>
+  </data>
+  <data name="INTEGRA_SERVICO" xml:space="preserve">
+    <value>Integra Livro Fiscal ISS</value>
+  </data>
+  <data name="INTEGRA_SINCO" xml:space="preserve">
+    <value>Integra Informação para o Sinco</value>
+  </data>
+  <data name="MOVTO_CUSTO" xml:space="preserve">
+    <value>Movimenta Custo</value>
+  </data>
+  <data name="MOVTO_SALDO" xml:space="preserve">
+    <value>Movimenta Saldo</value>
+  </data>
+  <data name="OBS" xml:space="preserve">
+    <value>Observação</value>
+  </data>
+  <data name="OP_VENDA_AMB" xml:space="preserve">
+    <value>Operação de Venda a Ambulantes</value>
+  </data>
+  <data name="OUT_CONSIGNACAO" xml:space="preserve">
+    <value>Consignação</value>
+  </data>
+  <data name="OUT_ENT_FUT" xml:space="preserve">
+    <value>Entrega Futura/Faturamento Antecipado</value>
+  </data>
+  <data name="TIPO_EPT" xml:space="preserve">
+    <value>Tipo E.P.T.</value>
+  </data>
+  <data name="TIPO_MVTO_CUSTO" xml:space="preserve">
+    <value>Tipo de Movimento Custo</value>
+  </data>
+  <data name="TIPO_MVTO_SALDO" xml:space="preserve">
+    <value>Tipo de Movimento Saldo</value>
+  </data>
+  <data name="TIPO_ROMANEIO" xml:space="preserve">
+    <value>Romaneio de Remessa/Retorno</value>
+  </data>
+  <data name="CD_OPERACAO" xml:space="preserve">
+    <value>Código da Operação</value>
+  </data>
+  <data name="CampoRequerido" xml:space="preserve">
+    <value>O Campo {0} é Obrigatório</value>
+  </data>
+  <data name="FUNCOES" xml:space="preserve">
+    <value>Funções</value>
+  </data>
+  <data name="MOVIMENTACOES" xml:space="preserve">
+    <value>Movimentações</value>
+  </data>
+  <data name="OUTROS" xml:space="preserve">
+    <value>Outros</value>
+  </data>
+  <data name="ROMANEIO" xml:space="preserve">
+    <value>Romaneio</value>
+  </data>
+  <data name="SELECIONEOPCAO" xml:space="preserve">
+    <value>Selecione uma opção</value>
+  </data>
+  <data name="MNUCADASTRO" xml:space="preserve">
+    <value>Cadastro</value>
+  </data>
+  <data name="MNUCADASTROS" xml:space="preserve">
+    <value>Cadastros</value>
+  </data>
+  <data name="MNUCLIENTES" xml:space="preserve">
+    <value>Clientes</value>
+  </data>
+  <data name="MNUDASHBOARD" xml:space="preserve">
+    <value>Tela Inicial</value>
+  </data>
+  <data name="MNUESTOQUE" xml:space="preserve">
+    <value>Estoque</value>
+  </data>
+  <data name="MNUFISCAL" xml:space="preserve">
+    <value>Fiscal</value>
+  </data>
+  <data name="MNUGRUPOFISCAL" xml:space="preserve">
+    <value>Grupo Fiscal</value>
+  </data>
+  <data name="MNUMATERIAIS" xml:space="preserve">
+    <value>Materiais</value>
+  </data>
+  <data name="MNUMEUSDADOS" xml:space="preserve">
+    <value>Meus Dados</value>
+  </data>
+  <data name="MNUOPERFISCAL" xml:space="preserve">
+    <value>Operação Fiscal</value>
+  </data>
+  <data name="MNUORACAMENTO" xml:space="preserve">
+    <value>Orçamento de Venda</value>
+  </data>
+  <data name="MNUORACEMNTOSERVICO" xml:space="preserve">
+    <value>Orçamento de Serviços</value>
+  </data>
+  <data name="MNUORDEMSERVICO" xml:space="preserve">
+    <value>Ordem de Serviços</value>
+  </data>
+  <data name="MNUPEDIDOVENDA" xml:space="preserve">
+    <value>Pediodo de Venda</value>
+  </data>
+  <data name="MNUPRODUTOS" xml:space="preserve">
+    <value>Produtos</value>
+  </data>
+  <data name="MNUSAIR" xml:space="preserve">
+    <value>Sair</value>
+  </data>
+  <data name="MNUSERVICOS" xml:space="preserve">
+    <value>Serviços</value>
+  </data>
+  <data name="MNUTRIBUTACAO" xml:space="preserve">
+    <value>Tributações</value>
+  </data>
+  <data name="MNUTROCARSENHA" xml:space="preserve">
+    <value>Trocar Senha</value>
+  </data>
+  <data name="MNUVENDAS" xml:space="preserve">
+    <value>Vendas</value>
+  </data>
+  <data name="OPERACAOFISCALENTRADA" xml:space="preserve">
+    <value>Entrada</value>
+  </data>
+  <data name="OPERACAOFISCALSAIDA" xml:space="preserve">
+    <value>Saída</value>
+  </data>
+  <data name="NOTAMERCADORIA" xml:space="preserve">
+    <value>Nota de Mercadoria</value>
+  </data>
+  <data name="NOTASERVICO" xml:space="preserve">
+    <value>Nota de Serviço</value>
+  </data>
+  <data name="CD_CFOP" xml:space="preserve">
+    <value>CFOP dentro do Estado</value>
+  </data>
+  <data name="CD_CFOP2" xml:space="preserve">
+    <value>CFOP fora do Estado</value>
+  </data>
+  <data name="CD_CFOP2_NFS" xml:space="preserve">
+    <value>CFOP fora do Estado</value>
+  </data>
+  <data name="CD_CFOP_NFS" xml:space="preserve">
+    <value>CFOP dentro do Estado</value>
+  </data>
+  <data name="COMP_IMP" xml:space="preserve">
+    <value>Apenas Complemento de Imposto</value>
+  </data>
+  <data name="ESTRUTURA_ITEM" xml:space="preserve">
+    <value>Utiliza Estrutura do Item</value>
+  </data>
+  <data name="GERA_EGP" xml:space="preserve">
+    <value>Gera Registro do Bem</value>
+  </data>
+  <data name="GERA_TITULO" xml:space="preserve">
+    <value>Gera Título a Pagar</value>
+  </data>
+  <data name="NR_SERIE_CP" xml:space="preserve">
+    <value>Série do Título</value>
+  </data>
+  <data name="NR_SERIE_CR" xml:space="preserve">
+    <value>Série Título Merc</value>
+  </data>
+  <data name="NR_SERIE_NF" xml:space="preserve">
+    <value>Série Nota Merc</value>
+  </data>
+  <data name="NR_SERIE_CR_NFS" xml:space="preserve">
+    <value>Série Título Serviço</value>
+  </data>
+  <data name="NR_SERIE_NFS" xml:space="preserve">
+    <value>Série Nota Serviço</value>
+  </data>
+  <data name="INDUSTRIALIZACAO" xml:space="preserve">
+    <value>Industrialização</value>
+  </data>
+  <data name="REVENDA" xml:space="preserve">
+    <value>Revenda</value>
+  </data>
+  <data name="CD_MODELO" xml:space="preserve">
+    <value>Modelo</value>
+  </data>
+  <data name="CD_GRUPO" xml:space="preserve">
+    <value>Código do Grupo</value>
+  </data>
+  <data name="CD_SEQUENCIA" xml:space="preserve">
+    <value>Seqüência</value>
+  </data>
+  <data name="CD_UF_DESTINO" xml:space="preserve">
+    <value>UF de Destino</value>
+  </data>
+  <data name="CD_UF_ORIGEM" xml:space="preserve">
+    <value>UF de Origem</value>
+  </data>
+  <data name="TRIBUTACAO" xml:space="preserve">
+    <value>Tributação</value>
+  </data>
+  <data name="CD_CADASTRO" xml:space="preserve">
+    <value>Cadastro</value>
+  </data>
+  <data name="CD_CIDADE" xml:space="preserve">
+    <value>Cidade</value>
+  </data>
+  <data name="CD_EMPRESA" xml:space="preserve">
+    <value>Código da Empresa</value>
+  </data>
+  <data name="CONS_FINAL" xml:space="preserve">
+    <value>Consumidor Final</value>
+  </data>
+  <data name="FUNRURAL" xml:space="preserve">
+    <value>FunRural</value>
+  </data>
+  <data name="ICMS" xml:space="preserve">
+    <value>ICMS</value>
+  </data>
+  <data name="ICMSST" xml:space="preserve">
+    <value>ICMS-ST</value>
+  </data>
+  <data name="IMPOSTORETIDO" xml:space="preserve">
+    <value>Imposto Retido</value>
+  </data>
+  <data name="IPI" xml:space="preserve">
+    <value>IPI</value>
+  </data>
+  <data name="ISS" xml:space="preserve">
+    <value>ISS</value>
+  </data>
+  <data name="LL" xml:space="preserve">
+    <value>ll</value>
+  </data>
+  <data name="OBSERVACOESOUTROS" xml:space="preserve">
+    <value>Observações/Outros</value>
+  </data>
+  <data name="PISCOFINS" xml:space="preserve">
+    <value>PIS/COFINS</value>
+  </data>
+  <data name="BTBCONSULTAR" xml:space="preserve">
+    <value>Consultar</value>
+  </data>
+  <data name="CD_ESTADO" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="CGC_CPF" xml:space="preserve">
+    <value>CNPJ</value>
+  </data>
+  <data name="FANTASIA" xml:space="preserve">
+    <value>Fantasia</value>
+  </data>
+  <data name="NOME" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="RAZAO" xml:space="preserve">
+    <value>Razão Social</value>
+  </data>
+  <data name="SIGLA" xml:space="preserve">
+    <value>Sigla</value>
+  </data>
+  <data name="CD_CNAE" xml:space="preserve">
+    <value>Cnae</value>
+  </data>
+  <data name="CD_NCM" xml:space="preserve">
+    <value>Ncm</value>
+  </data>
+  <data name="CALC_COFINS" xml:space="preserve">
+    <value>COFINS</value>
+  </data>
+  <data name="CALC_CS" xml:space="preserve">
+    <value>Contribuição Social</value>
+  </data>
+  <data name="CALC_FUNRURAL" xml:space="preserve">
+    <value>FunRural</value>
+  </data>
+  <data name="CALC_ICMS" xml:space="preserve">
+    <value>ICMS</value>
+  </data>
+  <data name="CALC_ICMSST" xml:space="preserve">
+    <value>Substituição Tributária</value>
+  </data>
+  <data name="CALC_II" xml:space="preserve">
+    <value>Imposto de Importação</value>
+  </data>
+  <data name="CALC_INSS" xml:space="preserve">
+    <value>INSS</value>
+  </data>
+  <data name="CALC_IPI" xml:space="preserve">
+    <value>IPI</value>
+  </data>
+  <data name="CALC_IRPJ" xml:space="preserve">
+    <value>IRPJ</value>
+  </data>
+  <data name="CALC_ISS" xml:space="preserve">
+    <value>ISS</value>
+  </data>
+  <data name="CALC_PIS" xml:space="preserve">
+    <value>PIS</value>
+  </data>
+  <data name="COFINS_RET" xml:space="preserve">
+    <value>Retenção COFINS</value>
+  </data>
+  <data name="CSLL_RET" xml:space="preserve">
+    <value>Retenção CSLL</value>
+  </data>
+  <data name="CSRF_RET" xml:space="preserve">
+    <value>Retenção CSRF</value>
+  </data>
+  <data name="ICMS_ACRE_SOMA" xml:space="preserve">
+    <value>Acréscimo Soma</value>
+  </data>
+  <data name="ICMS_CAP_SOMA" xml:space="preserve">
+    <value>Capatazias Soma</value>
+  </data>
+  <data name="ICMS_CD_GIA" xml:space="preserve">
+    <value>Código GIA</value>
+  </data>
+  <data name="ICMS_COFINS_SOMA" xml:space="preserve">
+    <value>COFINS Soma</value>
+  </data>
+  <data name="ICMS_CRED_PRES" xml:space="preserve">
+    <value>Crédito Presumido</value>
+  </data>
+  <data name="ICMS_DESPAD_SOMA" xml:space="preserve">
+    <value>Despesas Aduaneiras Soma</value>
+  </data>
+  <data name="ICMS_DES_ABATE" xml:space="preserve">
+    <value>Desconto Abate</value>
+  </data>
+  <data name="ICMS_FORA_NF_SOMA" xml:space="preserve">
+    <value>Despesa Soma</value>
+  </data>
+  <data name="ICMS_FRETE_SOMA" xml:space="preserve">
+    <value>Frete Soma</value>
+  </data>
+  <data name="ICMS_II_SOMA" xml:space="preserve">
+    <value>ll Soma</value>
+  </data>
+  <data name="ICMS_IOF_SOMA" xml:space="preserve">
+    <value>IOF Soma</value>
+  </data>
+  <data name="ICMS_IPI_SOMA" xml:space="preserve">
+    <value>IPI Soma</value>
+  </data>
+  <data name="ICMS_MERC_SOMA" xml:space="preserve">
+    <value>Mercadoria Soma</value>
+  </data>
+  <data name="ICMS_PIS_SOMA" xml:space="preserve">
+    <value>PIS Soma</value>
+  </data>
+  <data name="ICMS_REDUZ" xml:space="preserve">
+    <value>Redução de ICMS</value>
+  </data>
+  <data name="ICMS_REGIME_ESP" xml:space="preserve">
+    <value>Regime Especial</value>
+  </data>
+  <data name="ICMS_SEG_SOMA" xml:space="preserve">
+    <value>Seguro Soma</value>
+  </data>
+  <data name="ICMS_SIT_TRIBU" xml:space="preserve">
+    <value>CST</value>
+  </data>
+  <data name="ICMS_TX_SIS_SOMA" xml:space="preserve">
+    <value>Taxa Siscomex Soma</value>
+  </data>
+  <data name="ICMS_ZERA" xml:space="preserve">
+    <value>Zera ICMS Final</value>
+  </data>
+  <data name="INCIDENCIAIMPOSTOS" xml:space="preserve">
+    <value>Incidência de Impostos</value>
+  </data>
+  <data name="INSS_RET" xml:space="preserve">
+    <value>Retenção INSS</value>
+  </data>
+  <data name="IR_RET" xml:space="preserve">
+    <value>Retenção IR</value>
+  </data>
+  <data name="ISS_RET" xml:space="preserve">
+    <value>Retenção ISS</value>
+  </data>
+  <data name="PIS_RET" xml:space="preserve">
+    <value>Retenção PIS</value>
+  </data>
+  <data name="ICMS_ALIQ" xml:space="preserve">
+    <value>Alíquota</value>
+  </data>
+  <data name="ICMS_ALIQ_ESP" xml:space="preserve">
+    <value>Alíquota Especial ICMS</value>
+  </data>
+  <data name="ICMS_PER_DIF" xml:space="preserve">
+    <value>% Diferido</value>
+  </data>
+  <data name="ICMS_PER_RED" xml:space="preserve">
+    <value>Perc. Red. Base ICMS</value>
+  </data>
+  <data name="ad_irjp" xml:space="preserve">
+    <value>Adicional IRPJ</value>
+  </data>
+  <data name="base_cs" xml:space="preserve">
+    <value>Base CS</value>
+  </data>
+  <data name="base_irpj_mercad" xml:space="preserve">
+    <value>Base IRPJ Mercadorias</value>
+  </data>
+  <data name="base_irpj_servico" xml:space="preserve">
+    <value>Base IRPJ Serviço</value>
+  </data>
+  <data name="cd_carimbo2" xml:space="preserve">
+    <value>Código do Carimbo</value>
+  </data>
+  <data name="cd_cfop_uso" xml:space="preserve">
+    <value>Cfop do Item</value>
+  </data>
+  <data name="cd_grupo2" xml:space="preserve">
+    <value>Cód do Grupo 2</value>
+  </data>
+  <data name="cofins_base_ret" xml:space="preserve">
+    <value>% Base</value>
+  </data>
+  <data name="cofins_valor_ret" xml:space="preserve">
+    <value>% Retido</value>
+  </data>
+  <data name="cs" xml:space="preserve">
+    <value>CS</value>
+  </data>
+  <data name="csll_base_ret" xml:space="preserve">
+    <value>% Base</value>
+  </data>
+  <data name="csll_valor_ret" xml:space="preserve">
+    <value>% Retido</value>
+  </data>
+  <data name="csrf_ret_base" xml:space="preserve">
+    <value>% Base</value>
+  </data>
+  <data name="csrf_ret_valor" xml:space="preserve">
+    <value>% Retido</value>
+  </data>
+  <data name="frural_acre_soma" xml:space="preserve">
+    <value>Acréscimo Soma</value>
+  </data>
+  <data name="frural_aliq" xml:space="preserve">
+    <value>Alíquota</value>
+  </data>
+  <data name="frural_desc_abate" xml:space="preserve">
+    <value>Desconoto Abate</value>
+  </data>
+  <data name="frural_fora_soma" xml:space="preserve">
+    <value>Fora Nota Soma</value>
+  </data>
+  <data name="frural_frete_soma" xml:space="preserve">
+    <value>Frete Soma</value>
+  </data>
+  <data name="frural_merc_soma" xml:space="preserve">
+    <value>Mercadoria Soma</value>
+  </data>
+  <data name="frural_seg_soma" xml:space="preserve">
+    <value>Seguro Soma</value>
+  </data>
+  <data name="ii_acre_soma" xml:space="preserve">
+    <value>Acréscimo Soma</value>
+  </data>
+  <data name="ii_aliq" xml:space="preserve">
+    <value>Alíquota</value>
+  </data>
+  <data name="ii_cap_soma" xml:space="preserve">
+    <value>Capatazias Soma</value>
+  </data>
+  <data name="ii_despad_soma" xml:space="preserve">
+    <value>Desp. Aduaneiras Soma</value>
+  </data>
+  <data name="ii_frete_soma" xml:space="preserve">
+    <value>Frete Soma</value>
+  </data>
+  <data name="ii_iof_soma" xml:space="preserve">
+    <value>IOF Soma</value>
+  </data>
+  <data name="ii_merc_soma" xml:space="preserve">
+    <value>Mercadoria Soma</value>
+  </data>
+  <data name="ii_per_cred_pres" xml:space="preserve">
+    <value>% Crédito Presumido</value>
+  </data>
+  <data name="ii_per_max_limite" xml:space="preserve">
+    <value>% Limite Máximo</value>
+  </data>
+  <data name="ii_per_min_limite" xml:space="preserve">
+    <value>% Limite Mínimo</value>
+  </data>
+  <data name="ii_per_red_base" xml:space="preserve">
+    <value>% Redução da Base</value>
+  </data>
+  <data name="ii_seg_soma" xml:space="preserve">
+    <value>Seguro Soma</value>
+  </data>
+  <data name="ii_somaicms" xml:space="preserve">
+    <value>ICMS soma nos acréscimos</value>
+  </data>
+  <data name="ii_somaii_item" xml:space="preserve">
+    <value>Valro do II soma no valor do Item</value>
+  </data>
+  <data name="ii_somapiscofins" xml:space="preserve">
+    <value>PIS/COFINS soma nos acréscimos</value>
+  </data>
+  <data name="ii_tx_sis_soma" xml:space="preserve">
+    <value>Taxa Siscomex Soma</value>
+  </data>
+  <data name="ii_zera" xml:space="preserve">
+    <value>Zera IIno Final</value>
+  </data>
+  <data name="inss_aliq_ret" xml:space="preserve">
+    <value>% Retenção INSS</value>
+  </data>
+  <data name="inss_fat" xml:space="preserve">
+    <value>INSS Faturamento</value>
+  </data>
+  <data name="ipi_acre_soma" xml:space="preserve">
+    <value>Acréscimo Soma</value>
+  </data>
+  <data name="ipi_cap_soma" xml:space="preserve">
+    <value>Capatazias Soma</value>
+  </data>
+  <data name="IPI_DESC_ABATE" xml:space="preserve">
+    <value>Desconto Abate</value>
+  </data>
+  <data name="ipi_despad_soma" xml:space="preserve">
+    <value>Desp. Aduaneiras Soma</value>
+  </data>
+  <data name="ipi_fora_soma" xml:space="preserve">
+    <value>Fora Nota Soma</value>
+  </data>
+  <data name="IPI_FRETE_SOMA" xml:space="preserve">
+    <value>Frete Soma</value>
+  </data>
+  <data name="ipi_ii_soma" xml:space="preserve">
+    <value>II Soma</value>
+  </data>
+  <data name="ipi_iof_soma" xml:space="preserve">
+    <value>IOF Soma</value>
+  </data>
+  <data name="IPI_MERC_SOMA" xml:space="preserve">
+    <value>Mercadoria Soma</value>
+  </data>
+  <data name="IPI_PER_REDUZ" xml:space="preserve">
+    <value>% Redução</value>
+  </data>
+  <data name="IPI_REDUZ" xml:space="preserve">
+    <value>Reduçaõ IPI</value>
+  </data>
+  <data name="ipi_seg_soma" xml:space="preserve">
+    <value>Seguro Soma</value>
+  </data>
+  <data name="IPI_SIT_TRIB" xml:space="preserve">
+    <value>Código Situação Tributária</value>
+  </data>
+  <data name="IPI_TP_BASE_IPI" xml:space="preserve">
+    <value>Base IPI</value>
+  </data>
+  <data name="IPI_TP_REDUZ" xml:space="preserve">
+    <value>Tipo Redução</value>
+  </data>
+  <data name="ipi_tx_sis_soma" xml:space="preserve">
+    <value>Taxa Siscomex Soma</value>
+  </data>
+  <data name="IPI_ZERA" xml:space="preserve">
+    <value>Zera IPI ao Final</value>
+  </data>
+  <data name="irf_aliquota" xml:space="preserve">
+    <value>IRF</value>
+  </data>
+  <data name="irpj" xml:space="preserve">
+    <value>IRPJ</value>
+  </data>
+  <data name="ir_aliq_ret" xml:space="preserve">
+    <value>% Retenção I.R.</value>
+  </data>
+  <data name="iss_aliq" xml:space="preserve">
+    <value>Alíquota</value>
+  </data>
+  <data name="iss_cd_tibutacao" xml:space="preserve">
+    <value>Código Situação Tributária</value>
+  </data>
+  <data name="iss_cod_municipio" xml:space="preserve">
+    <value>Cód. do Município</value>
+  </data>
+  <data name="iss_cod_nat_isqn" xml:space="preserve">
+    <value>Cód Natureza ISQN</value>
+  </data>
+  <data name="iss_cod_trib_isqn" xml:space="preserve">
+    <value>Cód. Trib. ISQN</value>
+  </data>
+  <data name="iss_imp_obs_item" xml:space="preserve">
+    <value>Imprime a Obs na RPS</value>
+  </data>
+  <data name="iss_imp_ret" xml:space="preserve">
+    <value>Imposto Retido</value>
+  </data>
+  <data name="iss_inc_cultural" xml:space="preserve">
+    <value>Incentivador Cultural</value>
+  </data>
+  <data name="iss_item_lista" xml:space="preserve">
+    <value>Item da lista de Serviço</value>
+  </data>
+  <data name="iss_nat_oper" xml:space="preserve">
+    <value>Natureza de Operação</value>
+  </data>
+  <data name="iss_opt_simples" xml:space="preserve">
+    <value>Simples Nacional</value>
+  </data>
+  <data name="iss_regime_esp" xml:space="preserve">
+    <value>Regime Especial de Tributação</value>
+  </data>
+  <data name="iss_ret_aliq" xml:space="preserve">
+    <value>% Retençaõ ISS</value>
+  </data>
+  <data name="iss_status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="iss_tp_registro" xml:space="preserve">
+    <value>Tipo do Registro</value>
+  </data>
+  <data name="iss_tp_rps" xml:space="preserve">
+    <value>Tipo da RPS</value>
+  </data>
+  <data name="iss_versao" xml:space="preserve">
+    <value>Versão</value>
+  </data>
+  <data name="op_ret_cofins" xml:space="preserve">
+    <value>% COFINS</value>
+  </data>
+  <data name="op_ret_csll" xml:space="preserve">
+    <value>% CSLL</value>
+  </data>
+  <data name="op_ret_csrf" xml:space="preserve">
+    <value>% CSRF</value>
+  </data>
+  <data name="op_ret_inss" xml:space="preserve">
+    <value>% INSS</value>
+  </data>
+  <data name="op_ret_ir" xml:space="preserve">
+    <value>% I.R.</value>
+  </data>
+  <data name="op_ret_irpj" xml:space="preserve">
+    <value>% IRPJ</value>
+  </data>
+  <data name="op_ret_iss" xml:space="preserve">
+    <value>% ISS</value>
+  </data>
+  <data name="op_ret_pis" xml:space="preserve">
+    <value>% PIS</value>
+  </data>
+  <data name="pc_acre_soma" xml:space="preserve">
+    <value>Acréscimo Soma</value>
+  </data>
+  <data name="pc_cap_soma" xml:space="preserve">
+    <value>Capatazias Soma</value>
+  </data>
+  <data name="pc_despad_soma" xml:space="preserve">
+    <value>Desp. Aduaneiras Soma</value>
+  </data>
+  <data name="pc_des_abate" xml:space="preserve">
+    <value>Desconto Abate</value>
+  </data>
+  <data name="pc_fora_soma" xml:space="preserve">
+    <value>Fora Nota Soma</value>
+  </data>
+  <data name="pc_frete_soma" xml:space="preserve">
+    <value>Frete Soma</value>
+  </data>
+  <data name="pc_icmsst_soma" xml:space="preserve">
+    <value>ICMS-ST Soma</value>
+  </data>
+  <data name="pc_ii_soma" xml:space="preserve">
+    <value>II Soma</value>
+  </data>
+  <data name="pc_iof_soma" xml:space="preserve">
+    <value>IOF Soma</value>
+  </data>
+  <data name="pc_ipi_soma" xml:space="preserve">
+    <value>IPI Soma</value>
+  </data>
+  <data name="pc_merc_soma" xml:space="preserve">
+    <value>Mercadoria Soma</value>
+  </data>
+  <data name="pc_per_cofins" xml:space="preserve">
+    <value>% COFINS</value>
+  </data>
+  <data name="pc_per_cofins2" xml:space="preserve">
+    <value>% COFINS II</value>
+  </data>
+  <data name="pc_per_pis" xml:space="preserve">
+    <value>% PIS</value>
+  </data>
+  <data name="pc_per_pis2" xml:space="preserve">
+    <value>% PIS II</value>
+  </data>
+  <data name="pc_seg_soma" xml:space="preserve">
+    <value>Seguro Soma</value>
+  </data>
+  <data name="pc_st_acre_soma" xml:space="preserve">
+    <value>Acréscimo Soma</value>
+  </data>
+  <data name="pc_st_des_abate" xml:space="preserve">
+    <value>Desconto Abate</value>
+  </data>
+  <data name="pc_st_fora_soma" xml:space="preserve">
+    <value>Fora Nota Soma</value>
+  </data>
+  <data name="pc_st_frete_soma" xml:space="preserve">
+    <value>Frete Soma</value>
+  </data>
+  <data name="pc_st_ipi_soma" xml:space="preserve">
+    <value>IPI Soma</value>
+  </data>
+  <data name="pc_st_merc_soma" xml:space="preserve">
+    <value>Mercadoria Soma</value>
+  </data>
+  <data name="pc_st_per_cofins" xml:space="preserve">
+    <value>% COFINS</value>
+  </data>
+  <data name="pc_st_per_pis" xml:space="preserve">
+    <value>% PIS</value>
+  </data>
+  <data name="pc_st_seg_soma" xml:space="preserve">
+    <value>Seguro Soma</value>
+  </data>
+  <data name="pc_tx_sis_soma" xml:space="preserve">
+    <value>Taxa Siscomex Soma</value>
+  </data>
+  <data name="pis_base_ret" xml:space="preserve">
+    <value>% Base</value>
+  </data>
+  <data name="pis_valor_ret" xml:space="preserve">
+    <value>% Retido</value>
+  </data>
+  <data name="ST_ACRE_SOMA" xml:space="preserve">
+    <value>Acrescimo Soma</value>
+  </data>
+  <data name="ST_ALIQ" xml:space="preserve">
+    <value>Alíquota</value>
+  </data>
+  <data name="ST_CAP_SOMA" xml:space="preserve">
+    <value>Capatazias Soma</value>
+  </data>
+  <data name="ST_COFINS_SOMA" xml:space="preserve">
+    <value>COFINS Soma</value>
+  </data>
+  <data name="ST_CST" xml:space="preserve">
+    <value>Código Fiscal Tributário</value>
+  </data>
+  <data name="ST_DESC_ABATE" xml:space="preserve">
+    <value>Desconto Abate</value>
+  </data>
+  <data name="ST_DESPAD_SOMA" xml:space="preserve">
+    <value>Desp. Aduaneiras Soma</value>
+  </data>
+  <data name="ST_FORA_SOMA" xml:space="preserve">
+    <value>Acréscimo Soma</value>
+  </data>
+  <data name="ST_FRETE_SOMA" xml:space="preserve">
+    <value>Frete Soma</value>
+  </data>
+  <data name="ST_II_SOMA" xml:space="preserve">
+    <value>II Soma</value>
+  </data>
+  <data name="ST_IOF_SOMA" xml:space="preserve">
+    <value>IOF Soma</value>
+  </data>
+  <data name="ST_IPI_SOMA" xml:space="preserve">
+    <value>IPI Soma</value>
+  </data>
+  <data name="ST_IVA" xml:space="preserve">
+    <value>% MVA</value>
+  </data>
+  <data name="ST_MERC_SOMA" xml:space="preserve">
+    <value>Mercadoria Soma</value>
+  </data>
+  <data name="ST_PER_REDUZ" xml:space="preserve">
+    <value>% Redução Base Cálculo</value>
+  </data>
+  <data name="ST_PIS_SOMA" xml:space="preserve">
+    <value>Pis Soma</value>
+  </data>
+  <data name="ST_PRED_ICMS" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="ST_RED_ICMS" xml:space="preserve">
+    <value>Redução ICMS</value>
+  </data>
+  <data name="ST_SEG_SOMA" xml:space="preserve">
+    <value>Seguro Soma</value>
+  </data>
+  <data name="ST_TX_SIS_SOMA" xml:space="preserve">
+    <value>Taxa Siscomex Soma</value>
+  </data>
+  <data name="ST_ZERA" xml:space="preserve">
+    <value>Zera ST no Final</value>
+  </data>
+  <data name="MNUBASICO" xml:space="preserve">
+    <value>Básicos</value>
+  </data>
+  <data name="MNUDEPARTAMENTOS" xml:space="preserve">
+    <value>Departamentos</value>
+  </data>
+  <data name="MNUGRUPODEPARTAMENTO" xml:space="preserve">
+    <value>Grupo de Departamentos x Usuários</value>
+  </data>
+  <data name="MNUGRUPOUSUARIO" xml:space="preserve">
+    <value>Grupo de Usuários</value>
+  </data>
+  <data name="MNUPROCEDIMENTO" xml:space="preserve">
+    <value>Proc. Administrativo</value>
+  </data>
+  <data name="MNUPROCGERENCIA" xml:space="preserve">
+    <value>Gerenciamento</value>
+  </data>
+  <data name="MNUPROCINC" xml:space="preserve">
+    <value>Inclusão</value>
+  </data>
+  <data name="MNUPROCLISTA" xml:space="preserve">
+    <value>Listagem Geral de Procedimento</value>
+  </data>
+  <data name="MNUPROCMANU" xml:space="preserve">
+    <value>Manutenção</value>
+  </data>
+  <data name="MNUPROCPORDEP" xml:space="preserve">
+    <value>Procedimento por Departamento</value>
+  </data>
+  <data name="MNURELATORIOS" xml:space="preserve">
+    <value>Relatórios</value>
+  </data>
+  <data name="MNUSEGURANCA" xml:space="preserve">
+    <value>Segurança</value>
+  </data>
+  <data name="MNUTEMPOLIBERA" xml:space="preserve">
+    <value>Tempo de Liberação</value>
+  </data>
+  <data name="MNUTIPOPROCEDIMENTO" xml:space="preserve">
+    <value>Tipos de Procedimentos</value>
+  </data>
+  <data name="MNUUSUARIOS" xml:space="preserve">
+    <value>Usuários</value>
+  </data>
+  <data name="ATIVO" xml:space="preserve">
+    <value>Ativo</value>
+  </data>
+  <data name="CD_TIPO" xml:space="preserve">
+    <value>Código Tipo</value>
+  </data>
+  <data name="DES_TIPO" xml:space="preserve">
+    <value>Tipo do Procedimento</value>
+  </data>
+  <data name="SOL_NF_CLIENTE_OBRIGATORIA" xml:space="preserve">
+    <value>Nota Cliente Obrigatória</value>
+  </data>
+  <data name="SOL_NF_OBRIGATORIA" xml:space="preserve">
+    <value>Nota Obrigatória</value>
+  </data>
+  <data name="tp_procedimento" xml:space="preserve">
+    <value>Tipo de Procedimentos</value>
+  </data>
+  <data name="APROVA" xml:space="preserve">
+    <value>Aprova Procedimentos ?</value>
+  </data>
+  <data name="CD_NL" xml:space="preserve">
+    <value>Código do NL</value>
+  </data>
+  <data name="CD_USUARIO" xml:space="preserve">
+    <value>Código Usuário</value>
+  </data>
+  <data name="EMAIL" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="GRUPO" xml:space="preserve">
+    <value>Grupo do Usuário</value>
+  </data>
+  <data name="REPROVA" xml:space="preserve">
+    <value>Reprova Procedimentos ?</value>
+  </data>
+  <data name="USUATIVO" xml:space="preserve">
+    <value>Ativo ?</value>
+  </data>
+  <data name="CD_DEPARTAMENTO" xml:space="preserve">
+    <value>Cód. Departamento</value>
+  </data>
+  <data name="DEPATIVO" xml:space="preserve">
+    <value>Ativo ?</value>
+  </data>
+  <data name="DESC_DEPARTAMENTO" xml:space="preserve">
+    <value>Departamento</value>
+  </data>
+  <data name="ENVIA_EMAIL" xml:space="preserve">
+    <value>Envia Email?</value>
+  </data>
+  <data name="TEMPO_PADRAO" xml:space="preserve">
+    <value>Tempo Atendimento (Horas)</value>
+  </data>
+  <data name="DEPARTAMENTO" xml:space="preserve">
+    <value>Departamentos</value>
+  </data>
+  <data name="MNUPROCATENDE" xml:space="preserve">
+    <value>Atendimento</value>
+  </data>
+  <data name="NF_CLIENTE" xml:space="preserve">
+    <value>Nº Nota Cliente</value>
+  </data>
+  <data name="NF_FOX" xml:space="preserve">
+    <value>Nº Nota Foxlux</value>
+  </data>
+  <data name="VL_CLIENTE" xml:space="preserve">
+    <value>Crédito Cliente</value>
+  </data>
+  <data name="VL_FOXLUX" xml:space="preserve">
+    <value>Débito Foxlux</value>
+  </data>
+  <data name="VL_REPRESENTANTE" xml:space="preserve">
+    <value>Débito Rep.</value>
+  </data>
+  <data name="VL_TRANSPORTADORA" xml:space="preserve">
+    <value>Débito Transp.</value>
+  </data>
+  <data name="MNUSITUACOES" xml:space="preserve">
+    <value>Situações Procedimentos</value>
+  </data>
+  <data name="CD_PROCEDIMENTO" xml:space="preserve">
+    <value>Procedimento</value>
+  </data>
+  <data name="CAMINHO" xml:space="preserve">
+    <value>Caminho</value>
+  </data>
+  <data name="CD_ANEXO" xml:space="preserve">
+    <value>Cód. Anexo</value>
+  </data>
+  <data name="CD_DEPARTAMENTO_ANT" xml:space="preserve">
+    <value>Departamento Ant.</value>
+  </data>
+  <data name="CD_DEPARTAMENTO_NOVA" xml:space="preserve">
+    <value>Departamento Novo</value>
+  </data>
+  <data name="CD_REGIONAL" xml:space="preserve">
+    <value>Cód. Regional</value>
+  </data>
+  <data name="COD_USUARIO" xml:space="preserve">
+    <value>Cód. Usuário</value>
+  </data>
+  <data name="DTA_ABERTURA" xml:space="preserve">
+    <value>Abertura</value>
+  </data>
+  <data name="DTA_ENTRADA_DEP_NOVA" xml:space="preserve">
+    <value>Entrada</value>
+  </data>
+  <data name="DTA_FECHAMENTO" xml:space="preserve">
+    <value>Fechamento</value>
+  </data>
+  <data name="DTA_NF_FOX" xml:space="preserve">
+    <value>Data Nota</value>
+  </data>
+  <data name="DTA_SAIDA_DEP_NOVA" xml:space="preserve">
+    <value>Saída</value>
+  </data>
+  <data name="DTA_TROCA" xml:space="preserve">
+    <value>Data da Troca</value>
+  </data>
+  <data name="ProcedimentoAdm" xml:space="preserve">
+    <value>Procedimento Administrativo</value>
+  </data>
+  <data name="SITUACAO" xml:space="preserve">
+    <value>Situação</value>
+  </data>
+  <data name="NUM_SEQ" xml:space="preserve">
+    <value>Sequência</value>
+  </data>
+  <data name="HORASCORRIDAS" xml:space="preserve">
+    <value>Horas Corridas</value>
+  </data>
+  <data name="HORASUTEIS" xml:space="preserve">
+    <value>Horas Úteis</value>
+  </data>
+  <data name="DT_EMISSAO" xml:space="preserve">
+    <value>Emissão</value>
+  </data>
+  <data name="NR_NOTA" xml:space="preserve">
+    <value>Nr. Nota</value>
+  </data>
+  <data name="DepartamentoUsuario" xml:space="preserve">
+    <value>Departamento x Usuário</value>
+  </data>
+  <data name="GUsuario" xml:space="preserve">
+    <value>Grupo de Usuário</value>
+  </data>
+  <data name="Permissoes" xml:space="preserve">
+    <value>Permissões</value>
+  </data>
+  <data name="lnkDelete" xml:space="preserve">
+    <value>Clique para Deletar o Registro</value>
+  </data>
+  <data name="lnkDetails" xml:space="preserve">
+    <value>Clique para Detalhar o Registro</value>
+  </data>
+  <data name="lnkEdit" xml:space="preserve">
+    <value>Clique para Editar o Registro</value>
+  </data>
+  <data name="lnkPermissao" xml:space="preserve">
+    <value>Abre o Cadastro de Permissões para o Grupo</value>
+  </data>
+  <data name="lnkUserRegional" xml:space="preserve">
+    <value>Abre o Cadastro de Usuários x Regional</value>
+  </data>
+  <data name="lnkUserReset" xml:space="preserve">
+    <value>Altera a Senha do Usuário</value>
+  </data>
+  <data name="lnkUsersDep" xml:space="preserve">
+    <value>Abre o Cadastro de Usuários x Departamentos</value>
+  </data>
+  <data name="ALT_SENHA" xml:space="preserve">
+    <value>Altera Senha no Primeiro Login</value>
+  </data>
+  <data name="UsuarioRegional" xml:space="preserve">
+    <value>Usuário x Regional</value>
+  </data>
+  <data name="CD_PAGINA" xml:space="preserve">
+    <value>Página Inicial</value>
+  </data>
+  <data name="btbatender" xml:space="preserve">
+    <value>Responder</value>
+  </data>
+  <data name="Oops" xml:space="preserve">
+    <value>Ops... </value>
+  </data>
+  <data name="btbatualizar" xml:space="preserve">
+    <value>Atualizar</value>
+  </data>
+  <data name="btbfind" xml:space="preserve">
+    <value>Filtrar</value>
+  </data>
+  <data name="btboutros" xml:space="preserve">
+    <value>Outros</value>
+  </data>
+  <data name="ID_SITUACAO" xml:space="preserve">
+    <value>Código</value>
+  </data>
+  <data name="CANCELA" xml:space="preserve">
+    <value>Cancela Procedimento ?</value>
+  </data>
+  <data name="titlefind" xml:space="preserve">
+    <value>Pesquisar</value>
+  </data>
+  <data name="CD_TRANSPORTADOR" xml:space="preserve">
+    <value>Transportador</value>
+  </data>
+  <data name="MNUPROCEDT" xml:space="preserve">
+    <value>Incluir Documento</value>
+  </data>
+  <data name="TMP_MESES_PESQUISA" xml:space="preserve">
+    <value>Qtde Máxima de NF Pesquisadas</value>
+  </data>
+  <data name="MNUPROCTMMEIOD" xml:space="preserve">
+    <value>Tempo Médio Liberação</value>
+  </data>
+  <data name="VL_DCLIENTE" xml:space="preserve">
+    <value>Valor Débito Cliente</value>
+  </data>
+  <data name="CD_DEPARTAMENTO_DEFAULT" xml:space="preserve">
+    <value>Departamento Default (Origem da Abertura)</value>
+  </data>
+  <data name="MNUPRINTPRO" xml:space="preserve">
+    <value>Impressão procedimento</value>
+  </data>
+  <data name="NIVEL_SERVICO" xml:space="preserve">
+    <value>Nível Serviço</value>
+  </data>
+</root>

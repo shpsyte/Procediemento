@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Isco Sistemas</title>
+    
+
+
+    <link href="/Content/site.css" rel="stylesheet"/>
+    <link href="/Content/Modulos.css" rel="stylesheet" />
+    <script src="/Scripts/modernizr-2.5.3.js"></script>
+    
+    <script src="/Scripts/Isco.js"></script>
+
+    <link href="/Content/bootstrap.min.css" rel="stylesheet"/>
+<link href="/Content/bootstrap-responsive.min.css" rel="stylesheet"/>
+
+    <script src="/Scripts/_FuncoesIsco.js"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="/Scripts/jquery-1.7.1.js"></script>
+<script src="/Scripts/jquery-1.8.3.js"></script>
+
+    <script src="/Scripts/jquery-ui-1.8.20.js"></script>
+
+
+     <link href="/Content/kendo/2012.3.1114/kendo.common.min.css" rel="stylesheet"/>
+<link href="/Content/kendo/2012.3.1114/kendo.dataviz.min.css" rel="stylesheet"/>
+<link href="/Content/kendo/2012.3.1114/kendo.default.min.css" rel="stylesheet"/>
+
+    <script src="/Scripts/kendo/2012.3.1114/jquery.min.js"></script>
+<script src="/Scripts/kendo/2012.3.1114/kendo.all.min.js"></script>
+<script src="/Scripts/kendo/2012.3.1114/kendo.aspnetmvc.min.js"></script>
+<script src="http://cdn.kendostatic.com/2012.3.1114/js/cultures/kendo.culture.pt-BR.min.js"></script>
+
+    <!-- Correção de funções de validação específicas para a cultura pt-BR -->
+<!-- Mais algumas funções para correção de validação específicas para a cultura pt-BR -->
+<script src="@Url.Content("/Scripts/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("/Scripts/globalize.culture.pt-BR.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    // Faz com que o plugin de globalização adote a cultura pt-BR.
+    // O ideal é que esta linha não seja necessária, e que o plugin detecte automaticamente a cultura sendo usada.
+    // Verificar isso depois.
+    Globalize.cultureSelector = 'pt-BR';
+</script>
+
+
+
+    <script type="text/javascript">
+        //set current to the "en-GB" culture script
+        kendo.culture("pt-BR");
+</script>
+    <meta name="viewport" content="width=device-width">
+    @RenderSection("HeadContent", required: false)
+
+
+    
+</head>
+
+    @{ 
+    string nome = "";
+
+    if (HttpContext.Current.Session["nome"] != null)
+    {
+        nome = HttpContext.Current.Session["nome"].ToString();
+    }
+      
+}
+
+<body>
+    <header>
+      <div class="container">
+          <br />
+         @* @Html.Partial("_Menu")*@
+
+          
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="../../../../Administracao">
+                <img src="/Images/brand.png" /></a>
+
+
+            <div class="nav-collapse collapse navbar-responsive-collapse">
+               
+
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administração<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-header">Regiões</li>
+                            <li>@Html.ActionLink("Estado", "Index", new { area = "Administracao", controller = "Estado" })</li>
+                            <li>@Html.ActionLink("Cidade", "Index", new { area = "Administracao", controller = "Cidade" })</li>
+                            <li class="divider"></li>
+                            <li class="nav-header">HTML</li>
+                            <li>@Html.ActionLink("CMS", "Index", new { area = "Administracao", controller = "CMS" })</li>
+                            <li>@Html.ActionLink("Páginas", "Index", new { area = "Administracao", controller = "Pages" })</li>
+                            <li class="divider"></li>
+                            <li class="nav-header">Segurança</li>
+                            <li>@Html.ActionLink("Perfil", "Index", new { area = "Administracao", controller = "Perfil" })</li>
+                            <li>@Html.ActionLink("Usuários", "Index", new { area = "Administracao", controller = "User" })</li>
+                            <li>@Html.ActionLink("Usuários x Perfil", "Index", new { area = "Administracao", controller = "aspnet_UsersInRoles" })</li>
+                            <li><a href="/Account/Logoff">Sair</a></li>
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+                <ul class="nav">
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-header">Gerais</li>
+                            <li>@Html.ActionLink("Clientes", "Index", new { area = "Administracao", controller = "Clientes" })</li>
+
+                            <li class="divider"></li>
+                            <li class="nav-header">SKU</li>
+                            <li>@Html.ActionLink("Produtos", "Index", new { area = "Administracao", controller = "Item" })</li>
+                            <li>@Html.ActionLink("Grande Grupo", "Index", new { area = "Administracao", controller = "GrandeGrupo" })</li>
+                            <li>@Html.ActionLink("Grupo", "Index", new { area = "Administracao", controller = "Grupo" })</li>
+                            <li class="divider"></li>
+                            <li class="nav-header">Outros</li>
+                            <li>@Html.ActionLink("Notícias", "Index", new { area = "Administracao", controller = "Noticia" })</li>
+                            <li>@Html.ActionLink("Tipo de Atendimento", "Index", new { area = "Administracao", controller = "TipoAtendimento" })</li>
+                            <li class="divider"></li>
+                            <li class="nav-header">Campanhas</li>
+                            <li>@Html.ActionLink("Campanhas", "Index", new { area = "Administracao", controller = "Campanha" })</li>
+                            <li>@Html.ActionLink("Equipe de Vendas", "Index", new { area = "Administracao", controller = "Equipe" })</li>
+                            <li>@Html.ActionLink("Tabela de Pontos", "Index", new { area = "Administracao", controller = "TabelaPontos" })</li>
+
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+                <ul class="nav">
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vinculações<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Cliente x Equipe", "Index", new { area = "Administracao", controller = "EquipeCliente" })</li>
+                            <li>@Html.ActionLink("Campanha x Cliente", "Index", new { area = "Administracao", controller = "CampanhaCliente" })</li>
+                            <li>@Html.ActionLink("Tabela Pontos x Cliente", "Index", new { area = "Administracao", controller = "PontosClientes" })</li>
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+                <ul class="nav">
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestão<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Atendimento", "Index", new { area = "Administracao", controller = "Atendimento" })</li>
+                            <li>@Html.ActionLink("Gestão Pontos", "Index", new { area = "Administracao", controller = "ContaCorrente" })</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Fechamento das Campanhas", "Fechamento", new { area = "Administracao", controller = "Campanha" })</li>
+                            <li>@Html.ActionLink("Resgate de Prêmios", "Index", new { area = "Administracao", controller = "Orders" })</li>
+                        </ul>
+
+                    </li>
+
+                </ul>
+
+                <ul class="nav">
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movimentações<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Sell - IN", "IdxCampanha", new { area = "Administracao", controller = "Sellin" })</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Sell - OUT Por Item", "IdxCampanha", new { area = "Administracao", controller = "Sellout" })</li>
+                            <li>@Html.ActionLink("Sell - OUT Por Vendedor", "IdxCampanha", new { area = "Administracao", controller = "SelloutVendedor" })</li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+
+                <ul class="nav">
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Relatórios<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Fechamento de Campanha", "PesquisaCampanha", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Sell - IN", "RelatorioSellIn", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li>@Html.ActionLink("Sell - OUT por Item", "RelatorioSellOut", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li>@Html.ActionLink("Sell - IN x SELL OUT (Item)", "RelatorioSellinSellOut", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Pontos por Campanha", "RelatorioPontos", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li>@Html.ActionLink("Resgate de Prêmios", "RelatorioResgate", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li>@Html.ActionLink("Saldo de Pontos", "RelatorioSaldoPontos", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Campanha x Acesso", "RelatorioCampanhaAcesso", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li>@Html.ActionLink("Campanha x Resgate", "RelatorioCampanhaResgate", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li>@Html.ActionLink("Campanha x Pontos Resgatados", "RelatorioCampanhaResgatePontos", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Clientes Cadastrados", "RelatorioCadastro", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li>@Html.ActionLink("Acesso por Vendedor", "RelatorioAcessoCliente", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li>@Html.ActionLink("Equipes de Vendas", "RelatorioEquipe", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Atendimento 0800 Analítico", "RelatorioAtendimentoAnalitico", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li>@Html.ActionLink("Atendimento 0800 Sintético", "RelatorioAtendimento", new { area = "Administracao", controller = "Relatorio" })</li>
+                            <li>@Html.ActionLink("Atendimento 0800 Geral", "RelatorioAtendimentoGeral", new { area = "Administracao", controller = "Relatorio" })</li>
+                        </ul>
+                    </li>
+                </ul>
+                 <ul class="nav">
+                    <li> <a href="/">Página Inicial</a></li>
+                </ul>
+
+
+                @* <ul class="nav pull-right">
+                    <li class="divider-vertical"></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@nome<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/">Página Inicial</a></li>
+                            <li><a href="/Account/Logoff">Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#undo")
+            .bind("click", function () {
+
+                $("#windowLogin").data("kendoWindow").open();
+            });
+
+        $("#lichangepassword")
+                 .bind("click", function () {
+
+                     $("#windowChangePassword").data("kendoWindow").open();
+                 });
+    });
+</script>
+
+
+
+
+@(Html.Kendo().Window()
+    .Name("windowChangePassword")
+    .Title("Trocar Senha")
+    .Content("loading user info...")
+        //.LoadContentFrom("EditPopChange", "Usuario",    new { area = "Admin", id = oUsuario.cd_usuario })
+    .Draggable()
+    .Visible(false)
+    .Modal(true)
+    .Resizable()
+    .Width(600)
+    .Actions(actions => actions
+        .Refresh()
+        .Minimize()
+        .Maximize()
+        .Close()
+    )
+    )
+
+
+@(Html.Kendo().Window()
+    .Name("windowLogin")
+    .Title("Meus Dados")
+    .Content("loading user info...")
+        //   .LoadContentFrom("EditPop", "Usuario",    new { area = "Admin", id = oUsuario.cd_usuario })
+    .Draggable()
+    .Visible(false)
+    .Modal(true)
+    .Resizable()
+    .Width(600)
+    .Actions(actions => actions
+        .Refresh()
+        .Minimize()
+        .Maximize()
+        .Close()
+    )
+    )
+
+        
+       </div>
+    </header>
+
+    <div id="body">
+        @RenderSection("featured", false)
+        <section class="content-wrapper main-content clear-fix">
+        @RenderBody()
+      </section>
+    </div>
+    
+    <div id="fb-root">
+    
+    </div>
+
+     <script src="/Scripts/bootstrap.min.js"></script>
+
+    
+    
+<div class="container">
+    <div class="controls">
+        <div class="container">
+     <footer>
+      <div id="dvFooter" class="dvFooter">
+      
+            Todos Direitos Reservados: &#169; @DateTime.Now.Year <a href="http://www.iscosistemas.com.br" target="_blank">Isco Sistemas</a> 
+            </div>
+    </footer>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+@Html.Hidden("nome_usuario", nome)
+
+
+<script type="text/javascript">
+    olark('api.chat.updateVisitorNickname', {
+        snippet: $("#nome_usuario").text()
+    });
+</script>
+
+
+<!-- begin olark code -->
+<!-- begin olark code -->

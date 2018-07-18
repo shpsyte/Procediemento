@@ -1,0 +1,74 @@
+﻿@model IEnumerable<eNota>
+<script>
+    var cd_cadastro_digitado = $("#CD_CADASTRO").val();
+    $("#aux_cd_cadastro").val(cd_cadastro_digitado);
+
+    var razao = $("#cd_cadastro_desc").text();
+    $("#nomecli").val(razao);
+    $("#NFLookupPesquisa").val(razao);
+    
+
+</script>
+
+@using (Ajax.BeginForm("PesquisarNF", "ProcedimentoAdm", new AjaxOptions { UpdateTargetId = "NFLookupGrid", InsertionMode = InsertionMode.Replace }))
+{
+    <br />
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-6">
+                <label for="nomecli">@Html.DisplayName("Razão social, Fantasia ou CNPJ")</label>
+                <span class="display-label-text" id="nomecli"> </span>
+                
+                <br />
+                @Html.TextBox("NFLookupPesquisa", "", new { @class = "form-control" })
+                 @Html.Hidden("aux_cd_cadastro")
+            </div>
+        </div>
+
+    </div>
+    <hr />
+    <button  id="loading-btn" class="btn btn-success" type="submit" data-loading-text="Loading..." type="submit">@Html.T("btbConsultar")</button>
+    
+    
+   
+}
+<hr />
+<div id="NFLookupGrid">
+<table class="table table-hover" >
+    <tr>
+          <th>
+            @Html.DisplayNameFor(model => model.NR_NOTA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DT_EMISSAO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Clientes.RAZAO)
+        </th>
+
+         <th>
+            @Html.DisplayNameFor(model => model.CD_TRANSPORTADOR )
+        </th>
+       
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+             <td>
+                <a href="#" onclick="SelecionaNF('@item.NR_NOTA','@item.DT_EMISSAO', '@item.CD_TRANSPORTADOR');">@item.NR_NOTA</a>
+            </td>
+            <td>
+                <a href="#" onclick="SelecionaNF('@item.NR_NOTA','@item.DT_EMISSAO', '@item.CD_TRANSPORTADOR');">@item.DT_EMISSAO</a>
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Clientes.RAZAO)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.CD_TRANSPORTADOR)
+            </td>
+           
+        </tr>
+    }
+</table>
+    
+</div>

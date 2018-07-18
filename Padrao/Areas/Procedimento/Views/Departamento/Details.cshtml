@@ -1,0 +1,65 @@
+﻿@model DEPARTAMENTO
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleDetails") <small>@Html.T("DEPARTAMENTO") </small></h2>
+    </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.DESC_DEPARTAMENTO)
+                            @Html.TextBoxFor(model => model.DESC_DEPARTAMENTO, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.TEMPO_PADRAO)
+                            @Html.TextBoxFor(model => model.TEMPO_PADRAO, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.HiddenFor(model => model.ENVIA_EMAIL, new { id = "ENVIA_EMAIL" })
+                            <label class="checkbox">
+                                <input type="checkbox" disabled id="_ENVIA_EMAIL" />
+                                @Html.DisplayNameFor(model => model.ENVIA_EMAIL)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.HiddenFor(model => model.ATIVO, new { id = "ATIVO" })
+                            <label class="checkbox">
+                                <input type="checkbox" disabled id="_ATIVO" @(Model.ATIVO == "S" ? "checked='checked'" : "") />				 
+                                @Html.DisplayNameFor(model => model.ATIVO)
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.CD_DEPARTAMENTO.ToString().Trim() })"><i class="fa fa-pencil-square-o"></i>&nbsp;@Html.T("btbeditar")</a>
+                </div>
+            </div>
+
+        </div>
+         
+    
+</div>
+

@@ -1,0 +1,79 @@
+﻿@model Usuario
+
+<style>
+    body
+    {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #eee;
+    }
+
+    .form-signin
+    {
+        max-width: 500px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+</style>
+
+
+
+<div class="container">
+
+    <div class="form-signin" role="form">
+
+        <div class="panel panel-danger">
+
+            <div class="panel-body">
+                <section id="loginForm">
+                    @using (Html.BeginForm(null, null, new { ReturnUrl = @Url.Action("Login", "Protected") }, FormMethod.Post, new { @class = "form-horizontal", @id = "formLogin" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Partial("_Validation", ViewData.ModelState)
+                        <h2 class="form-signin-heading"></h2>
+                            
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img src="~/Images/Logo_P.jpg" class="img-responsive" alt="Foxlux">
+                            </div>
+                        </div>
+                            
+                        <hr />
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.NOME, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.NOME, new { @class = "form-control", @placeholder = Html.T("nome") })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SENHA, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.SENHA, new { @class = "form-control", @placeholder = Html.T("senha") })
+                            </div>
+                        </div>
+                   
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="@Html.T("entrar")" class="btn btn-primary" />
+                            </div>
+                        </div>
+                      
+                    }
+                </section>
+            </div>
+            <div class="panel-footer">
+                <h3 class="panel-title">@Html.T("nomeapp")</h3>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /container -->
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

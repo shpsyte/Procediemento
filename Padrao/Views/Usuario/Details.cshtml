@@ -1,0 +1,167 @@
+﻿
+@model Usuario
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleDetails") <small>@Html.T("Usuario") </small></h2>
+    </div>
+
+ 
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-angle-double-left"></i>&nbsp;@Html.T("voltarlistagem")</a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.NOME)
+                            @Html.TextBoxFor(model => model.NOME, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+
+                       
+                    </div>
+                  
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.CD_GUSUARIO)
+                            <br />
+                            @(Html.Kendo().DropDownList()
+                                                  .Name("CD_GUSUARIO")
+                                                  .DataTextField("NOME")
+                                                  .DataValueField("CD_GUSUARIO")
+                                                   .HtmlAttributes(new { style = "width:100%" })
+                                                  .Enable(false) .DataSource(source => { source.Read(read => { read.Action("GetGUsuario", "Usuario"); }); })
+                                            )
+                            @Html.ValidationMessageFor(model => model.CD_GUSUARIO)
+                        </div>
+
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.CD_NL)
+                            @Html.TextBoxFor(model => model.CD_NL, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.APROVA)
+                            <br />
+                            @(Html.Kendo().DropDownList()
+                                                  .Name("APROVA")
+                                                  .DataTextField("TEXT")
+                                                  .DataValueField("VALUE")
+                                                  .HtmlAttributes(new { style = "width:100%" })
+                                                  .Enable(false) .DataSource(source =>
+                                                      {
+                                                          source.Read(read =>
+                                                             {
+                                                                 read.Action("ReadComboSimouNao", "Usuario");
+                                                             });
+                                                      })
+                                            )
+                            @Html.ValidationMessageFor(model => model.APROVA)
+                        </div>
+
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.REPROVA)
+                            <br />
+                            @(Html.Kendo().DropDownList()
+                                                  .Name("REPROVA")
+                                                  .DataTextField("TEXT")
+                                                  .DataValueField("VALUE")
+                                                  .HtmlAttributes(new { style = "width:100%" })
+                                                  .Enable(false) .DataSource(source =>
+                                                      {
+                                                          source.Read(read =>
+                                                             {
+                                                                 read.Action("ReadComboSimouNao", "Usuario");
+                                                             });
+                                                      })
+                                            )
+                            @Html.ValidationMessageFor(model => model.REPROVA)
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.CANCELA)
+                            <br />
+                            @(Html.Kendo().DropDownList()
+                                                  .Name("CANCELA")
+                                                  .DataTextField("TEXT")
+                                                  .DataValueField("VALUE")
+                                                  .HtmlAttributes(new { style = "width:100%" })
+                                                  .Enable(false) .DataSource(source =>
+                                                      {
+                                                          source.Read(read =>
+                                                             {
+                                                                 read.Action("ReadComboSimouNao", "Usuario");
+                                                             });
+                                                      })
+                                            )
+                            @Html.ValidationMessageFor(model => model.CANCELA)
+
+                        </div>
+
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.SITUACAO)
+                            <br />
+                            @(Html.Kendo().DropDownList()
+                                                  .Name("SITUACAO")
+                                                  .DataTextField("TEXT")
+                                                  .DataValueField("VALUE")
+                                                  .HtmlAttributes(new { style = "width:100%" })
+                                                  .Enable(false) .DataSource(source =>
+                                                      {
+                                                          source.Read(read =>
+                                                             {
+                                                                 read.Action("ReadComboAtivo", "Usuario");
+                                                             });
+                                                      })
+                                            )
+                            @Html.ValidationMessageFor(model => model.SITUACAO)
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.ALT_SENHA)
+                            <br />
+                            @(Html.Kendo().DropDownList()
+                                                  .Name("ALT_SENHA")
+                                                  .DataTextField("TEXT")
+                                                  .DataValueField("VALUE")
+                                                  .HtmlAttributes(new { style = "width:100%" })
+                                                  .Enable(false) .DataSource(source =>
+                                                      {
+                                                          source.Read(read =>
+                                                             {
+                                                                 read.Action("ReadComboSimouNao", "Usuario");
+                                                             });
+                                                      })
+                                            )
+                            @Html.ValidationMessageFor(model => model.CANCELA)
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+           <div class="panel-footer">
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.CD_USUARIO.ToString().Trim() })"><i class="fa fa-pencil-square-o"></i>&nbsp;@Html.T("btbeditar")</a>
+                </div>
+            </div>
+
+        </div>
+         
+</div>
+
+
+
+

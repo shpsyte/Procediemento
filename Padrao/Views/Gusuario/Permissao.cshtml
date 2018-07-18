@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Permissoes>
+
+
+
+<div class="container">
+    <div class="page-header-isco">
+        <h2>@Html.T("titleindex") <small>@Html.T("Permissoes") </small></h2>
+    </div>
+    @Html.Partial("_Search", "tipoorcamento")
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("CreatePermissoes", "Gusuario", new { cd_grupo = Request["cd_grupo"] })"><i class="fa fa-plus"></i>&nbsp;@Html.T("btbnovo")</a>
+                <a class="btn btn-default" href="@Url.Action("Index")"><i class="fa fa-angle-double-left"></i>Voltar a Listagem</a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cloud"></i>&nbsp;@Html.T("btboutros")
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a id="lnkExporta" href="@Url.Action("ExportXls", new { strPesquisa = @ViewData["termo"] })">@Html.T("btbexportar") <i>@Model.Count()</i> @Html.T("msgtotalregencontrados")</a>   </li>
+                        <li><a id="lnkImporta" href="@Url.Action("Upload")">@Html.T("btbimportar")</a></li>
+                    </ul>
+                </div>
+            </div>
+            <small><i>@Model.Count()</i>  @Html.T("msgtotalregencontrados")</small>
+        </div>
+        <div class="panel-body">
+
+
+            @(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.MODULO);
+        columns.Bound(p => p.ACESSA).ClientTemplate("<input type='checkbox' disabled='disabled'  #= ACESSA == 'S' ? checked='checked' : '' # ></input>").Width(100).Title("Acessa");
+        columns.Bound(p => p.DETALHA).ClientTemplate("<input type='checkbox' disabled='disabled'  #= DETALHA == 'S' ? checked='checked' : '' # ></input>").Width(100).Title("Detalha");
+        columns.Bound(p => p.EDITA).ClientTemplate("<input type='checkbox' disabled='disabled'  #= EDITA == 'S' ? checked='checked' : '' # ></input>").Width(100).Title("Edita");
+        columns.Bound(p => p.DELETA).ClientTemplate("<input type='checkbox' disabled='disabled'  #= DELETA == 'S' ? checked='checked' : '' # ></input>").Width(100).Title("Deleta");
+        columns.Bound(p => p.CRIA).ClientTemplate("<input type='checkbox' disabled='disabled'  #= CRIA == 'S' ? checked='checked' : '' # ></input>").Width(100).Title("Cria");
+
+        columns.Command(command => { command.Edit(); }).Width(100);
+
+    })
+            .ColumnMenu()
+            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+            .Pageable()
+            .Sortable()
+            .Filterable()
+            .DataSource(ds => ds.Ajax()
+                 .ServerOperation(false)
+                 .PageSize(20)
+
+                                .Model(m =>
+                                {
+                                    m.Id(p => p.ID_INSERT);
+                                    m.Field(p => p.MODULO).Editable(false);
+
+
+                                })
+                        .Read(r => r.Action("Index", "Permissoes"))
+                        .Update(update => update.Action("UpdatePermissao", "Gusuario"))
+                )
+        )
+        </div>
+    </div>
+</div>

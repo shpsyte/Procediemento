@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+        <link href="~/Content/JQueryUI-Modified.css" rel="stylesheet" />
+        <link href="~/Content/SiteModified.css" rel="stylesheet" />
+
+</head>
+<body>
+     @RenderBody()
+   <script src="~/Scripts/jquery-1.5.1.min.js"></script>
+   <script src="~/Scripts/jquery-ui-1.8.13.min.js"></script>
+     @RenderSection("scripts", required: false)
+
+</body>
+</html>
