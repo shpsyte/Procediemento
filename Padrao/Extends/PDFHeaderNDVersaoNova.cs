@@ -36,7 +36,7 @@ namespace b2yweb_mvc4.Extends
             imgudmais.ScalePercent(40);
 
             //tbl 
-            PdfPTable HeaderTbl = new PdfPTable(3) ;
+            PdfPTable HeaderTbl = new PdfPTable(2) ;
             HeaderTbl.TotalWidth = doc.PageSize.Width - 10;
             HeaderTbl.LockedWidth = true;
             HeaderTbl.DefaultCell.BorderWidth = 1;
@@ -49,7 +49,7 @@ namespace b2yweb_mvc4.Extends
             HeaderTbl.DefaultCell.Border = PdfPCell.BOTTOM_BORDER;
             HeaderTbl.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
             HeaderTbl.DefaultCell.VerticalAlignment = Element.ALIGN_CENTER;
-            HeaderTbl.SetWidths(new float[] { 1f, 1f, 1f });
+            HeaderTbl.SetWidths(new float[] { 1f, 1f });
 
 
 
@@ -66,7 +66,7 @@ namespace b2yweb_mvc4.Extends
 
             HeaderTbl.AddCell(new PdfPCell(img) { MinimumHeight = 50, HorizontalAlignment = Element.ALIGN_CENTER, VerticalAlignment = Element.ALIGN_CENTER, PaddingTop = 5 });
             HeaderTbl.AddCell(new PdfPCell(new Phrase(new Chunk("NOTA DE DÉBITO" + Environment.NewLine + "Nº: " + NotaFiscal.ToString(), verdana))) { HorizontalAlignment = Element.ALIGN_CENTER, VerticalAlignment = Element.ALIGN_CENTER, PaddingTop = 5 }) ;
-            HeaderTbl.AddCell(new PdfPCell(imgudmais) {  HorizontalAlignment = Element.ALIGN_CENTER, VerticalAlignment = Element.ALIGN_CENTER, PaddingTop = 5 });
+            //HeaderTbl.AddCell(new PdfPCell(imgudmais) {  HorizontalAlignment = Element.ALIGN_CENTER, VerticalAlignment = Element.ALIGN_CENTER, PaddingTop = 5 });
 
             //celula = new PdfPCell(new Phrase(new Chunk("N.:" + NotaFiscal.ToString(), verdana))) { Rowspan = 1, Colspan = 2};
             HeaderTbl.AddCell(celula);
