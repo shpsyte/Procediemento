@@ -64,6 +64,7 @@
     <Compile Include="Entity\Combo.cs" />
     <Compile Include="Entity\CustomList.cs" />
     <Compile Include="Entity\Clientes.cs" />
+    <Compile Include="Entity\GarantiaProcedimento.cs" />
     <Compile Include="Entity\TRANSPORTADOR.cs" />
     <Compile Include="Entity\wProcedimento.cs" />
     <Compile Include="Entity\Modulos.cs" />

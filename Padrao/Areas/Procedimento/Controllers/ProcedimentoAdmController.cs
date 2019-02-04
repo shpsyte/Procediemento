@@ -1328,7 +1328,9 @@ namespace b2yweb_mvc4.Areas.Procedimento.Controllers
 
             ViewBag.cod_gerado = RetornaDocGeradoSac(id);
             ViewBag.cod_gerado_vinculado = RetornaDocGeradoGat(1, id);
-            ViewBag.cod_gerado_final = RetornaDocGeradoGat(2, id);
+            ViewBag.cod_gerado_final     = RetornaDocGeradoGat(2, id);
+
+
 
             string ssql = $"SELECT DISTINCT  B.DATA_ENTREGA, D.DTEXPEDICAO_DOCEMBARQUE dta_expedicao FROM TB_FRTNFDESPACHADAS A LEFT JOIN TB_FRTDATASENTREGA B   ON(A.DOC_NFDESPACHADAS = B.DOC_NFDESPACHADAS AND B.DATA_ENTREGA IS NOT NULL) LEFT JOIN TB_FRTNFDOCEMBARQUE C   ON(A.DOC_NFDESPACHADAS = C.DOC_NFDESPACHADAS) INNER JOIN TB_FRTDOCEMBARQUE D    ON(C.NUM_DOCEMBARQUE = D.NUM_DOCEMBARQUE) WHERE(NVL(UPPER(D.PLACA_DOCEMBARQUE), 0) NOT LIKE 'DEV%' OR A.CNPJ_EMISSOR LIKE '01723086000%') " +
                 $" and A.NUMNF_NFDESPACHADAS = {procedimentoadm.NF_FOX}";
@@ -1407,7 +1409,20 @@ namespace b2yweb_mvc4.Areas.Procedimento.Controllers
                 retorno = 0;
             }
 
-            //int doc = procedimento.cod_procedimento == null ? 0 : procedimento.cod_procedimento;
+            // pode ser que o SAC esteja vinculado a garantia!
+            if (retorno == 0)
+            {
+                GarantiaProcedimento garantia = db.GarantiaProcedimento.Where(p => p.COD_PROCEDIMENTO == cod_procedimento).FirstOrDefault();
+                if (garantia != null)
+                {
+                    SacGarantia sacgarantia = db.SacGarantia.Where(a => a.GARANTIAID == garantia.GARANTIAID).FirstOrDefault();
+
+                    if (sacgarantia != null)
+                    {
+                        retorno = sacgarantia.COD_SAC;
+                    }
+                }
+            }
 
             return retorno;
         }

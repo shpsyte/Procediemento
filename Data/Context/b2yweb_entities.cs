@@ -118,6 +118,11 @@ namespace Data.Context
             modelBuilder.Entity<TRANSPORTADOR>().ToTable("TRANSPORTADOR", shemma);
             modelBuilder.Entity<TRANSPORTADOR>().HasKey(s => new { s.CD_CADASTRO });
 
+            modelBuilder.Entity<GarantiaProcedimento>().ToTable("GARANTIAPROCEDIMENTO", shemma);
+            modelBuilder.Entity<GarantiaProcedimento>().HasKey(s => new { s.ID, s.GARANTIAID, s.COD_PROCEDIMENTO });
+
+
+
 
             modelBuilder.Entity<wpa_troca_departamentos>().HasRequired(a => a.DEPANT).WithMany().HasForeignKey(u => u.CD_DEPARTAMENTO_ANT);
             modelBuilder.Entity<wpa_troca_departamentos>().HasRequired(a => a.DEPNOVA).WithMany().HasForeignKey(u => u.CD_DEPARTAMENTO_NOVA);
@@ -142,8 +147,10 @@ namespace Data.Context
         public DbSet<ProcedimentoAdm> ProcedimentoAdm { get; set; }
         public DbSet<SacProcedimento> SacProcedimento { get; set; }
         public DbSet<Garantia> Garantia { get; set; }
-        
+        public DbSet<GarantiaProcedimento> GarantiaProcedimento { get; set; }
         public DbSet<SacGarantia> SacGarantia { get; set; }
+
+
         public DbSet<eNota> eNota { get; set; }
         public DbSet<ProcedimentoAdmArq> ProcedimentoAdmArq { get; set; }
         public DbSet<Situacao> Situacao { get; set; }
