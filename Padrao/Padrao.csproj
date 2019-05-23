@@ -1600,6 +1600,7 @@
     <None Include="Web.config.Release.template">
       <DependentUpon>Web.config.template</DependentUpon>
     </None>
+    <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
