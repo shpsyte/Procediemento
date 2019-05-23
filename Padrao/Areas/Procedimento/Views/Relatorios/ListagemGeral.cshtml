@@ -24,13 +24,13 @@
                         </div>
                         <div class="col-md-2">
                             @(Html.Kendo().DatePicker()
-                                                      .Name("dt_inicial")
-                                                      .HtmlAttributes(new { style = "width:100%" }))
+                                                              .Name("dt_inicial")
+                                                              .HtmlAttributes(new { style = "width:100%" }))
                         </div>
                         <div class="col-md-2">
                             @(Html.Kendo().DatePicker()
-                                                      .Name("dt_final")
-                                                      .HtmlAttributes(new { style = "width:100%" }))
+                                                              .Name("dt_final")
+                                                              .HtmlAttributes(new { style = "width:100%" }))
                         </div>
                     </div>
 
@@ -49,20 +49,29 @@
                         </div>
                         <div class="col-md-4">
                             @(Html.Kendo().ComboBox()
-                                                  .Name("CD_CADASTRO")
-                                                  .DataTextField("RAZAO")
-                                                  .DataValueField("CD_CADASTRO")
-                                                  .Filter("contains")
-                                                  .MinLength(4)
-                                                  .AutoBind(false)
-                                                  .HtmlAttributes(new { style = "width:100%" })
-                                                  .DataSource(source => { source.Read(read => { read.Action("GetCadastro", "ProcedimentoAdm"); }); })
-                                                   .Template(
-                                                    "<dl>" +
-                                                        "<dt>Razão:</dt><dd>${ data.RAZAO }</dd>" +
-                                                         "<dt>Código:</dt><dd>${ data.CD_CADASTRO }</dd>" +
-                                                    "</dl>"))
-                                            
+                                                          .Name("CD_CADASTRO")
+                                                          .DataTextField("RAZAO")
+                                                          .DataValueField("CD_CADASTRO")
+                                                          .Filter("contains")
+                                                          .MinLength(4)
+                                                          .AutoBind(false)
+                                                          .HtmlAttributes(new { style = "width:100%" })
+                                                          .DataSource(source => { source.Read(read => { read.Action("GetCadastro", "ProcedimentoAdm"); }); })
+                                                           .Template(
+                                                            "<dl>" +
+                                                                "<dt>Razão:</dt><dd>${ data.RAZAO }</dd>" +
+                                                                 "<dt>Código:</dt><dd>${ data.CD_CADASTRO }</dd>" +
+                                                            "</dl>"))
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label for="">Representante</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" id="cod_representante" name="cod_representante" type="number" />
                         </div>
                     </div>
 
@@ -72,14 +81,14 @@
                         </div>
                         <div class="col-md-4">
                             @(Html.Kendo().ComboBox()
-                                                  .Name("CD_TIPO")
-                                                  .DataTextField("DES_TIPO")
-                                                  .DataValueField("CD_TIPO")
-                                                  .Filter("contains")
-                                                  .AutoBind(false)
-                                                  .HtmlAttributes(new { style = "width:100%" })
-                                  .DataSource(source => { source.Read(read => { read.Action("GetTipoProcedimento", "ProcedimentoAdm"); }); })
-                                            )
+                                                          .Name("CD_TIPO")
+                                                          .DataTextField("DES_TIPO")
+                                                          .DataValueField("CD_TIPO")
+                                                          .Filter("contains")
+                                                          .AutoBind(false)
+                                                          .HtmlAttributes(new { style = "width:100%" })
+                                          .DataSource(source => { source.Read(read => { read.Action("GetTipoProcedimento", "ProcedimentoAdm"); }); })
+                            )
                         </div>
                     </div>
 
@@ -89,14 +98,14 @@
                         </div>
                         <div class="col-md-4">
                             @(Html.Kendo().ComboBox()
-                                                  .Name("CD_DEPARTAMENTO")
-                                                  .DataTextField("DESC_DEPARTAMENTO")
-                                                  .DataValueField("CD_DEPARTAMENTO")
-                                                  .Filter("contains")
-                                                  .AutoBind(false)
-                                                  .HtmlAttributes(new { style = "width:100%" })
-                            .DataSource(source => { source.Read(read => { read.Action("GetDepartamento", "ProcedimentoAdm"); }); })
-                                            )
+                                                          .Name("CD_DEPARTAMENTO")
+                                                          .DataTextField("DESC_DEPARTAMENTO")
+                                                          .DataValueField("CD_DEPARTAMENTO")
+                                                          .Filter("contains")
+                                                          .AutoBind(false)
+                                                          .HtmlAttributes(new { style = "width:100%" })
+                                    .DataSource(source => { source.Read(read => { read.Action("GetDepartamento", "ProcedimentoAdm"); }); })
+                            )
                         </div>
                     </div>
 
@@ -106,14 +115,14 @@
                         </div>
                         <div class="col-md-4">
                             @(Html.Kendo().ComboBox()
-                                                  .Name("CD_USUARIO")
-                                                  .DataTextField("NOME")
-                                                  .DataValueField("CD_USUARIO")
-                                                  .Filter("contains")
-                                                  .AutoBind(false)
-                                                  .HtmlAttributes(new { style = "width:100%" })
-                            .DataSource(source => { source.Read(read => { read.Action("GetUsuario", "ProcedimentoAdm"); }); })
-                                            )
+                                                          .Name("CD_USUARIO")
+                                                          .DataTextField("NOME")
+                                                          .DataValueField("CD_USUARIO")
+                                                          .Filter("contains")
+                                                          .AutoBind(false)
+                                                          .HtmlAttributes(new { style = "width:100%" })
+                                    .DataSource(source => { source.Read(read => { read.Action("GetUsuario", "ProcedimentoAdm"); }); })
+                            )
                         </div>
                     </div>
 
@@ -123,18 +132,18 @@
                         </div>
                         <div class="col-md-4">
                             @(Html.Kendo().ComboBox()
-                                                  .Name("ID_SITUACAO")
-                                                  .DataTextField("DESCRICAO")
-                                                  .DataValueField("ID_SITUACAO")
-                                                  .Filter("contains")
-                                                  .AutoBind(false)
-                                                  .HtmlAttributes(new { style = "width:100%" })
-                                                  .DataSource(source => { source.Read(read => { read.Action("GetSituacao", "ProcedimentoAdm"); }); })
-                                            )
+                                                          .Name("ID_SITUACAO")
+                                                          .DataTextField("DESCRICAO")
+                                                          .DataValueField("ID_SITUACAO")
+                                                          .Filter("contains")
+                                                          .AutoBind(false)
+                                                          .HtmlAttributes(new { style = "width:100%" })
+                                                          .DataSource(source => { source.Read(read => { read.Action("GetSituacao", "ProcedimentoAdm"); }); })
+                            )
                         </div>
                     </div>
 
-                 
+
                 </div>
 
             </div>

@@ -27,7 +27,49 @@ namespace b2yweb_mvc4.Extends
     public class SendEmail
     {
         private b2yweb_entities db = null;
-        
+
+        private string _email;
+        private string _username;
+        private string _password;
+        private NetworkCredential _logininfo;
+        private SmtpClient _smtpcient;
+
+        public SendEmail()
+        {
+            this._email = ConfigurationManager.AppSettings["MailFrom"].ToString();
+            this._username = ConfigurationManager.AppSettings["MailUserName"].ToString();
+            this._password = ConfigurationManager.AppSettings["MailPwd"].ToString();
+            this._logininfo = new NetworkCredential(_username, _password);
+            string smtp = ConfigurationManager.AppSettings["SMTP"].ToString();
+            int port = Int32.Parse(ConfigurationManager.AppSettings["Port"]);
+
+            this._smtpcient = new SmtpClient(smtp, port);
+
+            
+            _smtpcient.EnableSsl = true;
+            _smtpcient.UseDefaultCredentials = false;
+            _smtpcient.Credentials = _logininfo;
+        }
+
+
+        public void EnviarEmailTest(string to, string subject, string body)
+        {
+            var msg = new MailMessage(new MailAddress(_email).Address, new MailAddress(to).Address, subject, body);
+
+            msg.IsBodyHtml = true;
+
+            try
+            {
+                _smtpcient.Send(msg);
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
 
         public void EnviarEmail(int cd_procedimento, string tipo)
         {
@@ -128,15 +170,6 @@ namespace b2yweb_mvc4.Extends
             string subject = "[Chamado #" + cd_procedimento +"] " + DescTipo ;
 
 
-
-            string email = ConfigurationManager.AppSettings["MailFrom"].ToString();
-            string username = ConfigurationManager.AppSettings["MailUserName"].ToString();
-            string password = ConfigurationManager.AppSettings["MailPwd"].ToString();
-            var loginInfo = new NetworkCredential(username, password);
-            var smtpClient = new SmtpClient(ConfigurationManager.AppSettings["SMTP"].ToString(), Int32.Parse(ConfigurationManager.AppSettings["Port"]));
-
-
-           
 
 
             //string message = "<b> DADOS DO CHAMADO </b>";
@@ -331,7 +364,7 @@ namespace b2yweb_mvc4.Extends
             message += "   <p class='MsoNormal' align='center' style='text-align:center'><span style='font-size:8.5pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;;mso-fareast-font-family:" ;
             message += "   &quot;Times New Roman&quot;;color:#666666'>Se você possui filtro antispam habilitado em" ;
             message += "   sua caixa postal, autorize o e-mail<br>" ;
-            message += "   <a href='" + email + "'><span style='color:#990000'>" + email + "</span></a>";
+            message += "   <a href='" + _email + "'><span style='color:#990000'>" + _email + "</span></a>";
             message += "   para continuar recebendo nossas mensagens <o:p></o:p></span></p>" ;
             message += "   </td>" ;
             message += "  </tr>" ;
@@ -353,18 +386,23 @@ namespace b2yweb_mvc4.Extends
 //msg.AlternateViews.Add(av1);
          
 
-        msg.From = new MailAddress(email);
+        msg.From = new MailAddress(_email);
         //msg.To.Add(new MailAddress(Para));
         
         msg.Subject = subject;
         msg.Body = message;
         msg.IsBodyHtml = true;
 
-        smtpClient.EnableSsl = false;
-        smtpClient.UseDefaultCredentials = false;
-        smtpClient.Credentials = loginInfo;
-        smtpClient.Send(msg);
-        
+            try
+            {
+                _smtpcient.Send(msg);
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
     }
 }

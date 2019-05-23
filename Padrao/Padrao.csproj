@@ -618,7 +618,7 @@
     <Content Include="Areas\Procedimento\Views\TP_PROCEDIMENTO\EditMotivo.cshtml" />
     <Content Include="Areas\Procedimento\Views\TP_PROCEDIMENTO\ExcluirMotivo.cshtml" />
     <Content Include="Areas\Procedimento\Views\Relatorios\PrintNFDebito.cshtml" />
-    <None Include="Properties\PublishProfiles\Jose.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Images\LogoEmail.png" />
     <Content Include="Images\isco.png" />
@@ -1591,6 +1591,15 @@
     <Content Include="Scripts\kendo\kendo.view.min.js.map" />
     <Content Include="Scripts\kendo\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo\kendo.window.min.js.map" />
+    <None Include="Web.config.template">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.config.Debug.template">
+      <DependentUpon>Web.config.template</DependentUpon>
+    </None>
+    <None Include="Web.config.Release.template">
+      <DependentUpon>Web.config.template</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

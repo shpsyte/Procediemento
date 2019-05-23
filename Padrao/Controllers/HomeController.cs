@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Services.Functions;
 using Data.Context;
+using b2yweb_mvc4.Extends;
 
 namespace b2yweb_mvc4.Controllers
 {
@@ -31,6 +32,12 @@ namespace b2yweb_mvc4.Controllers
         [AuthFilter]
         public ActionResult Index()
         {
+
+            //SendEmail email = new SendEmail();
+
+            //email.EnviarEmailTest("jose.iscosistemas@gmail.com", "Teste de Email", "Olá este ´um teste");
+
+
             var grafico = db.Grafico1.ToList();
             ViewData["TOTALPROCEDIMENTOS"] = (from a in db.Grafico1 select a.QTDETOTAL).Sum();
             ViewData["TOTALAPROVADOS"] = (from a in db.Grafico1 select a.QTDEAPROVADA).Sum();

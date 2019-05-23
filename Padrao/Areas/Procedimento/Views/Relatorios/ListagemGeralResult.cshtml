@@ -33,6 +33,8 @@
         columns.Bound(p => p.HORASUTEIS).Width(70).Title("Horas Úteis");
         columns.Bound(p => p.PERCENTUAL).Visible(true).ClientTemplate("#= productDetailsImg(data) #").Title("PD").Width(20);
         columns.Bound(p => p.PERCENTUALPROCEDIMENTO).Visible(true).ClientTemplate("#= productDetailsImg2(data) #").Title("PP").Width(20);
+        columns.Bound(p => p.VL_REPRESENTANTE).Visible(true).Title("Valor Representante").Width(50);
+        columns.Bound(p => p.COD_REPRESENTANTE).Visible(true).Title("Representante").Width(50);
 
 
 

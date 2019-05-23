@@ -1128,7 +1128,8 @@ namespace b2yweb_mvc4.Areas.Procedimento.Controllers
             , int CD_DEPARTAMENTO = 0
             , int CD_USUARIO = 0
             , int ID_SITUACAO = 0
-            , string Destino = "")
+            , string Destino = ""
+            , int cod_representante = 0)
         {
             var list_regional = (List<int>)Session["oRegional"];
             int cd_usuario = ((Usuario)Session["oUsuario"]).CD_USUARIO;
@@ -1149,7 +1150,20 @@ namespace b2yweb_mvc4.Areas.Procedimento.Controllers
             int _cd_usuario_fim;
             int _situacao_ini;
             int _situacao_fim;
+            int _cd_representante_ini;
+            int _cd_representante_fim;
 
+
+
+            if (cod_representante > 0)
+            {
+                _cd_representante_ini = cod_representante;
+                _cd_representante_fim = cod_representante;
+            }else
+            {
+                _cd_representante_ini = 0;
+                _cd_representante_fim = int.MaxValue;
+            }
 
             if (ID_SITUACAO > 0)
             {
@@ -1186,7 +1200,7 @@ namespace b2yweb_mvc4.Areas.Procedimento.Controllers
             }
             else
             {
-                _dt_inicial = DateTime.Now.AddYears(-1);
+                _dt_inicial = DateTime.MinValue;
             }
 
 
@@ -1272,7 +1286,15 @@ namespace b2yweb_mvc4.Areas.Procedimento.Controllers
                           (c.ID_SITUACAO <= _situacao_fim) &&
 
                           (c.CD_USUARIO >= _cd_usuario_ini) &&
-                          (c.CD_USUARIO <= _cd_usuario_fim)).ToList()
+                          (c.CD_USUARIO <= _cd_usuario_fim) &&
+
+                          (c.COD_REPRESENTANTE >= _cd_representante_ini) &&
+                          (c.COD_REPRESENTANTE <= _cd_representante_fim) 
+                          
+
+
+
+                          ).ToList()
                    select a).OrderByDescending(a => a.CD_PROCEDIMENTO).ToList();
 
 

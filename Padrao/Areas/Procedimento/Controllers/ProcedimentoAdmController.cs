@@ -75,6 +75,11 @@ namespace b2yweb_mvc4.Areas.Procedimento.Controllers
         [CustomAuthorize(AccessLevel = "procedimentoadmIndex")]
         public ActionResult Index()
         {
+
+            
+
+
+
             var procedimentoadm = db.ProcedimentoAdm.Include("Clientes").Include("Regional").Include("TP_PROCEDIMENTO").Include("Usuario");
             return View(procedimentoadm.ToList());
         }
@@ -906,7 +911,7 @@ namespace b2yweb_mvc4.Areas.Procedimento.Controllers
         [CustomAuthorize(AccessLevel = "procedimentoadmCreate")]
         public ActionResult Create()
         {
-            return Redirect("http://sac.grupofoxlux.com.br/Sac/Create/");
+           return Redirect("http://sac.grupofoxlux.com.br/Sac/Create/");
 
 
             ViewBag.CD_CADASTRO = new SelectList(db.Clientes, "CD_CADASTRO", "RAZAO");

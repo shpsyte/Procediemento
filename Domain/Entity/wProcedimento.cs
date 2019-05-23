@@ -204,6 +204,8 @@ namespace Domain.Entity
         public int PERCENTUALPROCEDIMENTO
         { get; set; }
 
+        public int COD_REPRESENTANTE { get; set; }
+
         public virtual Clientes Clientes { get; set; }
         public virtual Regional Regional { get; set; }
         public virtual tp_procedimento tp_procedimento { get; set; }
